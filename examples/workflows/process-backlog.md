@@ -70,15 +70,64 @@ Triage the items in BACKLOG.md
 
 ---
 
-### Clean Up Completed Work
+### Archive Completed Work
 
 ```
-Move completed items from the last month to archive/
+Archive completed work from [timeframe, e.g., "last quarter"]
 ```
 
 **What it does**:
-- Identifies completed work
-- Organizes by date
-- Archives with proper naming
+- Identifies completed items (initiatives, tasks, specs)
+- Moves to `archive/` with date prefix
+- Maintains directory structure
+- Logs what was archived
 
-**When to use**: Monthly maintenance
+**When to use**: Monthly/quarterly cleanup
+
+---
+
+### Update Knowledge Base
+
+```
+Review my knowledge/ folder and identify gaps or outdated content
+```
+
+**What it does**:
+- Checks freshness of docs
+- Identifies missing context
+- Suggests updates or new docs needed
+- Prioritizes by importance
+
+**When to use**: Quarterly maintenance
+
+---
+
+### Consolidate Duplicate Content
+
+```
+Find and consolidate duplicate information in [folder]
+```
+
+**What it does**:
+- Identifies similar or duplicate content
+- Suggests consolidation approach
+- Creates canonical versions
+- Updates references
+
+**When to use**: When things feel scattered
+
+---
+
+### Prioritize Backlog Items
+
+```
+Help me prioritize these backlog items: [paste list or reference file]
+```
+
+**What it does**:
+- Applies prioritization framework (RICE, Impact/Effort, etc.)
+- References product strategy
+- Provides rationale for each priority
+- Helps decide what becomes initiatives vs tasks
+
+**When to use**: Planning sessions, backlog reviews

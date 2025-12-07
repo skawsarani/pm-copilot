@@ -39,7 +39,8 @@ AI-powered workflows for product management. These are your slash commands for C
 /synthesize     → Synthesize research from knowledge/transcripts/
 /insights [file]→ Extract key insights
 /feedback       → Analyze customer feedback
-/competitive    → Competitive analysis
+/competitive    → Competitive analysis and competitor research
+/metrics        → Query and analyze metrics
 ```
 
 ### 🔍 Decision & Planning
@@ -50,6 +51,25 @@ AI-powered workflows for product management. These are your slash commands for C
 /sprint            → Plan next sprint
 /roadmap           → Create/update roadmap
 /weekly            → Plan this week
+/okrs              → Create and manage OKRs
+```
+
+### 📝 Technical Writing
+
+```
+/api-docs          → Create API documentation
+/guide [topic]     → Write developer guide
+/reference [topic] → Create reference docs
+/recipe [task]     → Create code recipe
+/publish-docs      → Prepare docs for publishing
+```
+
+### 🔧 MCP Development
+
+```
+/mcp-server [api]  → Generate MCP server from API docs
+/create-mcp [tool] → Create MCP server implementation
+/mcp-env [server]  → Generate .env template for MCP server
 ```
 
 ---
@@ -59,38 +79,39 @@ AI-powered workflows for product management. These are your slash commands for C
 Browse workflows by action:
 
 ### Process & Organize
-- [process-backlog.md](process-backlog.md) - Process backlog items into initiatives, tasks, references
-- [archive-completed.md](archive-completed.md) - Archive completed work
+- [process-backlog.md](process-backlog.md) - Process backlog items into initiatives, tasks, references (includes archiving)
 
 ### Generate & Create
-- [generate-docs.md](generate-docs.md) - Generate specs, PRDs, briefs, user stories
-- [use-structured-prompts.md](use-structured-prompts.md) - Use structured workflow prompts
+- [product-docs.md](product-docs.md) - Generate and manage specs, PRDs, briefs, user stories, and document decisions
 
 ### Plan & Prioritize
-- [prioritize-work.md](prioritize-work.md) - Prioritize work, create roadmaps, plan sprints
-- [plan-launch.md](plan-launch.md) - Plan launches and rollouts
-- [set-goals.md](set-goals.md) - Set OKRs and align to strategy
+- [roadmap.md](roadmap.md) - Create and manage strategic roadmaps
+- [gtm-launch.md](gtm-launch.md) - Plan and execute GTM launches with implementation planning
+- [okrs.md](okrs.md) - Create and manage strategic OKRs
+- [task-manager.md](task-manager.md) - Prioritize and manage tasks and personal todos
 
 ### Research & Analyze
-- [synthesize-research.md](synthesize-research.md) - Synthesize research and interviews
-- [track-metrics.md](track-metrics.md) - Track and analyze metrics
+- [user-research.md](user-research.md) - Synthesize user research, interviews, and customer feedback
+- [competitor-research.md](competitor-research.md) - Research competitors and track changes
+- [metrics.md](metrics.md) - Track, analyze, and query metrics
 
 ### Communicate
-- [write-update.md](write-update.md) - Write stakeholder updates and communications
-
-### Document & Decide
-- [document-decision.md](document-decision.md) - Document decisions and evaluate options
+- [product-updates.md](product-updates.md) - Write product updates and communications
 
 ### Manage & Collaborate
-- [manage-tasks.md](manage-tasks.md) - Manage tasks
-- [triage-bugs.md](triage-bugs.md) - Triage and manage bugs
-- [collaborate-engineering.md](collaborate-engineering.md) - Collaborate with engineering
-- [collaborate-team.md](collaborate-team.md) - Collaborate with team
+- [bugs.md](bugs.md) - Manage and prioritize bugs and incidents
+- [eng-manager.md](eng-manager.md) - EM expert for technical requirements and architecture
+- [team-onboarding.md](team-onboarding.md) - Onboard team members and prepare handoffs
+- [product-processes.md](product-processes.md) - Expert in product processes and operating models
 
-### Review & Improve
-- [review-pr.md](review-pr.md) - Review pull requests
-- [improve-process.md](improve-process.md) - Improve processes
-- [apply-framework.md](apply-framework.md) - Apply PM frameworks
+### Development & Operations
+- [github.md](github.md) - Manage git and GitHub operations
+
+### Technical Writing
+- [technical-writing.md](technical-writing.md) - Create API docs, developer guides, references, and code recipes
+
+### MCP Development
+- [mcp-generator.md](mcp-generator.md) - Generate MCP servers from API docs/SDKs with .env configuration
 
 ---
 
@@ -117,18 +138,6 @@ Always reference:
 - @AGENTS.md for behavior
 - @templates/ for document structure
 - @knowledge/ for context
-```
-
-### For Windsurf
-
-```json
-{
-  "cascade.shortcuts": {
-    "/plan": "Read @examples/workflows/prioritize-work.md",
-    "/backlog": "Read @examples/workflows/process-backlog.md",
-    "/spec": "Read @examples/workflows/generate-docs.md and generate spec"
-  }
-}
 ```
 
 ---
@@ -172,7 +181,7 @@ Always reference:
 
 **Trigger**: `/expand-initiative [name]`
 
-**Workflow**: [prioritize-work.md](prioritize-work.md)
+**Workflow**: Use [product-docs.md](product-docs.md) or [user-research.md](user-research.md) for research expansion
 
 **What it does**:
 Before generating a PRD, expand the initiative with:
@@ -181,7 +190,6 @@ Before generating a PRD, expand the initiative with:
 - Risk analysis
 - Validation approach
 - Effort estimates
-- Competitive analysis
 
 **When to use**: After creating initiative, before committing to build
 
@@ -200,7 +208,7 @@ Before generating a PRD, expand the initiative with:
 
 **Trigger**: `/prd [initiative-name]`
 
-**Workflow**: [generate-docs.md](generate-docs.md)
+**Workflow**: [product-docs.md](product-docs.md)
 
 **What it does**:
 Converts initiative to full Product Requirements Document:
@@ -254,19 +262,19 @@ Converts initiative to full Product Requirements Document:
 
 ```
 1. Add transcripts to knowledge/transcripts/
-2. /synthesize
+2. /synthesize (uses user-research.md)
 3. /insights
 4. Create initiatives from top opportunities
-5. /prioritize
+5. Use roadmap.md or task-manager.md to prioritize
 ```
 
 ### Weekly Update
 
 ```
-1. /metrics
+1. /metrics (uses metrics.md)
    "Get latest numbers from @knowledge/product-analytics/"
 
-2. /exec-update
+2. /exec-update (uses product-updates.md)
    "Draft update for leadership"
 
 3. (Iterate)
@@ -315,38 +323,39 @@ Don't expect perfection first try:
 Each `.md` file in this directory contains detailed workflows:
 
 **Process & Organize**:
-- **process-backlog.md** - Process backlog items
-- **archive-completed.md** - Archive completed work
+- **process-backlog.md** - Process backlog items into initiatives, tasks, references (includes archiving)
 
 **Generate & Create**:
-- **generate-docs.md** - Generate specs, PRDs, briefs
-- **use-structured-prompts.md** - Structured workflow prompts
+- **product-docs.md** - Generate and manage specs, PRDs, briefs, user stories, and document decisions
 
 **Plan & Prioritize**:
-- **prioritize-work.md** - Prioritize and plan work
-- **plan-launch.md** - Plan launches
-- **set-goals.md** - Set goals and OKRs
+- **roadmap.md** - Create and manage strategic roadmaps
+- **gtm-launch.md** - Plan and execute GTM launches with implementation planning
+- **okrs.md** - Create and manage strategic OKRs
+- **task-manager.md** - Prioritize and manage tasks and personal todos
 
 **Research & Analyze**:
-- **synthesize-research.md** - Synthesize research
-- **track-metrics.md** - Track metrics
+- **user-research.md** - Synthesize user research, interviews, and customer feedback
+- **competitor-research.md** - Research competitors and track changes
+- **metrics.md** - Track, analyze, and query metrics
 
 **Communicate**:
-- **write-update.md** - Write updates
-
-**Document & Decide**:
-- **document-decision.md** - Document decisions
+- **product-updates.md** - Write product updates and communications
 
 **Manage & Collaborate**:
-- **manage-tasks.md** - Manage tasks
-- **triage-bugs.md** - Triage bugs
-- **collaborate-engineering.md** - Collaborate with engineering
-- **collaborate-team.md** - Collaborate with team
+- **bugs.md** - Manage and prioritize bugs and incidents
+- **eng-manager.md** - EM expert for technical requirements and architecture
+- **team-onboarding.md** - Onboard team members and prepare handoffs
+- **product-processes.md** - Expert in product processes and operating models
 
-**Review & Improve**:
-- **review-pr.md** - Review PRs
-- **improve-process.md** - Improve processes
-- **apply-framework.md** - Apply frameworks
+**Development & Operations**:
+- **github.md** - Manage git and GitHub operations
+
+**Technical Writing**:
+- **technical-writing.md** - Create API documentation, developer guides, reference docs, and code recipes
+
+**MCP Development**:
+- **mcp-generator.md** - Generate MCP servers from API documentation or SDKs with .env configuration
 
 ---
 

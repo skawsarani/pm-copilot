@@ -15,7 +15,7 @@ PM Co-Pilot turns your AI coding assistant (Cursor, Claude Code, etc.) into an i
 - 🎯 **Strategic Prioritization** → Framework-based recommendations aligned with your strategy
 - 📊 **Research Synthesis** → Turn interviews and data into actionable insights
 - 🎤 **Voice Training** → Make AI write like you, not generic AI
-- ⚡ **Workflow Library** → 15 categories of pre-built PM workflows
+- ⚡ **Workflow Library** → 17 categories of pre-built PM workflows
 
 ---
 
@@ -23,7 +23,7 @@ PM Co-Pilot turns your AI coding assistant (Cursor, Claude Code, etc.) into an i
 
 ### Prerequisites
 
-- An AI coding assistant (Cursor, Claude Code, Windsurf, etc.)
+- An AI coding assistant (Cursor, Claude Code, etc.)
 - Git for version control (if you plan to push your structure to a remote repo - never use it to store context)
 - Optional: Python 3.10+ (only if using MCP servers)
 
@@ -201,7 +201,7 @@ Built-in task system for actionable work:
 
 ### 📚 Comprehensive Workflows
 
-15 workflow categories covering:
+17 workflow categories covering:
 - Backlog processing (creates initiatives, tasks, references)
 - Task management
 - Document generation

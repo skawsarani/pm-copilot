@@ -41,21 +41,87 @@ When asked to create specs or make decisions:
 
 ## Workflow Library Integration
 
-Reference `examples/workflows/` directory for pre-built workflows. Read the workflow file and follow its instructions. Common patterns:
+Reference `examples/workflows/` directory for expert subagent workflows. Each workflow is an expert in a specific PM domain. Read the workflow file and follow its instructions.
 
-- `"/backlog"` or `"Process my backlog"` → See `examples/workflows/process-backlog.md`
-- `"/expand-initiative [name]"` → See `examples/workflows/prioritize-work.md`
-- `"/prd [initiative]"` or `"/spec [initiative]"` → See `examples/workflows/generate-docs.md`
-- `"What should I prioritize?"` → See `examples/workflows/prioritize-work.md`
-- `"/synthesize"` → See `examples/workflows/synthesize-research.md`
-- `"/exec-update"` → See `examples/workflows/write-update.md`
-- `"/decide [decision]"` → See `examples/workflows/document-decision.md`
-- `"Manage tasks"` → See `examples/workflows/manage-tasks.md`
+### When to Call Which Subagent
+
+**Backlog & Organization**:
+- `"/backlog"` or `"Process my backlog"` → `process-backlog.md` - Process backlog items, archive completed work
+- `"Archive completed work"` → `process-backlog.md` - Archive and cleanup
+
+**Documentation & Specs**:
+- `"/prd [initiative]"` or `"/spec [initiative]"` → `product-docs.md` - Generate specs, PRDs, briefs, user stories
+- `"/decide [decision]"` or `"Document decision"` → `product-docs.md` - Document decisions and evaluate options
+- `"Create brief"` or `"Generate user stories"` → `product-docs.md` - All document creation
+
+**Planning & Prioritization**:
+- `"/roadmap"` or `"Create roadmap"` → `roadmap.md` - Strategic roadmap planning
+- `"/sprint"` or `"Plan sprint"` → `roadmap.md` - Sprint planning
+- `"What should I prioritize?"` (tasks) → `task-manager.md` - Task prioritization
+- `"What should I prioritize?"` (initiatives/backlog) → `process-backlog.md` or `roadmap.md`
+- `"/weekly"` or `"Plan this week"` → `task-manager.md` - Weekly task planning
+
+**GTM & Launch**:
+- `"/launch"` or `"Plan launch"` → `gtm-launch.md` - GTM launch planning and execution
+- `"Create implementation plan"` → `gtm-launch.md` - Implementation planning
+
+**Goals & Strategy**:
+- `"/okrs"` or `"Set OKRs"` → `okrs.md` - Create and manage OKRs
+- `"Align to strategy"` → `okrs.md` - Strategic alignment
+
+**Research & Analysis**:
+- `"/synthesize"` or `"Synthesize research"` → `user-research.md` - User research synthesis
+- `"Analyze customer feedback"` → `user-research.md` - Customer feedback analysis
+- `"/competitive"` or `"Competitor research"` → `competitor-research.md` - Competitor analysis
+- `"Track competitor changes"` → `competitor-research.md` - Monitor competitors
+- `"/metrics"` or `"What are our metrics?"` → `metrics.md` - Query and analyze metrics
+
+**Communication**:
+- `"/exec-update"` or `"Draft executive update"` → `product-updates.md` - Executive updates
+- `"/team-update"` → `product-updates.md` - Team updates
+- `"Write stakeholder communication"` → `product-updates.md` - All product communications
+
+**Task Management**:
+- `"Manage tasks"` or `"Update task"` → `task-manager.md` - Task management and prioritization
+- `"Find stale tasks"` → `task-manager.md` - Task health
+
+**Bugs & Incidents**:
+- `"Triage bugs"` or `"Prioritize bugs"` → `bugs.md` - Bug management
+- `"Write post-mortem"` → `bugs.md` - Incident post-mortems
+
+**Technical Collaboration**:
+- `"Create technical requirements"` or `"Fill technical gaps"` → `eng-manager.md` - EM expert for technical requirements
+- `"Propose architecture"` → `eng-manager.md` - Architecture proposals
+
+**Team & Onboarding**:
+- `"Onboard new team member"` → `team-onboarding.md` - Team member onboarding
+- `"Prepare handoff"` → `team-onboarding.md` - Project handoffs
+
+**Processes**:
+- `"Improve process"` or `"Create process"` → `product-processes.md` - Product processes expert
+- `"Write process proposal"` → `product-processes.md` - Process proposals
+
+**Development**:
+- `"Create PR"` or `"Review PR"` → `github.md` - Git/GitHub operations
+- `"Manage branches"` → `github.md` - Git workflow
+
+**Technical Writing**:
+- `"/api-docs"` or `"Create API documentation"` → `technical-writing.md` - Generate API docs, guides, references
+- `"/guide [topic]"` or `"Write developer guide"` → `technical-writing.md` - Create developer guides and tutorials
+- `"/reference [topic]"` or `"Create reference docs"` → `technical-writing.md` - Write reference documentation
+- `"/recipe [task]"` or `"Create code recipe"` → `technical-writing.md` - Create code recipes and examples
+- `"/publish-docs"` or `"Prepare docs for publishing"` → `technical-writing.md` - Format docs for publishing platforms
+
+**MCP Development**:
+- `"/mcp-server [api-name]"` or `"Generate MCP server for [API]"` → `mcp-generator.md` - Generate MCP server from API docs/SDKs
+- `"/create-mcp [tool]"` or `"Create MCP server from API docs"` → `mcp-generator.md` - Create MCP server implementation
+- `"/mcp-env [server]"` or `"Generate .env for MCP server"` → `mcp-generator.md` - Create .env template and setup guide
 
 **How to use workflows:**
-1. When a task matches a trigger, read the corresponding workflow file
+1. When a task matches a trigger above, read the corresponding workflow file
 2. Follow the workflow's step-by-step instructions
 3. The workflow may reference files in `knowledge/` for context (e.g., voice samples)
+4. Each workflow is an expert subagent - use them for their specific domain expertise
 
 ## Best Practices
 
