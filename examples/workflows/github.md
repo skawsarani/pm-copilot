@@ -91,6 +91,30 @@ Create a commit message for [changes]
 
 ---
 
+### Commit and Push Changes
+
+```
+Commit all changes and push
+```
+
+**What it does**:
+- Stages all changes (including deletions and new files) with `git add -A`
+- Creates a commit with an appropriate message summarizing the changes
+- Pushes to the remote repository
+- Handles renames, deletions, and new files correctly
+- Provides summary of what was committed
+
+**When to use**: When user wants to commit all current changes and push to remote
+
+**Note**: If user asks to "commit and push" or "commit all changes and push", this workflow should:
+1. Stage all changes: `git add -A`
+2. Review what will be committed (or infer from context)
+3. Create a descriptive commit message
+4. Commit the changes
+5. Push to remote
+
+---
+
 ### Manage Branches
 
 ```

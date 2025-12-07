@@ -103,6 +103,7 @@ Reference `examples/workflows/` directory for expert subagent workflows. Each wo
 
 **Development**:
 - `"Create PR"` or `"Review PR"` → `github.md` - Git/GitHub operations
+- `"Commit all changes and push"` or `"Commit and push"` → `github.md` - Commit and push changes
 - `"Manage branches"` → `github.md` - Git workflow
 
 **Technical Writing**:
