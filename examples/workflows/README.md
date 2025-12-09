@@ -72,6 +72,12 @@ AI-powered workflows for product management. These are your slash commands for C
 /mcp-env [server]  → Generate .env template for MCP server
 ```
 
+### 🛠️ Prototyping
+
+```
+/prototype [feature] → Create working code prototype from spec/brief
+```
+
 ---
 
 ## Workflow Index (Action-Based)
@@ -106,6 +112,7 @@ Browse workflows by action:
 
 ### Development & Operations
 - [github.md](github.md) - Manage git and GitHub operations
+- [prototype.md](prototype.md) - Create working code prototypes from specs/briefs using Shadcn/ui
 
 ### Technical Writing
 - [technical-writing.md](technical-writing.md) - Create API docs, developer guides, references, and code recipes
@@ -350,6 +357,7 @@ Each `.md` file in this directory contains detailed workflows:
 
 **Development & Operations**:
 - **github.md** - Manage git and GitHub operations
+- **prototype.md** - Create working code prototypes from specs/briefs using Shadcn/ui
 
 **Technical Writing**:
 - **technical-writing.md** - Create API documentation, developer guides, reference docs, and code recipes
