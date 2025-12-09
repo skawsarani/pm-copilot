@@ -31,3 +31,6 @@ Thumbs.db
 .vscode/
 .idea/
 .obsidian/
+
+# Prototype code
+code/

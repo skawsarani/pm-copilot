@@ -50,3 +50,9 @@ __pycache__/
 !.env/.gitignore
 !.env/README.md
 !.env/.env.example
+
+# Prototype code (keep structure but ignore content)
+code/**/*
+!code/**/
+!code/**/.gitkeep
+!code/README.md
