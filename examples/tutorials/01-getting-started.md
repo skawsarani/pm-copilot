@@ -221,7 +221,7 @@ Reduce mobile app crash rate from 1.8% to <0.5%
 - **Tutorial 4**: Stakeholder Communication
 
 Or explore:
-- `examples/workflows/` - See all available workflows
+- `workflows/` - See all available workflows
 - `examples/example_files/` - View example documents
 - `BACKLOG.md` - Keep dumping ideas here
 

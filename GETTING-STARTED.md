@@ -316,7 +316,7 @@ AI creates comprehensive spec or PRD from your initiative.
 
 ### Explore Workflows
 
-See `examples/workflows/README.md` for the complete library:
+See `workflows/README.md` for the complete library:
 - Backlog processing
 - Initiative management
 - Document generation
@@ -379,7 +379,7 @@ See `examples/workflows/README.md` for the complete library:
 **Problem**: Don't know what's available
 
 **Solutions**:
-1. Browse `examples/workflows/README.md`
+1. Browse `workflows/README.md`
 2. Search workflow files for keywords
 3. Ask AI: "What workflows do you have for [task]?"
 4. Create your own (see CONTRIBUTING.md)
@@ -483,7 +483,7 @@ After setup, you should have:
 ### Resources
 - **[README.md](README.md)** - Overview and features
 - **[examples/tutorials/](examples/tutorials/)** - 4 learning tutorials
-- **[examples/workflows/README.md](examples/workflows/README.md)** - Complete workflow library
+- **[workflows/README.md](workflows/README.md)** - Complete workflow library
 - **[AGENTS.md](AGENTS.md)** - How AI understands this system (includes style guidance)
 
 ### Stuck?

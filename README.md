@@ -156,8 +156,8 @@ pm-copilot/
 │   ├── transcripts/             # User interviews, meetings, research
 │   └── voice-samples/           # Your writing samples for AI
 │
+├── workflows/                   # 18 PM workflow files + comprehensive README
 ├── examples/                     # Learning & reference
-│   ├── workflows/               # 18 PM workflow files + comprehensive README
 │   ├── tutorials/               # 5 step-by-step guides (135 min total)
 │   ├── example_files/           # Sample documents  
 │   └── voice-samples/           # Example writing samples
@@ -287,7 +287,7 @@ Use workflows as shortcuts in Cursor or Claude Code:
 - `/team-update` - Team update
 - `/faq [topic]` - Generate FAQ
 
-**More**: See `examples/workflows/README.md` for a complete list and how to set up in Claude Code or cursor.
+**More**: See `workflows/README.md` for a complete list and how to set up in Claude Code or cursor.
 
 ---
 
@@ -369,7 +369,7 @@ Built for product managers who want to spend more time on strategic thinking and
 
 ### Reference
 - **[AGENTS.md](AGENTS.md)** - How the AI agent works (includes style guidance)
-- **[examples/workflows/README.md](examples/workflows/README.md)** - Complete workflow library
+- **[workflows/README.md](workflows/README.md)** - Complete workflow library
 - **[templates/](templates/)** - 7 document templates
 
 ### Advanced
@@ -398,7 +398,7 @@ Built for product managers who want to spend more time on strategic thinking and
 **Q: How do I use slash commands?**
 - Just type them in your AI assistant (e.g., `/plan`)
 - Or use natural language: "Help me plan my day"
-- See `examples/workflows/README.md` for all commands
+- See `workflows/README.md` for all commands
 
 ---
 
@@ -421,7 +421,7 @@ MIT License - feel free to use and adapt for your needs.
 **Quick help**:
 - Start with [GETTING-STARTED.md](GETTING-STARTED.md)
 - Browse [examples/tutorials/](examples/tutorials/)
-- Check [examples/workflows/README.md](examples/workflows/README.md)
+- Check [workflows/README.md](workflows/README.md)
 
 **Questions**:
 - Open an issue

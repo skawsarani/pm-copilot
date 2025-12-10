@@ -56,7 +56,7 @@ Open an issue to discuss:
 ### File Organization
 - Put examples in `examples/example_files/`
 - Put tutorials in `examples/tutorials/`
-- Put workflow docs in `examples/workflows/`
+- Put workflow docs in `workflows/`
 - Put templates in `templates/`
 
 ### Naming Conventions
@@ -203,16 +203,16 @@ templates/
 examples/example_files/
 └── pricing-strategy-example.md
 
-examples/workflows/
+workflows/
 └── generate-docs.md (updated to reference new template)
 ```
 
 ### 📋 New Workflows
 
 **What to include**:
-1. Workflow in appropriate category file in `examples/workflows/`
+1. Workflow in appropriate category file in `workflows/`
 2. Example in `examples/example_files/` if complex
-3. Update `examples/workflows/README.md` if new category
+3. Update `workflows/README.md` if new category
 
 **Format**:
 ```markdown

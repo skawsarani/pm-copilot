@@ -41,7 +41,26 @@ When asked to create specs or make decisions:
 
 ## Workflow Library Integration
 
-Reference `examples/workflows/` directory for expert subagent workflows. Each workflow is an expert in a specific PM domain. Read the workflow file and follow its instructions.
+Reference `workflows/` directory for expert subagent workflows. Each workflow is an expert in a specific PM domain. Read the workflow file and follow its instructions.
+
+### Workflow Invocation Announcement
+
+**CRITICAL**: When invoking a workflow/subagent, you MUST announce which workflow you are using before proceeding. This makes it clear to the PM which expert subagent is handling their request.
+
+**Format**: 
+- "Invoking [workflow-name] workflow..." or
+- "Using [workflow-name] subagent to handle this request..." or
+- "Activating [workflow-name] workflow..."
+
+**When to announce**:
+- Immediately after identifying that a request matches a workflow trigger
+- Before reading the workflow file
+- In your first response to the user
+
+**Example**:
+- User: "/backlog"
+- AI: "Invoking process-backlog workflow to process your backlog items..."
+- Then proceed to read `workflows/process-backlog.md` and follow its instructions
 
 ### When to Call Which Subagent
 
@@ -124,10 +143,11 @@ Reference `examples/workflows/` directory for expert subagent workflows. Each wo
 - `"/mcp-env [server]"` or `"Generate .env for MCP server"` → `mcp-generator.md` - Create .env template and setup guide
 
 **How to use workflows:**
-1. When a task matches a trigger above, read the corresponding workflow file
-2. Follow the workflow's step-by-step instructions
-3. The workflow may reference files in `knowledge/` for context (e.g., voice samples)
-4. Each workflow is an expert subagent - use them for their specific domain expertise
+1. When a task matches a trigger above, **announce which workflow you are invoking** (see "Workflow Invocation Announcement" above)
+2. Read the corresponding workflow file from `workflows/` directory
+3. Follow the workflow's step-by-step instructions
+4. The workflow may reference files in `knowledge/` for context (e.g., voice samples)
+5. Each workflow is an expert subagent - use them for their specific domain expertise
 
 ## Best Practices
 
@@ -233,7 +253,7 @@ Before generating any new document type, check if a template exists in `template
 ## Evolution
 
 This system should evolve with the PM:
-- If you notice repetitive tasks, suggest adding workflows to `examples/workflows/` directory
+- If you notice repetitive tasks, suggest adding workflows to `workflows/` directory
 - If you create a useful document structure, suggest adding to `templates/`
 - If context is missing, suggest adding to the appropriate `knowledge/` subfolder
 - If a process isn't working, propose improvements

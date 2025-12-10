@@ -208,7 +208,7 @@ Want to master the system?
 
 Once comfortable with tutorials 1-5, explore:
 
-**Advanced Workflows** (`examples/workflows/`):
+**Advanced Workflows** (`workflows/`):
 - Research synthesis
 - Competitive analysis
 - Launch planning
@@ -278,7 +278,7 @@ Once comfortable with tutorials 1-5, explore:
 
 **Where to Get Help**:
 1. Check `examples/example_files/` for concrete examples
-2. Review `examples/workflows/README.md` for detailed workflows
+2. Review `workflows/README.md` for detailed workflows
 3. Read `GETTING-STARTED.md` for setup issues
 4. Check style guidance in `AGENTS.md`
 

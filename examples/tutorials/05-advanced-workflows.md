@@ -523,7 +523,7 @@ Reference files:
 
 ### Explore Advanced Workflows
 
-See `examples/workflows/` for specialized workflows:
+See `workflows/` for specialized workflows:
 - `user-research.md` - Research synthesis patterns
 - `product-docs.md` - Decision documentation and document creation
 - `gtm-launch.md` - Launch planning
@@ -534,7 +534,7 @@ See `examples/workflows/` for specialized workflows:
 
 Document your common workflows:
 ```
-"Save this workflow pattern to examples/workflows/my-pattern.md:
+"Save this workflow pattern to workflows/my-pattern.md:
 
 [Your workflow steps]"
 ```
