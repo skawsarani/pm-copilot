@@ -126,12 +126,17 @@ Browse workflows by action:
 
 ### For Cursor
 
-The `.cursorrules` file in project root has 30+ pre-configured slash commands.
+You can create a `.cursorrules` file in the project root to configure slash commands. Add instructions like:
+
+```markdown
+When I use shortcuts like /plan, /backlog, /spec, read the corresponding
+workflow file in examples/workflows/ and execute it.
+```
 
 **Usage**: Just type `/plan` or `/backlog` in Cursor chat!
 
 **Add Your Own**:
-Edit `.cursorrules` to add custom workflows.
+Create or edit `.cursorrules` to add custom workflows.
 
 ### For Claude Code
 

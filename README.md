@@ -15,7 +15,7 @@ PM Co-Pilot turns your AI coding assistant (Cursor, Claude Code, etc.) into an i
 - 🎯 **Strategic Prioritization** → Framework-based recommendations aligned with your strategy
 - 📊 **Research Synthesis** → Turn interviews and data into actionable insights
 - 🎤 **Voice Training** → Make AI write like you, not generic AI
-- ⚡ **Workflow Library** → 17 categories of pre-built PM workflows
+- ⚡ **Workflow Library** → 18 categories of pre-built PM workflows
 
 ---
 
@@ -157,13 +157,14 @@ pm-copilot/
 │   └── voice-samples/           # Your writing samples for AI
 │
 ├── examples/                     # Learning & reference
-│   ├── workflows/               # 15 PM workflow files + comprehensive README
-│   ├── tutorials/               # 4 step-by-step guides (90 min total)
+│   ├── workflows/               # 18 PM workflow files + comprehensive README
+│   ├── tutorials/               # 5 step-by-step guides (135 min total)
 │   ├── example_files/           # Sample documents  
 │   └── voice-samples/           # Example writing samples
 │
 ├── templates/                    # 7 reusable document templates
 ├── mcp/                         # MCP server/client configs (optional)
+├── code/                        # Prototype code (gitignored content)
 ├── archive/                     # Completed work (gitignored)
 └── .env/                        # Environment variables (gitignored)
 ```
@@ -201,7 +202,7 @@ Built-in task system for actionable work:
 
 ### 📚 Comprehensive Workflows
 
-17 workflow categories covering:
+18 workflow categories covering:
 - Backlog processing (creates initiatives, tasks, references)
 - Task management
 - Document generation
@@ -321,6 +322,7 @@ Use workflows as shortcuts in Cursor or Claude Code:
 - Everything in `knowledge/` (except READMEs)
 - Everything in `initiatives/` (except README)
 - Everything in `tasks/` (except README)
+- Everything in `code/` (except README and structure)
 - Everything in `archive/`
 - Everything in `.env/`
 - Content of `BACKLOG.md` (optional - you decide)

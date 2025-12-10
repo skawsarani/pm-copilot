@@ -12,8 +12,10 @@ knowledge/
 ├── briefs-and-specs/     # Product specs, feature briefs, technical docs
 ├── company-context/      # Company info, mission, org structure
 ├── frameworks/           # PM frameworks, methodologies, mental models
+├── notes/                # Archived inbox snapshots, meeting notes, uncategorized items
 ├── processes/            # How your team works
 ├── product-analytics/    # KPIs, dashboards, performance data
+│   └── metrics/          # Metric definitions and historical data
 ├── product-strategy/     # Vision, strategy, roadmap
 ├── proposals/            # Decision docs, RFCs, proposals
 ├── references/           # Links, articles, competitive analysis
@@ -207,6 +209,30 @@ knowledge/
 - `sprint-process.md`
 - `decision-making.md`
 - `launch-checklist.md`
+
+---
+
+### notes/
+
+**Purpose**: Store archived inbox snapshots, meeting notes, and uncategorized items from backlog processing.
+
+**Include**:
+- Daily archived snapshots from `BACKLOG.md` processing (named `YYYY-MM-DD.md`)
+- Meeting notes that don't fit into other categories
+- Random thoughts and uncategorized items
+- Items that were processed but didn't fit into initiatives, tasks, or references
+
+**Naming Convention**:
+- `YYYY-MM-DD.md` - Daily archived inbox snapshots
+- `YYYY-MM-DD-meeting-[topic].md` - Meeting notes
+- `YYYY-MM-DD-notes.md` - General notes
+
+**Example files**:
+- `2024-12-02.md` - Archived backlog snapshot
+- `2024-12-01-meeting-q4-planning.md` - Meeting notes
+- `2024-11-30-notes.md` - General notes
+
+**Usage**: This directory is automatically populated when processing `BACKLOG.md`. Items that don't fit into initiatives, tasks, or references are archived here with a dated snapshot.
 
 ---
 
