@@ -33,9 +33,30 @@ cd pm-copilot
 cursor .  # or open with your AI assistant
 ```
 
+### Run the Setup Script
+
+The easiest way to get started is using the interactive setup script:
+
+```bash
+./setup.sh
+```
+
+**What the setup script does:**
+- ✅ Creates all knowledge base directories
+- ✅ Generates template files with helpful content
+- ✅ Sets up your `BACKLOG.md` (if it doesn't exist)
+- ✅ Prompts you for essential information (company name, product, team size)
+- ✅ Provides clear next steps
+
+**Note**: If `BACKLOG.md` already exists, the script will preserve it and show a message. The script will also skip any directories or files that already exist to protect your existing content.
+
+### Alternative: Manual Setup
+
+If you prefer to set up manually or the script doesn't work for you, see the sections below for step-by-step instructions.
+
 ### First Conversation with AI
 
-Tell your AI assistant:
+After setup, tell your AI assistant:
 
 ```
 Read @AGENTS.md to understand how to help me as a PM Co-Pilot.
@@ -47,13 +68,15 @@ The AI will guide you through setup using the instructions in AGENTS.md.
 
 ---
 
-## Step 2: Add Company Context (10 minutes)
+## Step 2: Fill in Your Context Files (15-20 minutes)
 
-Create essential context files so AI understands your work environment.
+> **If you used `setup.sh`**: The template files are already created! Just edit them with your information.
+> 
+> **If setting up manually**: Create these files from scratch.
 
 ### Company Context
 
-Create `knowledge/company-context/overview.md`:
+Create or edit `knowledge/company-context/company-overview.md`:
 
 ```markdown
 # Company Overview
@@ -78,7 +101,7 @@ Create `knowledge/company-context/overview.md`:
 
 ### Product Strategy
 
-Create `knowledge/product-strategy/2024-strategy.md`:
+Create or edit `knowledge/product-strategy/current-strategy.md`:
 
 ```markdown
 # 2024 Product Strategy
@@ -136,9 +159,15 @@ Create `knowledge/about-me/about-me.md`:
 
 ## Step 3: Set Up First Backlog (5 minutes)
 
+> **If you used `setup.sh`**: `BACKLOG.md` is already created! Just start adding your ideas.
+> 
+> **If setting up manually**: Create `BACKLOG.md` in the root directory.
+
 ### Add Ideas to BACKLOG.md
 
 Open `BACKLOG.md` and brain dump ideas, tasks, notes - everything:
+
+**Note**: `BACKLOG.md` is gitignored to keep your private notes local. It won't be committed to the repository.
 
 ```markdown
 # Backlog
@@ -391,9 +420,10 @@ See `workflows/README.md` for the complete library:
 After setup, you should have:
 
 **Context Files**:
-- [ ] `knowledge/company-context/overview.md`
-- [ ] `knowledge/product-strategy/2024-strategy.md`
+- [ ] `knowledge/company-context/company-overview.md`
+- [ ] `knowledge/product-strategy/current-strategy.md`
 - [ ] `knowledge/about-me/about-me.md`
+- [ ] `knowledge/processes/how-we-work.md` (optional but recommended)
 
 **Backlog & Organization**:
 - [ ] `BACKLOG.md` processed (or ready to process)
@@ -482,7 +512,7 @@ After setup, you should have:
 
 ### Resources
 - **[README.md](README.md)** - Overview and features
-- **[examples/tutorials/](examples/tutorials/)** - 4 learning tutorials
+- **[examples/tutorials/](examples/tutorials/)** - 5 learning tutorials
 - **[workflows/README.md](workflows/README.md)** - Complete workflow library
 - **[AGENTS.md](AGENTS.md)** - How AI understands this system (includes style guidance)
 

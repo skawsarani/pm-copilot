@@ -103,6 +103,7 @@ Browse workflows by action:
 
 ### Communicate
 - [product-updates.md](product-updates.md) - Write product updates and communications
+- [copywriting.md](copywriting.md) - Create and refine UI/UX copy, translate to Canadian French
 
 ### Manage & Collaborate
 - [bugs.md](bugs.md) - Manage and prioritize bugs and incidents
@@ -144,7 +145,7 @@ Add to project instructions:
 
 ```markdown
 When I use shortcuts like /plan, /backlog, /spec, read the corresponding
-workflow file in examples/workflows/ and execute it.
+workflow file in workflows/ and execute it.
 
 Always reference:
 - @AGENTS.md for behavior
@@ -353,6 +354,7 @@ Each `.md` file in this directory contains detailed workflows:
 
 **Communicate**:
 - **product-updates.md** - Write product updates and communications
+- **copywriting.md** - Create and refine UI/UX copy, translate to Canadian French
 
 **Manage & Collaborate**:
 - **bugs.md** - Manage and prioritize bugs and incidents

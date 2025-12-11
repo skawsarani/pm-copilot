@@ -16,9 +16,15 @@
 
 ## Step 1: Add Your Context (5 min)
 
+> **Quick Setup**: If you haven't run `setup.sh` yet, do that first! It creates all the template files for you.
+> 
+> ```bash
+> ./setup.sh
+> ```
+
 ### Your Company & Product
 
-Create `knowledge/company-context/company-overview.md`:
+Create or edit `knowledge/company-context/company-overview.md`:
 
 ```markdown
 # Company Overview
@@ -62,7 +68,11 @@ Create `knowledge/about-me/about-me.md`:
 
 ## Step 2: Brain Dump Ideas (3 min)
 
+> **Note**: If you used `setup.sh`, `BACKLOG.md` is already created. If not, create it in the root directory.
+
 Open `BACKLOG.md` and add ideas, tasks, notes - everything:
+
+**Note**: `BACKLOG.md` is gitignored to keep your private notes local.
 
 ```markdown
 ## Mobile App Crashes
@@ -217,8 +227,9 @@ Reduce mobile app crash rate from 1.8% to <0.5%
 ## Next Steps
 
 - **Tutorial 2**: Working with Initiatives
-- **Tutorial 3**: Research and Decision Making
-- **Tutorial 4**: Stakeholder Communication
+- **Tutorial 3**: Memory & Context Management
+- **Tutorial 4**: Voice Training
+- **Tutorial 5**: Advanced Workflows
 
 Or explore:
 - `workflows/` - See all available workflows

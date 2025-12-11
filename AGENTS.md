@@ -23,7 +23,7 @@ Before making suggestions or generating documents, familiarize yourself with:
 - `knowledge/product-strategy/` - Product vision, roadmap, strategic pillars
 - `knowledge/frameworks/` - PM frameworks and methodologies used
 - `knowledge/processes/` - How this team works (rituals, frameworks, decision-making)
-- `knowledge/product-analytics/` - Success metrics, KPIs, current performance data (interac metrics stored in `interac-metrics/`)
+- `knowledge/product-analytics/` - Success metrics, KPIs, current performance data (all subdirectories are gitignored - only structure preserved)
 - `knowledge/briefs-and-specs/` - Product specs, feature briefs, technical documentation
 - `knowledge/transcripts/` - User interviews, stakeholder meetings, research sessions
 - `knowledge/voice-samples/` - Writing samples for matching communication style
@@ -131,6 +131,15 @@ Reference `workflows/` directory for expert subagent workflows. Each workflow is
 - `"/reference [topic]"` or `"Create reference docs"` → `technical-writing.md` - Write reference documentation
 - `"/recipe [task]"` or `"Create code recipe"` → `technical-writing.md` - Create code recipes and examples
 - `"/publish-docs"` or `"Prepare docs for publishing"` → `technical-writing.md` - Format docs for publishing platforms
+
+**Copywriting & Localization**:
+- `"Translate to Canadian French"` or `"Translate this copy"` → `copywriting.md` - Translate English UI/UX copy to Canadian French (Québécois)
+- `"Review copy"` or `"Refine this copy"` → `copywriting.md` - Review and improve UI copy for clarity and tone
+- `"Create UI copy for [feature]"` → `copywriting.md` - Generate complete UI copy set (buttons, labels, messages) in English and French
+- `"Translate error messages"` → `copywriting.md` - Translate error messages and validation text to Canadian French
+- `"Create microcopy"` → `copywriting.md` - Create tooltips, help text, empty states in bilingual format
+- `"Create onboarding copy"` → `copywriting.md` - Generate onboarding, tutorial, and welcome copy in both languages
+- `"Create notification copy"` → `copywriting.md` - Create notification messages (in-app, email, push) in bilingual format
 
 **Prototyping** (⚠️ Creates code):
 - `"/prototype [feature]"` or `"Create prototype for [feature]"` → `prototype.md` - Build working code prototypes from specs/briefs using Shadcn/ui

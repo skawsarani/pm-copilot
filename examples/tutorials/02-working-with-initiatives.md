@@ -101,7 +101,7 @@ Full PRD with:
 
 **Launch Plan**:
 ```
-/launch-plan mobile-app-crashes
+/launch mobile-app-crashes
 ```
 
 ---
@@ -309,9 +309,10 @@ Try these to practice:
 
 ## Next Tutorial
 
-**Tutorial 3**: Research and Decision Making
-- Synthesizing user research
-- Documenting decisions
+**Tutorial 3**: Memory & Context Management
+- Adding personal context (about-me)
+- Documenting frameworks
+- Building strategic context
 - Creating frameworks
 
 ---

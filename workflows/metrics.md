@@ -112,54 +112,65 @@ Compare [metric A] vs [metric B] from @knowledge/product-analytics/
 
 ---
 
-### Prepare Interac Metrics Write-Up
+### Prepare Weekly Metrics Summary
 
 ```
-Prepare Interac metrics write-up for this week
+Prepare weekly metrics summary for this week from [folder-name]
 ```
+
+**Examples**:
+- "Prepare weekly metrics summary for this week from interac-metrics"
+- "Prepare weekly metrics summary from @knowledge/product-analytics/[folder-name]/"
+- "Create weekly metrics write-up from product-analytics/[folder-name]"
 
 **What it does**:
-- Reviews this week's metric notes from `knowledge/product-analytics/interac-metrics/`
+- Reviews this week's metric notes from the specified folder in `knowledge/product-analytics/` (local files, gitignored)
 - Analyzes previous weeks for patterns and trends
-- Creates both long-form and TL;DR versions for Slack sharing
-- Formats according to Interac metrics standards
+- Creates both long-form and TL;DR versions for sharing
 - Remains neutral while covering all numbers
 
 **When to use**: Weekly metrics review and stakeholder communication
 
+**Note**: All content in `product-analytics/` subdirectories is gitignored. Only directory structure is preserved in the repo.
+
 **Detailed Steps**:
 
-1. **Check This Week's Metric Notes**: 
-   - Review metric notes in `knowledge/product-analytics/interac-metrics/`
-   - Look for files in format `Metrics YYYY-MM-DD` (representing the start of the week)
-   - Identify the current week's metrics file
+1. **Identify the Metrics Folder**: 
+   - Extract the folder name from the user's request (e.g., "interac-metrics", "mobile-metrics", etc.)
+   - If not specified, ask the user which subdirectory in `knowledge/product-analytics/` contains their metrics
+   - Confirm the path: `knowledge/product-analytics/[folder-name]/`
 
-2. **Review Previous Weeks for Patterns**:
-   - Review previous weeks' metrics in `knowledge/product-analytics/interac-metrics/`
+2. **Check This Week's Metric Notes**: 
+   - Review metric notes in `knowledge/product-analytics/[folder-name]/` (local files only)
+   - Look for files in format `Metrics YYYY-MM-DD` or similar (representing the start of the week)
+   - Identify the current week's metrics file
+   - If file format differs, adapt to the user's naming convention
+
+3. **Review Previous Weeks for Patterns**:
+   - Review previous weeks' metrics in `knowledge/product-analytics/[folder-name]/` (local files only)
    - Identify patterns, trends, and anomalies
    - Exclude incident-related trends from patterns (incidents are handled separately)
    - Create a dedicated "Patterns" section highlighting notable trends
 
-3. **Identify Incidents and Impact**:
+4. **Identify Incidents and Impact**:
    - Check for any incidents that occurred during the week
    - Document each incident and its specific impact on metrics
    - Include incident details: what happened, duration, affected metrics, and magnitude of impact
    - Create a dedicated "Incidents" section in the write-up
 
-4. **Remain Neutral and Comprehensive**:
+5. **Remain Neutral and Comprehensive**:
    - Cover all numbers in the metrics list
    - Be positive where appropriate but maintain neutrality
    - Don't hide negative trends, present them factually
 
-5. **Generate Both Versions**:
+6. **Generate Both Versions**:
    - Create a long-form version with full context
    - Create a TL;DR version for quick consumption
    - Both versions follow the format structure below
 
-6. **Preserve Original Notes**:
+7. **Preserve Original Notes**:
    - Do NOT modify the original metric notes files
    - Only generate new write-up content
-
 **Format Structure**:
 - **Header:** "Week of [date range]"
 - **Opening:** 1-2 sentence summary with key headline metrics and context
@@ -186,6 +197,7 @@ Prepare Interac metrics write-up for this week
 
 **Data Presentation**:
 - Use | for inline metric separation
-- Bold key merchants/flows
+- Bold key entities/categories as relevant to the metrics
 - Include context (26-week high, below norm, etc.)
 - Percentage changes in parentheses with arrows
+

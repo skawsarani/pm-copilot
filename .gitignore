@@ -56,3 +56,6 @@ code/**/*
 !code/**/
 !code/**/.gitkeep
 !code/README.md
+
+# Personal backlog (private daily inbox)
+BACKLOG.md

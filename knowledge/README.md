@@ -14,8 +14,7 @@ knowledge/
 ├── frameworks/           # PM frameworks, methodologies, mental models
 ├── notes/                # Archived inbox snapshots, meeting notes, uncategorized items
 ├── processes/            # How your team works
-├── product-analytics/    # KPIs, dashboards, performance data
-│   └── interac-metrics/  # Metric definitions and historical data
+├── product-analytics/    # KPIs, dashboards, performance data (content gitignored)
 ├── product-strategy/     # Vision, strategy, roadmap
 ├── proposals/            # Decision docs, RFCs, proposals
 ├── references/           # Links, articles, competitive analysis
@@ -443,9 +442,25 @@ knowledge/
 
 ## Getting Started
 
-### Day 1: Essential Context
+### Quick Setup (Recommended)
 
-Create these minimal files:
+Run the setup script to create all directories and template files:
+
+```bash
+./setup.sh
+```
+
+This will:
+- Create all knowledge base directories
+- Generate template files with helpful content
+- Set up your `BACKLOG.md` (if it doesn't exist)
+- Guide you through essential setup questions
+
+Then just edit the template files with your information!
+
+### Manual Setup (Alternative)
+
+If you prefer to set up manually, create these minimal files:
 
 1. **About me**:
 ```bash

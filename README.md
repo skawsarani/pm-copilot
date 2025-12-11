@@ -27,7 +27,7 @@ PM Co-Pilot turns your AI coding assistant (Cursor, Claude Code, etc.) into an i
 - Git for version control (if you plan to push your structure to a remote repo - never use it to store context)
 - Optional: Python 3.10+ (only if using MCP servers)
 
-### Setup (10 minutes)
+### Setup (5 minutes)
 
 1. **Clone this repo**
    ```bash
@@ -35,15 +35,28 @@ PM Co-Pilot turns your AI coding assistant (Cursor, Claude Code, etc.) into an i
    cd pm-copilot
    ```
 
-2. **Add your context** (see [GETTING-STARTED.md](GETTING-STARTED.md))
-   - Company overview → `knowledge/company-context/`
-   - Product strategy → `knowledge/product-strategy/`
-   - About you → `knowledge/about-me/`
+2. **Run the setup script**
+   ```bash
+   ./setup.sh
+   ```
+   This interactive script will:
+   - Create all knowledge base directories
+   - Generate template files with helpful content
+   - Set up your `BACKLOG.md` (if it doesn't exist)
+   - Guide you through essential setup questions
 
-3. **Start using it**
+3. **Fill in your context** (15-20 minutes)
+   - Edit `knowledge/about-me/about-me.md` - Add your background and working style
+   - Edit `knowledge/company-context/company-overview.md` - Add company info
+   - Edit `knowledge/product-strategy/current-strategy.md` - Add your product vision
+   - Edit `knowledge/processes/how-we-work.md` - Document your team process
+
+4. **Start using it**
    ```
    "Read @AGENTS.md and help me get organized"
    ```
+
+**Alternative**: See [GETTING-STARTED.md](GETTING-STARTED.md) for manual setup instructions.
 
 ---
 
@@ -130,7 +143,8 @@ AI creates full PRD, user stories, launch plan from your initiative.
 
 ```
 pm-copilot/
-├── BACKLOG.md                    # Your inbox for raw ideas
+├── BACKLOG.md                    # Your inbox for raw ideas (gitignored)
+├── setup.sh                      # Interactive setup script
 ├── AGENTS.md                     # AI agent instructions
 ├── README.md                     # This file
 ├── GETTING-STARTED.md            # Setup guide
@@ -149,7 +163,7 @@ pm-copilot/
 │   ├── company-context/         # Company vision, values, org
 │   ├── frameworks/              # Your PM frameworks (RICE, OKRs, etc.)
 │   ├── processes/               # How your team works
-│   ├── product-analytics/       # Metrics, KPIs, performance data
+│   ├── product-analytics/       # Metrics, KPIs, performance data (content gitignored)
 │   ├── product-strategy/        # Product vision, roadmap, pillars
 │   ├── proposals/               # Decision docs, RFCs
 │   ├── references/              # Links, articles, competitive analysis
@@ -202,13 +216,14 @@ Built-in task system for actionable work:
 
 ### 📚 Comprehensive Workflows
 
-18 workflow categories covering:
+18+ workflow categories covering:
 - Backlog processing (creates initiatives, tasks, references)
 - Task management
 - Document generation
 - Prioritization & planning
 - Research & analysis
 - Stakeholder communication
+- Copywriting & localization
 - Decision making
 - Technical collaboration
 - Bug management
@@ -325,7 +340,7 @@ Use workflows as shortcuts in Cursor or Claude Code:
 - Everything in `code/` (except README and structure)
 - Everything in `archive/`
 - Everything in `.env/`
-- Content of `BACKLOG.md` (optional - you decide)
+- `BACKLOG.md` (your private daily inbox)
 
 ---
 
@@ -432,8 +447,8 @@ MIT License - feel free to use and adapt for your needs.
 
 **Ready to start?**
 
-1. Read [GETTING-STARTED.md](GETTING-STARTED.md) (10 min)
-2. Add context to `knowledge/` (20 min)
+1. Run `./setup.sh` to set up your workspace (5 min)
+2. Fill in context files (15-20 min)
 3. Brain dump to `BACKLOG.md` (5 min)
 4. Run `/backlog` to create initiatives
 5. Watch the magic happen ✨
