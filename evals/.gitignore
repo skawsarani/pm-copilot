@@ -1,0 +1,5 @@
+# Eval results (test outputs)
+results/
+
+# Backup files
+*.backup
