@@ -94,6 +94,7 @@ check_and_create_dir "knowledge/frameworks" "PM frameworks and methodologies (RI
 check_and_create_dir "knowledge/processes" "How your team works (rituals, frameworks, decision-making)"
 check_and_create_dir "knowledge/product-analytics" "Success metrics, KPIs, current performance data (content gitignored)"
 check_and_create_dir "knowledge/briefs-and-specs" "Product specs, feature briefs, technical documentation"
+check_and_create_dir "knowledge/opportunities" "Strategic opportunities identified from backlog"
 check_and_create_dir "knowledge/transcripts" "User interviews, stakeholder meetings, research sessions"
 check_and_create_dir "knowledge/voice-samples" "Writing samples for matching communication style"
 check_and_create_dir "knowledge/references" "Useful info, links, competitive analysis"
@@ -134,7 +135,7 @@ ABOUT_ME_TEMPLATE='# About Me
 ---
 
 **Tip**: Be specific! The more detail you provide, the better AI can tailor its responses to your style and context.
-See `examples/example_files/about-me-example.md` for more detailed examples.
+See `templates/about-me-template.md` for more detailed examples.
 '
 
 # Template for company-overview.md
@@ -246,7 +247,7 @@ else
 
 Your daily inbox for all notes, ideas, tasks, and thoughts. Capture everything here throughout the day.
 
-Say `process my backlog` when you'\''re ready to categorize and organize items into initiatives, tasks, references, or archive.
+Say `process my backlog` when you'\''re ready to categorize and organize items into opportunities, tasks, references, or archive.
 '
     echo "$BACKLOG_CONTENT" > "BACKLOG.md"
     echo -e "${GREEN}✓ Created BACKLOG.md${NC}"
@@ -281,7 +282,7 @@ echo ""
 echo -e "${BLUE}2. Start using your BACKLOG.md:${NC}"
 echo "   • Add ideas, tasks, notes throughout the day"
 echo "   • Say 'process my backlog' or '/backlog' to organize items"
-echo "   • See examples/example_files/backlog-example.md for format ideas"
+echo "   • See templates/backlog-template.md for format ideas"
 echo ""
 
 echo -e "${BLUE}3. Tell your AI assistant:${NC}"
@@ -291,19 +292,19 @@ echo ""
 echo -e "${BLUE}4. Process your first backlog:${NC}"
 echo "   • Add a few items to BACKLOG.md"
 echo "   • Say: 'process my backlog' or '/backlog'"
-echo "   • AI will categorize items into initiatives, tasks, references, or archive"
+echo "   • AI will categorize items into opportunities, tasks, references, or archive"
 echo ""
 
 echo -e "${BLUE}5. Explore the workflows:${NC}"
 echo "   • Browse workflows/README.md for available workflows"
 echo "   • Try: '/plan' to get prioritized recommendations"
-echo "   • Try: '/spec [initiative]' to generate a spec from an initiative"
+echo "   • Try: '/create-initiative [opportunity]' to create an initiative from an opportunity"
+echo "   • Try: '/spec [name]' to generate a spec from an initiative or opportunity"
 echo ""
 
 echo -e "${BLUE}6. Learn more:${NC}"
-echo "   • Read GETTING-STARTED.md for detailed setup guide"
-echo "   • Check examples/tutorials/ for step-by-step guides"
-echo "   • Review examples/example_files/ for document examples"
+echo "   • Read README.md for complete guide and documentation"
+echo "   • Review templates/ for document examples"
 echo ""
 
 echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"

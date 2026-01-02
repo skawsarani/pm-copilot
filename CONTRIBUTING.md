@@ -54,8 +54,7 @@ Open an issue to discuss:
 - Test instructions before submitting
 
 ### File Organization
-- Put examples in `examples/example_files/`
-- Put tutorials in `examples/tutorials/`
+- Put examples in `templates/`
 - Put workflow docs in `workflows/`
 - Put templates in `templates/`
 
@@ -79,8 +78,7 @@ Open an issue to discuss:
 - Example usage
 - Expected output
 
-**For Tutorials**:
-- Time estimate
+**For Documentation**:
 - Clear goal
 - Step-by-step instructions
 - Common issues section
@@ -191,7 +189,7 @@ How you tested these changes
 
 **What to include**:
 1. Template file in `templates/`
-2. Example usage in `examples/example_files/`
+2. Example usage in `templates/`
 3. Reference in relevant workflow doc
 4. Entry in main README if major
 
@@ -199,9 +197,6 @@ How you tested these changes
 ```
 templates/
 └── pricing-strategy-template.md
-
-examples/example_files/
-└── pricing-strategy-example.md
 
 workflows/
 └── generate-docs.md (updated to reference new template)
@@ -211,7 +206,7 @@ workflows/
 
 **What to include**:
 1. Workflow in appropriate category file in `workflows/`
-2. Example in `examples/example_files/` if complex
+2. Example in `templates/` if complex
 3. Update `workflows/README.md` if new category
 
 **Format**:
@@ -232,16 +227,14 @@ workflows/
 [Concrete example]
 ```
 
-### 📚 New Tutorials
+### 📚 Documentation Improvements
 
 **What to include**:
-1. Tutorial file in `examples/tutorials/`
-2. Number it sequentially (05-your-topic.md)
-3. Follow tutorial template
-4. Update README to reference it
+1. Update relevant section in `README.md`
+2. Follow existing documentation style
+3. Include examples and clear instructions
 
 **Must have**:
-- Time estimate
 - Clear goal
 - Step-by-step instructions
 - Examples
@@ -312,9 +305,8 @@ By contributing, you agree that your contributions will be licensed under the sa
 ## Getting Help
 
 ### Resources
-- [README.md](README.md) - Project overview
+- [README.md](README.md) - Project overview and complete guide
 - [AGENTS.md](AGENTS.md) - How AI uses this repo (includes style guidance)
-- [examples/tutorials/](examples/tutorials/) - Learning guides
 
 ### Stuck?
 Open an issue with:

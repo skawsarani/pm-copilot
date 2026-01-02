@@ -1,133 +1,135 @@
-## Process Backlog
+# Process Backlog Workflow
 
-### Process Backlog
+When user says `/backlog` or "process my backlog", follow these steps:
 
-```
-Process my backlog
-```
+## Steps
 
-**What it does**:
-- Reads items from `BACKLOG.md` (your daily inbox)
-- **Categorizes each item** into:
-  - **Initiatives**: Product opportunities, features, strategic work → `initiatives/` folder
-  - **Tasks**: Actionable, time-bound, operational work → `tasks/` folder
-  - **References**: Useful info, links, context → `knowledge/references/`
-  - **Uncategorized**: Meeting notes, random thoughts → archived in `knowledge/notes/YYYY-MM-DD.md`
-- **Deduplication**: Checks against existing initiatives, tasks, and references across all categories
-- Creates structured files for each category
-- Archives remaining inbox content to `knowledge/notes/YYYY-MM-DD.md`
-- Clears `BACKLOG.md` for next day
+### 1. Read BACKLOG.md
+Read all items from `BACKLOG.md` (root file).
 
-**When to use**: Daily or weekly, when inbox needs processing
+### 2. Categorize Each Item
 
-**Detailed Steps**:
+Assign each item to one category:
 
-1. Read items from `BACKLOG.md` (single file at root)
-2. **Categorize each item** into one of:
-   - **Initiative**: Product opportunities, features, strategic work → `initiatives/` folder (opportunity assessment)
-   - **Task**: Actionable, time-bound, operational work → `tasks/` folder (task file with frontmatter)
-   - **Reference**: Useful info, links, context → `knowledge/references/`
-   - **Uncategorized**: Items that don't fit above categories (meeting notes, random thoughts) remain in `BACKLOG.md` and will be archived with the snapshot
-3. **Deduplication** (applies to ALL categories):
-   - Check against existing initiatives, tasks, and references
-   - Use similarity threshold from `config.yaml` (default 0.6)
-   - Flag potential duplicates across all categories
-   - Suggest merging or linking related items
-4. For initiatives: Create opportunity assessment in `initiatives/` folder with this format:
-   - **Objective**: What we're trying to achieve
-   - **Target Customer**: Who this serves
-   - **Success Metrics**: How we measure impact (specific, measurable)
-   - **What We Know**: Current data, insights, evidence
-   - **What We Should Research**: Open questions, validation needed
-   - **Solution Ideas**: Potential approaches (not decisions yet)
-   - **Risks**: What could go wrong
-   - **Questions to Validate**: Key assumptions to test
-   - Prioritize: P0 (Critical), P1 (High), P2 (Medium), P3 (Low)
-5. For tasks: Create task file in `tasks/` folder with frontmatter:
-   - title, category (auto-assigned using config.yaml keywords), priority, status (default: n), created_date, due_date (if mentioned), resource_refs
-   - Include Context, Next Actions, and Progress Log sections
-6. For references: Move to appropriate reference file or create new one in `knowledge/references/`
-7. Remove processed items (initiatives, tasks, references) from `BACKLOG.md`
-8. After processing, archive entire remaining `BACKLOG.md` content to `knowledge/notes/YYYY-MM-DD.md` (single file per day)
-   - This archived snapshot contains all uncategorized items (meeting notes, random thoughts, etc.)
-9. Clear `BACKLOG.md` for next day
-10. Summarize what was created/categorized
+**Tasks** - Actionable, time-bound work → `tasks/` folder
+- Examples: "Email Sarah about Q4 goals", "Review PRD draft", "Update roadmap"
+- Must have clear action and completion criteria
 
+**Opportunities** - Strategic ideas to explore → `knowledge/opportunities/` folder
+- Examples: "Mobile performance issues", "Enterprise SSO request", "AI-powered search"
+- Product opportunities, features, strategic initiatives
+
+**References** - Useful context, links, info → `knowledge/references/`
+- Examples: Competitor analysis, articles, links, research notes
+- No action needed, just context to save
+
+**Uncategorized** - Everything else stays in BACKLOG.md (will be archived)
+- Examples: Meeting notes, random thoughts, incomplete ideas
+
+### 3. Check for Duplicates
+
+Before creating new files:
+- Scan existing tasks in `tasks/`
+- Scan existing opportunities in `knowledge/opportunities/`
+- Scan existing references in `knowledge/references/`
+- Use similarity threshold from `config.yaml` (default 0.6)
+- If similar item exists, suggest merging or linking instead of duplicating
+
+### 4. Create Task Files
+
+For each task, create file in `tasks/` with frontmatter:
+
+```yaml
+---
+title: Task name
+category: auto-assigned from config.yaml keywords
+priority: P0/P1/P2/P3
+status: n
+created_date: YYYY-MM-DD
+due_date: YYYY-MM-DD (if mentioned in backlog)
 ---
 
-### Quick Triage
+## Context
+[Why this task matters, background info]
 
-```
-Triage the items in BACKLOG.md
-```
+## Next Actions
+- [ ] First step
+- [ ] Second step
 
-**What it does**:
-- Quick categorization without full processing
-- Assigns categories and priorities
-- Flags urgent items and potential duplicates
-
-**When to use**: Quick check before full processing
-
----
-
-### Archive Completed Work
-
-```
-Archive completed work from [timeframe, e.g., "last quarter"]
+## Progress Log
+- YYYY-MM-DD: Task created
 ```
 
-**What it does**:
-- Identifies completed items (initiatives, tasks, specs)
-- Moves to `archive/` with date prefix
-- Maintains directory structure
-- Logs what was archived
+**Priority assignment:**
+- P0 (Critical): Urgent, blocks other work, time-sensitive
+- P1 (High): Important, has deadline this week
+- P2 (Medium): Normal work, this month
+- P3 (Low): Nice to have, backlog
 
-**When to use**: Monthly/quarterly cleanup
+### 5. Enforce Priority Caps
 
----
+Check priority caps from `config.yaml`:
+- P0: Max 3 tasks
+- P1: Max 7 tasks
+- P2: Max 15 tasks
+- P3: Unlimited
 
-### Update Knowledge Base
+If caps exceeded when creating new tasks:
+1. Count existing tasks at each priority level
+2. If new task would exceed cap, ask user: "You already have [N] P0 tasks. Should I demote one to P1, or make this new task P1 instead?"
+3. Show user current P0/P1 tasks for context
+4. Wait for user decision before proceeding
 
+### 6. Create Opportunity Files
+
+For each opportunity, create file in `knowledge/opportunities/` with this structure:
+
+```markdown
+# [Opportunity Name]
+
+## Description
+[What this opportunity is about]
+
+## Strategic Context
+[Why it matters, alignment with product vision]
+
+## What We Know
+- Current data, insights, evidence
+- User feedback or requests
+- Business impact
+
+## What We Should Research
+- Open questions
+- Validation needed
+- Assumptions to test
+
+## Initial Thoughts
+[Potential approaches, not decisions - exploratory]
 ```
-Review my knowledge/ folder and identify gaps or outdated content
-```
 
-**What it does**:
-- Checks freshness of docs
-- Identifies missing context
-- Suggests updates or new docs needed
-- Prioritizes by importance
+### 7. Create/Update References
 
-**When to use**: Quarterly maintenance
+For references:
+- Add to existing reference file if related topic exists
+- Create new file in `knowledge/references/` if new topic
+- Use descriptive filenames: `competitor-analysis.md`, `pricing-research.md`
 
----
+### 8. Archive & Clear
 
-### Consolidate Duplicate Content
+After processing all items:
+1. Archive remaining BACKLOG.md content to `knowledge/notes/YYYY-MM-DD.md`
+   - This preserves uncategorized items (meeting notes, random thoughts)
+2. Clear `BACKLOG.md` completely
+3. Summarize what was created:
+   - "Created X tasks (P0: N, P1: N, P2: N, P3: N)"
+   - "Created N opportunities"
+   - "Added N references"
+   - "Archived remaining items to knowledge/notes/YYYY-MM-DD.md"
 
-```
-Find and consolidate duplicate information in [folder]
-```
+## Tips
 
-**What it does**:
-- Identifies similar or duplicate content
-- Suggests consolidation approach
-- Creates canonical versions
-- Updates references
-
-**When to use**: When things feel scattered
-
----
-
-### Prioritize Backlog Items
-
-```
-Help me prioritize these backlog items: [paste list or reference file]
-```
-
-**What it does**:
-- Applies prioritization framework (RICE, Impact/Effort, etc.)
-- References product strategy
-- Provides rationale for each priority
-- Helps decide what becomes initiatives vs tasks
-
-**When to use**: Planning sessions, backlog reviews
+- When uncertain about categorization, ask user
+- Better to create fewer, clearer items than many vague ones
+- If backlog item lacks context, ask user for clarification before creating
+- Use context from `knowledge/product-strategy/` to inform priority decisions
+- Reference `knowledge/frameworks/` for prioritization methodology

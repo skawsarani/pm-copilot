@@ -4,16 +4,11 @@ knowledge/**/*
 !knowledge/**/.gitkeep
 !knowledge/**/README.md
 
-# Initiatives and backlog content (keep structure)
-initiatives/**/*
-!initiatives/**/
-!initiatives/**/.gitkeep
-!initiatives/README.md
-
-# Archive content (keep structure)
-archive/**/*
-!archive/**/
-!archive/**/.gitkeep
+# Tasks (personal work items)
+tasks/**/*
+!tasks/**/
+!tasks/**/.gitkeep
+!tasks/README.md
 
 # MCP specific
 mcp/**/*.log
@@ -29,6 +24,7 @@ Thumbs.db
 .vscode/
 .obsidian/
 .cursor/
+.claude/
 .idea/
 *.swp
 *.swo
@@ -36,6 +32,7 @@ Thumbs.db
 # Environment
 .env
 .env.local
+.venv
 
 # Logs
 *.log

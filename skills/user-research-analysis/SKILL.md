@@ -1,0 +1,154 @@
+---
+name: user-research-analysis
+description: Analyze user interviews, research transcripts, and feedback to extract themes, generate insights, create personas, and synthesize findings into actionable reports. Use when asked to analyze customer interviews, synthesize research, identify user pain points, extract themes from feedback, create user personas, generate insight summaries, or produce research synthesis reports. Triggers include requests like "analyze interviews," "synthesize research," "what did users say about," "create personas," or "identify themes from feedback."
+---
+
+# User Research Analysis
+
+## Overview
+
+Systematically analyze user interviews, research transcripts, surveys, and feedback to extract themes, identify patterns, generate actionable insights, and create comprehensive synthesis reports or personas.
+
+## Analysis Workflow
+
+### 1. Understand the Request
+
+Clarify what type of analysis is needed:
+- **Theme extraction**: Identify recurring topics and patterns
+- **Insight generation**: Synthesize findings into actionable recommendations
+- **Persona creation**: Build user profiles from research data
+- **Quick synthesis**: Summarize key findings
+- **Full report**: Comprehensive research synthesis document
+
+Determine the source materials:
+- Location of transcripts (typically `knowledge/transcripts/`)
+- Related documents in `knowledge/briefs-and-specs/` or `knowledge/opportunities/`
+- Timeframe or specific interviews to analyze
+- Any specific questions to answer
+
+### 2. Review Source Materials
+
+Read through all relevant materials:
+- Interview transcripts
+- Survey responses
+- Feedback forms
+- Meeting notes
+- Related product specs, opportunities, or initiatives
+
+**Use the analysis framework** by reading `references/analysis-framework.md` for systematic guidance on:
+- How to extract themes
+- How to categorize findings
+- How to quote effectively
+- How to generate insights from observations
+
+### 3. Perform Analysis
+
+Based on the analysis framework, systematically:
+
+**Extract themes:**
+- Identify recurring pain points, feature requests, behaviors
+- Quote verbatim with source attribution
+- Note frequency (how many users mentioned it)
+- Assess intensity (how strongly they felt about it)
+
+**Categorize findings:**
+- Pain Points
+- Feature Requests
+- Workflow Patterns
+- Usability Issues
+- Jobs to be Done
+- Competitive Insights
+
+**Generate insights:**
+- Transform observations into implications
+- Connect findings to product strategy
+- Recommend next steps
+- Prioritize based on frequency, intensity, and strategic fit
+
+### 4. Create Deliverable
+
+Choose the appropriate output format:
+
+#### Full Research Synthesis Report
+
+Use the template at `assets/synthesis-report-template.md` when creating comprehensive reports. Copy the template structure and populate with:
+- Executive summary with top 3 insights
+- Detailed findings with supporting quotes
+- User segments identified
+- Pain points summary table
+- Feature requests and opportunities
+- Behavioral patterns and workflows
+- Competitive insights
+- Recommendations (immediate, short-term, long-term)
+- Open questions and next steps
+
+Save synthesis reports to appropriate location:
+- Related to initiative: `knowledge/briefs-and-specs/[initiative-name]/research-synthesis-YYYY-MM-DD.md` (or wherever user stores initiatives)
+- General research: `knowledge/briefs-and-specs/research-synthesis-[topic]-YYYY-MM-DD.md`
+
+#### Insight Cards (Quick Summaries)
+
+Use the template at `assets/insight-card-template.md` for stakeholder-friendly summaries. Each card includes:
+- Priority level (High/Medium/Low)
+- Category (Pain Point/Feature Request/etc.)
+- Clear one-sentence insight
+- Supporting quotes with sources
+- Frequency data
+- Why it matters
+- Recommended action
+
+Save insight cards to:
+- `knowledge/briefs-and-specs/insight-[brief-title]-YYYY-MM-DD.md`
+
+#### User Personas
+
+**Read the persona guide** at `references/persona-guide.md` for detailed instructions on creating research-based personas. The guide covers:
+- What makes a good persona
+- Required components (goals, pain points, behaviors, context)
+- How to segment users from research
+- Persona format template
+- Anti-patterns to avoid
+
+Save personas to:
+- `knowledge/briefs-and-specs/persona-[name].md`
+- Or within relevant initiative folder (wherever user stores initiatives)
+
+### 5. Link to Source Materials
+
+Always reference source materials in the output:
+- Link to specific transcript files
+- Attribute quotes with dates and participant roles
+- Note sample size and methodology
+- Flag any biases or limitations
+
+## Best Practices
+
+**Quote liberally:**
+- Use participants' exact words for authenticity
+- Always attribute (Interview YYYY-MM-DD with [Role])
+- Preserve emotional tone in brackets [frustrated], [excited]
+
+**Be systematic:**
+- Follow the analysis framework for consistency
+- Don't cherry-pick only data that supports assumptions
+- Note contradictions or surprising findings
+- Track frequency and intensity of themes
+
+**Make it actionable:**
+- Connect findings to product implications
+- Suggest concrete next steps
+- Prioritize recommendations
+- Flag what requires further research
+
+**Stay grounded in data:**
+- Don't extrapolate beyond what research supports
+- Distinguish between edge cases and patterns
+- Note sample size and limitations
+- Challenge confirmation bias
+
+## Quick Reference
+
+- **Analysis framework**: See `references/analysis-framework.md`
+- **Persona creation**: See `references/persona-guide.md`
+- **Full report template**: `assets/synthesis-report-template.md`
+- **Insight card template**: `assets/insight-card-template.md`

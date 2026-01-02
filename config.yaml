@@ -29,15 +29,17 @@ deduplication:
   check_categories: true     # Consider category in matching
   check_keywords: true       # Use keyword overlap
 
-# Priority limits (warning thresholds)
-priority_limits:
-  P0: 3  # Warn if more than 3 P0 tasks
-  P1: 5  # Warn if more than 5 P1 tasks
+# Priority caps (strict limits - enforce during backlog processing)
+priority_caps:
+  P0: 3   # Max 3 P0 tasks (today's critical focus)
+  P1: 7   # Max 7 P1 tasks (this week)
+  P2: 15  # Max 15 P2 tasks (this month)
+  P3: 999 # Unlimited backlog items
 
 # Task aging (in days)
 task_aging:
-  prune_completed_after: 30  # Delete done tasks after 30 days
-  flag_stale_after: 14       # Flag inactive tasks after 14 days
+  prune_completed_after: 90  # Delete done tasks after 90 days
+  flag_stale_after: 14       # Flag stale tasks (started but inactive) after 14 days
 
 # Category keywords for auto-categorization
 category_keywords:

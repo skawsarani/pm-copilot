@@ -1,6 +1,6 @@
 # PM Co-Pilot
 
-> Your AI-powered companion for product management. Transform raw ideas into structured initiatives, generate specs, stay focused on strategic work.
+> Turn your AI assistant into a product management partner. Process ideas, generate specs, prioritize strategically.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -8,134 +8,157 @@
 
 ## What is This?
 
-PM Co-Pilot turns your AI coding assistant (Cursor, Claude Code, etc.) into an intelligent product management partner. It provides:
+PM Co-Pilot is a simple system that turns AI assistants (Cursor, Claude Code) into PM tools:
 
-- 🧠 **Initiative-Based Workflow** → Think before building with structured opportunity assessments
-- 📋 **Document Generation** → Specs, briefs, PRDs from natural conversation
-- 🎯 **Strategic Prioritization** → Framework-based recommendations aligned with your strategy
-- 📊 **Research Synthesis** → Turn interviews and data into actionable insights
-- 🎤 **Voice Training** → Make AI write like you, not generic AI
-- ⚡ **Workflow Library** → 18 categories of pre-built PM workflows
+- **Priority-Focused Workflow** - Max 3 P0 tasks keeps you focused
+- **Backlog Processing** - Brain dump → Organized tasks/opportunities
+- **Document Generation** - Specs, briefs, PRDs from conversation
+- **Research Synthesis** - Transform interviews into insights
+- **Voice Training** - Match your writing style
 
 ---
 
-## Quick Start
+## Quick Start (10 minutes)
 
-### Prerequisites
+### 1. Clone and Setup
 
-- An AI coding assistant (Cursor, Claude Code, etc.)
-- Git for version control (if you plan to push your structure to a remote repo - never use it to store context)
-- Optional: Python 3.10+ (only if using MCP servers)
+```bash
+git clone <your-repo-url>
+cd pm-copilot
+./setup.sh
+cursor .    # Or your AI assistant
+```
 
-### Setup (5 minutes)
+Tell your AI:
+```
+Read @AGENTS.md to understand how to help me as a PM Co-Pilot.
+```
 
-1. **Clone this repo**
-   ```bash
-   git clone <your-repo-url>
-   cd pm-copilot
-   ```
+### 2. Add Your Context (15 minutes)
 
-2. **Run the setup script**
-   ```bash
-   ./setup.sh
-   ```
-   This interactive script will:
-   - Create all knowledge base directories
-   - Generate template files with helpful content
-   - Set up your `BACKLOG.md` (if it doesn't exist)
-   - Guide you through essential setup questions
+Fill in these essential files created by setup:
 
-3. **Fill in your context** (15-20 minutes)
-   - Edit `knowledge/about-me/about-me.md` - Add your background and working style
-   - Edit `knowledge/company-context/company-overview.md` - Add company info
-   - Edit `knowledge/product-strategy/current-strategy.md` - Add your product vision
-   - Edit `knowledge/processes/how-we-work.md` - Document your team process
+- `knowledge/product-strategy/current-strategy.md` - Vision, priorities, metrics
+- `knowledge/company-context/company-overview.md` - Mission, products, team
+- `knowledge/about-me/about-me.md` - Background, working style, preferences
 
-4. **Start using it**
-   ```
-   "Read @AGENTS.md and help me get organized"
-   ```
+See `templates/` for examples.
 
-**Alternative**: See [GETTING-STARTED.md](GETTING-STARTED.md) for manual setup instructions.
+### 3. Start Using It
+
+**Brain dump to BACKLOG.md:**
+```markdown
+## Mobile Performance Issues
+- Source: Support tickets (15 this week)
+- Context: Android app slow on startup
+- Impact: 4.2⭐ rating drop
+
+## Follow up with Sarah about Q4 goals
+- Need to align on OKRs by end of week
+```
+
+**Process your backlog:**
+```
+/backlog
+```
+
+AI categorizes into:
+- **Tasks** → `tasks/` (P0-P3 priority, max 3 P0 tasks)
+- **Opportunities** → `knowledge/opportunities/` (ideas to explore)
+- **References** → `knowledge/references/` (useful context)
+
+**Generate docs when ready:**
+```
+/prd mobile-performance
+/spec mobile-performance
+/user-stories mobile-performance
+```
 
 ---
 
 ## Core Workflow
 
 ```
-Raw Idea → BACKLOG.md → Categorize (Initiatives/Tasks/References) → Expand & Research → PRD → Build
+BACKLOG.md → /backlog → Tasks (P0≤3) / Opportunities / References
 ```
 
-### 1. Brain Dump → BACKLOG.md
+1. **Brain dump** to `BACKLOG.md` throughout the day
+2. **Process** with `/backlog` - AI categorizes and enforces priority caps
+3. **Work** - Focus on your 3 P0 tasks, explore opportunities, generate docs
 
-Drop ideas into `BACKLOG.md` without structure:
+---
 
-```markdown
-## Mobile App Crashes
-- Source: 20 support tickets this week
-- Context: Android 12 users, affecting conversion
-- Why now: Losing customers
+## Priority System
 
-## Enterprise SSO Request
-- Source: Sales (Acme Corp - $500K deal)
-- Context: Need SAML for 500 users
-- Why now: Deal blocker
+Tasks use P0-P3 with strict caps to prevent overwhelm:
 
-## Follow up with Sarah about Q4 goals
-- Need to align on OKRs
-- Due: End of week
-```
+- **P0** (Critical): Max 3 tasks - Today's focus
+- **P1** (High): Max 7 tasks - This week
+- **P2** (Medium): Max 15 tasks - This month
+- **P3** (Low): Unlimited - Backlog
 
-See `examples/example_files/backlog-example.md` for more examples and tips.
+When `/backlog` processing would exceed caps, AI asks you to deprioritize.
 
-### 2. Process → Categorize
+---
 
-Tell AI:
-```
-process my backlog
-```
-or
-```
-/backlog
-```
+## Skills (Auto-Invoked)
 
-AI **categorizes** each item into:
-- **Initiatives** → `initiatives/` folder (opportunity assessments)
-- **Tasks** → `tasks/` folder (actionable items with frontmatter)
-- **References** → `knowledge/references/` (useful info, links)
-- **Uncategorized** → Archived in `knowledge/notes/YYYY-MM-DD.md` (meeting notes, random thoughts)
+Skills are specialized tools AI uses automatically:
 
-**Initiatives** include:
-- Objective, Target customer, Success metrics
-- What we know, What we should research
-- Solution ideas, Risks, Questions to validate
-- Priority (P0-P3)
+**Product Docs (`product-docs` skill):**
+- `/prd [name]`, `/spec [name]`, `/brief [name]`
+- `/user-stories [name]`, `/decision [topic]`
+- Auto-pulls context from knowledge base
 
-**Tasks** include:
-- Frontmatter: title, category, priority, status, dates
-- Context, Next Actions, Progress Log
+**UX Copy (`ux-copy` skill):**
+- Translate to Canadian French (Québécois)
+- Create UI copy, error messages, microcopy
+- Follows OQLF guidelines
 
-### 3. Expand Before Building
+**User Research (`user-research-analysis` skill):**
+- Analyze interviews and transcripts
+- Synthesize research, create personas
 
-```
-/expand-initiative mobile-crashes
-```
+**Prototyping (`prototype-builder` skill):**
+- Build working prototypes from specs
 
-AI adds:
-- Detailed research plan
-- Multiple solution options evaluated
-- Risk analysis
-- Validation approach
+**Internal Comms (`internal-comms` skill):**
+- Status reports, updates, FAQs
 
-### 4. Generate Execution Docs
+---
 
-```
-/prd mobile-crashes
-/stories mobile-crashes
-/launch-plan mobile-crashes
-```
+## Common Commands
 
-AI creates full PRD, user stories, launch plan from your initiative.
+**Daily:**
+- "What should I work on today?" - Review P0/P1 tasks
+- `/backlog` - Process ideas into tasks/opportunities
+
+**Tasks:**
+- "Mark task [name] as complete"
+- "Find stale tasks"
+- "Prune completed tasks" - Delete tasks older than 90 days
+
+**Documents:**
+- `/prd [name]` - Generate PRD
+- `/spec [name]` - Generate spec
+- `/brief [name]` - Generate brief
+
+**Natural language works too:**
+- "Create a spec for the mobile performance opportunity"
+- "Analyze the user interviews in knowledge/transcripts/"
+- "What are my P0 tasks?"
+
+---
+
+## Voice Training
+
+Train AI to match your writing style:
+
+1. Add 5-10 writing samples to `knowledge/voice-samples/`
+2. Ask AI to analyze patterns
+3. AI will adapt to your voice automatically
+
+See `templates/voice-samples/` for examples.
 
 ---
 
@@ -143,314 +166,69 @@ AI creates full PRD, user stories, launch plan from your initiative.
 
 ```
 pm-copilot/
-├── BACKLOG.md                    # Your inbox for raw ideas (gitignored)
-├── setup.sh                      # Interactive setup script
-├── AGENTS.md                     # AI agent instructions
-├── README.md                     # This file
-├── GETTING-STARTED.md            # Setup guide
-├── CONTRIBUTING.md               # How to contribute
-├── config.yaml                   # Task management configuration
+├── BACKLOG.md              # Daily inbox (gitignored)
+├── AGENTS.md               # AI instructions
+├── config.yaml             # Priority caps, categories
+├── setup.sh                # Setup script
 │
-├── initiatives/                  # Opportunity assessments (gitignored content)
-│   └── README.md
+├── tasks/                  # Your tasks (gitignored)
+├── knowledge/              # Your context (gitignored)
+│   ├── about-me/
+│   ├── product-strategy/
+│   ├── company-context/
+│   ├── frameworks/
+│   ├── opportunities/
+│   ├── briefs-and-specs/
+│   ├── transcripts/
+│   ├── voice-samples/
+│   ├── references/
+│   └── notes/             # Archived backlog snapshots
 │
-├── tasks/                        # Actionable tasks (gitignored content)
-│   └── README.md
-│
-├── knowledge/                    # Your context (gitignored content)
-│   ├── about-me/                # Personal PM context, preferences
-│   ├── briefs-and-specs/        # Product specs, briefs, technical docs
-│   ├── company-context/         # Company vision, values, org
-│   ├── frameworks/              # Your PM frameworks (RICE, OKRs, etc.)
-│   ├── processes/               # How your team works
-│   ├── product-analytics/       # Metrics, KPIs, performance data (content gitignored)
-│   ├── product-strategy/        # Product vision, roadmap, pillars
-│   ├── proposals/               # Decision docs, RFCs
-│   ├── references/              # Links, articles, competitive analysis
-│   ├── transcripts/             # User interviews, meetings, research
-│   └── voice-samples/           # Your writing samples for AI
-│
-├── workflows/                   # 18 PM workflow files + comprehensive README
-├── examples/                     # Learning & reference
-│   ├── tutorials/               # 5 step-by-step guides (135 min total)
-│   ├── example_files/           # Sample documents  
-│   └── voice-samples/           # Example writing samples
-│
-├── templates/                    # 7 reusable document templates
-├── mcp/                         # MCP server/client configs (optional)
-├── code/                        # Prototype code (gitignored content)
-├── archive/                     # Completed work (gitignored)
-└── .env/                        # Environment variables (gitignored)
+├── templates/              # Document templates
+├── workflows/              # Workflow files
+├── mcp/                    # MCP servers (optional)
+└── code/                   # Prototypes (gitignored)
 ```
-
----
-
-## Key Features
-
-### 🎯 Initiative-Based Thinking
-
-Don't jump straight to PRDs. Start with opportunity assessments:
-- Why build this?
-- Who's it for?
-- How do we measure success?
-- What do we need to validate?
-
-**Then** generate execution docs when ready.
-
-### 🧠 Context-Aware AI
-
-AI understands YOUR context:
-- Your working style (`knowledge/about-me/`)
-- Your frameworks (`knowledge/frameworks/`)
-- Your strategy (`knowledge/product-strategy/`)
-- Your voice (`knowledge/voice-samples/`)
-
-### 📋 Task Management
-
-Built-in task system for actionable work:
-- Auto-categorization using `config.yaml` keywords
-- Frontmatter tracking (priority, status, dates, categories)
-- Task aging and pruning
-- Status management (not_started, started, blocked, done)
-- Integrated with backlog processing
-
-### 📚 Comprehensive Workflows
-
-18+ workflow categories covering:
-- Backlog processing (creates initiatives, tasks, references)
-- Task management
-- Document generation
-- Prioritization & planning
-- Research & analysis
-- Stakeholder communication
-- Copywriting & localization
-- Decision making
-- Technical collaboration
-- Bug management
-- Process improvement
-- And more...
-
-### 🎓 Learning System
-
-- **5 tutorials** (135 min total) from beginner to advanced
-- **Example files** showing real outputs (including task examples)
-- **Voice samples** demonstrating format
-- **Structured prompts** for complex workflows
-
----
-
-## Common Workflows
-
-### Monday Morning Planning
-
-```
-/plan
-"What should I work on this week based on my priorities?"
-```
-
-### Feature Kick-off
-
-```
-1. Add idea to BACKLOG.md
-2. /backlog → Creates initiative
-3. /expand-initiative [name] → Add research
-4. /prd [name] → Generate PRD
-5. /stories [name] → Create user stories
-```
-
-### Weekly Update
-
-```
-/exec-update
-"Draft update including metrics from @knowledge/product-analytics/"
-```
-
-### Research Synthesis
-
-```
-/synthesize
-"Synthesize interviews in @knowledge/transcripts/"
-```
-
----
-
-## Slash Commands
-
-Use workflows as shortcuts in Cursor or Claude Code:
-
-**Daily**:
-- `/plan` - Daily planning
-- `/backlog` - Process ideas into initiatives, tasks, references
-
-**Initiatives**:
-- `/expand-initiative [name]` - Add research before building
-- `/create-initiative [topic]` - New opportunity assessment
-
-**Tasks**:
-- Manage tasks - Update status, priority, category
-- Find tasks - Search by age, status, category
-- Prune tasks - Archive completed tasks
-
-**Documents**:
-- `/spec [initiative]` - Generate spec
-- `/prd [initiative]` - Generate PRD
-- `/brief [project]` - Create brief
-- `/stories [initiative]` - User stories
-
-**Communication**:
-- `/exec-update` - Executive update
-- `/team-update` - Team update
-- `/faq [topic]` - Generate FAQ
-
-**More**: See `workflows/README.md` for a complete list and how to set up in Claude Code or cursor.
-
----
-
-## Learning Path
-
-### Beginner (Week 1)
-1. [Tutorial 1: Getting Started](examples/tutorials/01-getting-started.md) - 15 min
-2. [Tutorial 2: Working with Initiatives](examples/tutorials/02-working-with-initiatives.md) - 20 min
-
-### Advanced (Week 2+)
-3. [Tutorial 3: Memory & Context](examples/tutorials/03-memory-and-context.md) - 25 min
-4. [Tutorial 4: Voice Training](examples/tutorials/04-voice-training.md) - 30 min
-5. [Tutorial 5: Advanced Workflows](examples/tutorials/05-advanced-workflows.md) - 45 min
-
-**See**: `examples/tutorials/README.md` for complete learning path
 
 ---
 
 ## What Gets Committed vs. Gitignored
 
-### ✅ Committed (shared structure)
-- Directory structure (via `.gitkeep`)
-- All documentation (README, AGENTS, guides)
-- Templates
-- Example files
-- Tutorials
-- Workflow definitions
-- MCP configurations (without secrets)
-- `config.yaml` (task management configuration)
+**Committed (shared structure):**
+- Directory structure
+- Documentation, templates
+- `config.yaml`, `AGENTS.md`
 
-### ❌ Gitignored (personal data)
-- Everything in `knowledge/` (except READMEs)
-- Everything in `initiatives/` (except README)
-- Everything in `tasks/` (except README)
-- Everything in `code/` (except README and structure)
-- Everything in `archive/`
-- Everything in `.env/`
-- `BACKLOG.md` (your private daily inbox)
+**Gitignored (your data):**
+- `BACKLOG.md`
+- Content in `knowledge/`, `tasks/`, `code/`
 
 ---
 
 ## Best Practices
 
-### 📝 Documentation
-- Keep `knowledge/` updated with the latest strategy
-- Process BACKLOG.md weekly
-- Archive completed initiatives monthly
+**Daily:**
+- Morning: "What should I work on today?"
+- Throughout day: Brain dump to BACKLOG.md
+- Weekly: `/backlog` to process
+
+**Context:**
+- Start small - add context as you go
+- Process backlog weekly, not daily
 - Update voice samples quarterly
 
-### 🎯 Initiatives
-- Start with opportunity assessment
-- Expand with research before committing
-- Generate PRDs only when validated
-- Archive when complete
+**Tips:**
+- Use @ mentions: `@knowledge/product-strategy/`
+- Process 3-5 backlog items at a time, not 50
+- Let priority caps guide you - max 3 P0 tasks
 
-### 🔄 Daily Routine
-- **Morning**: `/plan` - "What should I work on?"
-- **Throughout day**: Brain dump to BACKLOG.md
-- **End of day**: Update initiative status
-- **Weekly**: `/backlog` + archive completed work
-
----
-
-## Acknowledgements
-
-Inspired by the excellent work of:
-- **[Aman Khan](https://github.com/amanaiproduct/personal-os)** - personal-os: Task management and goal-driven prioritization patterns
-- **[Tal Raviv](https://github.com/talsraviv/from-thinking-to-coding)** - from-thinking-to-coding: Structured workflow prompts and spec generation approach
-
-Built for product managers who want to spend more time on strategic thinking and less time on repetitive documentation.
-
----
-
-## Documentation
-
-### Getting Started
-- **[GETTING-STARTED.md](GETTING-STARTED.md)** - Complete setup guide
-- **[examples/tutorials/](examples/tutorials/)** - Step-by-step learning path
-
-### Reference
-- **[AGENTS.md](AGENTS.md)** - How the AI agent works (includes style guidance)
-- **[workflows/README.md](workflows/README.md)** - Complete workflow library
-- **[templates/](templates/)** - 7 document templates
-
-### Advanced
-- **[mcp/README.md](mcp/README.md)** - MCP server integration
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute
-
----
-
-## Troubleshooting
-
-**Q: AI doesn't understand my context**
-- Add context to `knowledge/about-me/`, `knowledge/product-strategy/`
-- Use @ mentions: `@knowledge/product-strategy/2024-roadmap.md`
-- Check that files exist and have content
-
-**Q: Outputs are too generic**
-- Add more detail to `knowledge/` folders
-- Include examples in your context docs
-- Train AI on your voice (Tutorial 4)
-
-**Q: BACKLOG.md is overwhelming**
-- Process weekly: `/backlog`
-- Archive old ideas: Move to `archive/`
-- Use P3 liberally for low-priority items
-
-**Q: How do I use slash commands?**
-- Just type them in your AI assistant (e.g., `/plan`)
-- Or use natural language: "Help me plan my day"
-- See `workflows/README.md` for all commands
+**Troubleshooting:**
+- Generic responses? Add more to `knowledge/`
+- AI not using context? Use @ mentions explicitly
+- Too many tasks? Let AI enforce priority caps
 
 ---
 
 ## Contributing
 
-Have templates, workflows, or improvements to share?
-- Read [CONTRIBUTING.md](CONTRIBUTING.md)
-- Submit a pull request
-
----
-
-## License
-
-MIT License - feel free to use and adapt for your needs.
-
----
-
-## Support
-
-**Quick help**:
-- Start with [GETTING-STARTED.md](GETTING-STARTED.md)
-- Browse [examples/tutorials/](examples/tutorials/)
-- Check [workflows/README.md](workflows/README.md)
-
-**Questions**:
-- Open an issue
-- Check existing documentation
-- See [CONTRIBUTING.md](CONTRIBUTING.md)
-
----
-
-**Ready to start?**
-
-1. Run `./setup.sh` to set up your workspace (5 min)
-2. Fill in context files (15-20 min)
-3. Brain dump to `BACKLOG.md` (5 min)
-4. Run `/backlog` to create initiatives
-5. Watch the magic happen ✨
-
-Happy product managing! 🚀
+See [CONTRIBUTING.md](CONTRIBUTING.md) to share templates or improvements.
