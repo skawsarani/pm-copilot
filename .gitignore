@@ -56,3 +56,7 @@ code/**/*
 
 # Personal backlog (private daily inbox)
 BACKLOG.md
+
+# Evals (test results and backups)
+evals/results/
+*.backup
