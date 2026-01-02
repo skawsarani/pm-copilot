@@ -93,11 +93,11 @@ When caps exceeded during `/backlog`, ask user what to deprioritize.
 
 **Find tasks:**
 - "What should I work on today?" → Review P0/P1 tasks, check deadlines
-- "Find stale tasks" → Tasks with status `s` but no updates in 14+ days
+- "Find stale tasks" → Tasks with status `s` but no updates (uses `task_aging.flag_stale_after` from config.yaml)
 - "Show tasks older than [N] days"
 
 **Clean up:**
-- "Prune completed tasks" → Delete tasks with status `d` older than 90 days
+- "Prune completed tasks" → Delete tasks with status `d` (uses `task_aging.prune_completed_after` from config.yaml)
 
 ### Task File Structure
 

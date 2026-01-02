@@ -1,6 +1,11 @@
 # Task Management System Configuration
+#
+# This file is read by AI during backlog processing and task management.
+# All values below are referenced in AGENTS.md and workflows/process-backlog.md.
+# Customize these settings to match your workflow.
 
 # Task categories - modify based on your needs
+# Used by: Auto-categorization during /backlog processing
 categories:
   - technical      # Development, coding, debugging
   - outreach       # Emails, meetings, networking
@@ -10,6 +15,7 @@ categories:
   - other          # Miscellaneous
 
 # Priority levels
+# Used by: Task creation and priority assignment
 priorities:
   - P0  # Critical/Urgent - do immediately
   - P1  # Important - has deadlines
@@ -17,6 +23,7 @@ priorities:
   - P3  # Low - nice to have
 
 # Status codes
+# Used by: Task file frontmatter and status updates
 statuses:
   n: not_started
   s: started
@@ -24,12 +31,14 @@ statuses:
   d: done
 
 # Deduplication settings
+# Used by: Duplicate detection during /backlog processing
 deduplication:
   similarity_threshold: 0.6  # How similar before flagging (0-1)
   check_categories: true     # Consider category in matching
   check_keywords: true       # Use keyword overlap
 
 # Priority caps (strict limits - enforce during backlog processing)
+# Used by: /backlog workflow to prevent overwhelm
 priority_caps:
   P0: 3   # Max 3 P0 tasks (today's critical focus)
   P1: 7   # Max 7 P1 tasks (this week)
@@ -37,11 +46,14 @@ priority_caps:
   P3: 999 # Unlimited backlog items
 
 # Task aging (in days)
+# Used by: "Prune completed tasks" and "Find stale tasks" commands
 task_aging:
   prune_completed_after: 90  # Delete done tasks after 90 days
   flag_stale_after: 14       # Flag stale tasks (started but inactive) after 14 days
 
 # Category keywords for auto-categorization
+# Used by: Auto-categorization during task creation
+# AI matches task descriptions against these keywords to assign categories
 category_keywords:
   technical:
     - code

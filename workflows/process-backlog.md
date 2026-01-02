@@ -28,11 +28,18 @@ Assign each item to one category:
 
 ### 3. Check for Duplicates
 
-Before creating new files:
+Before creating new files, check against existing items using settings from `config.yaml`:
+
+**Deduplication settings:**
+- `similarity_threshold` - How similar before flagging (0-1 scale, default 0.6)
+- `check_categories` - Consider category when matching (default true)
+- `check_keywords` - Use keyword overlap for matching (default true)
+
+**Process:**
 - Scan existing tasks in `tasks/`
 - Scan existing opportunities in `knowledge/opportunities/`
 - Scan existing references in `knowledge/references/`
-- Use similarity threshold from `config.yaml` (default 0.6)
+- Apply similarity threshold and matching rules from config
 - If similar item exists, suggest merging or linking instead of duplicating
 
 ### 4. Create Task Files
@@ -65,6 +72,12 @@ due_date: YYYY-MM-DD (if mentioned in backlog)
 - P1 (High): Important, has deadline this week
 - P2 (Medium): Normal work, this month
 - P3 (Low): Nice to have, backlog
+
+**Auto-categorization:**
+- Use `category_keywords` from `config.yaml` to auto-assign task category
+- Match task description against keyword lists for each category
+- If multiple categories match, choose the most specific one
+- Default to "other" if no keywords match
 
 ### 5. Enforce Priority Caps
 
@@ -133,3 +146,5 @@ After processing all items:
 - If backlog item lacks context, ask user for clarification before creating
 - Use context from `knowledge/product-strategy/` to inform priority decisions
 - Reference `knowledge/frameworks/` for prioritization methodology
+- All configurable values (priority caps, deduplication thresholds, task aging) come from `config.yaml`
+- Users can customize these settings by editing `config.yaml`
