@@ -1,28 +1,28 @@
 # Contributing to PM Co-Pilot
 
-Thank you for your interest in contributing! This document outlines how to contribute to PM Co-Pilot.
+Thank you for your interest in contributing! This guide outlines how to contribute to PM Co-Pilot.
 
 ---
 
 ## Ways to Contribute
 
-### 1. Share Your Templates
-If you've created useful document templates that work well for your PM workflow.
+### 1. Share Templates
+Document templates that work well for your PM workflow (specs, briefs, decision docs, etc.)
 
-### 2. Add Workflow Examples
-Share workflows or slash commands that have been valuable in your practice.
+### 2. Share Skills
+Custom skills that extend PM Co-Pilot's capabilities (see `skills/` directory)
 
 ### 3. Improve Documentation
 - Fix typos or unclear instructions
 - Add examples or clarifications
-- Translate guides (if applicable)
+- Update outdated references
 
-### 4. Create Tutorials
-Share how you use PM Co-Pilot in your workflow.
+### 4. Share Your Experience
+Write about how you use PM Co-Pilot in your workflow
 
 ### 5. Suggest Improvements
 Open an issue to discuss:
-- New features or workflows
+- New features or capabilities
 - Better organization
 - Missing documentation
 
@@ -32,8 +32,8 @@ Open an issue to discuss:
 
 ### Prerequisites
 - Familiarity with Markdown
-- Experience using AI coding assistants (Cursor, Claude Code, etc.)
-- Product management experience (for PM-specific contributions)
+- Experience using AI assistants (Cursor, Claude Code, etc.)
+- PM experience (for PM-specific contributions)
 
 ### Setup
 1. Fork the repository
@@ -45,69 +45,96 @@ Open an issue to discuss:
 
 ---
 
-## Contribution Guidelines
+## Contribution Types
 
-### Documentation
-- Follow style guidance in [AGENTS.md](AGENTS.md)
-- Use clear, concise language
-- Include examples where helpful
+### 📄 Templates
+
+**What to include:**
+1. Template file in `templates/`
+2. Clear structure with sections
+3. Inline instructions
+4. Example content
+5. When to use this template
+
+**Example:**
+```
+templates/
+├── pricing-strategy-template.md
+└── competitive-analysis-template.md
+```
+
+**Format:**
+- Use clear section headers
+- Include placeholders: `[DESCRIPTION]`, `[YOUR ANSWER]`
+- Add comments to guide users
+- Show example content
+
+### 🎯 Skills
+
+**What to include:**
+1. Skill directory in `skills/your-skill-name/`
+2. `SKILL.md` with skill description and instructions
+3. Supporting files in `assets/`, `references/`, or `scripts/`
+4. Clear documentation on when to invoke
+
+**Example structure:**
+```
+skills/your-skill-name/
+├── SKILL.md              # Main skill instructions
+├── assets/               # Templates, examples
+├── references/           # Reference docs
+└── scripts/              # Helper scripts (optional)
+```
+
+See existing skills in `skills/` for examples.
+
+### 📚 Documentation
+
+**What to improve:**
+- README.md
+- AGENTS.md
+- workflows/README.md
+- Knowledge folder READMEs
+
+**Requirements:**
+- Clear, concise language
+- Include examples
 - Test instructions before submitting
+- Follow existing style
 
-### File Organization
-- Put examples in `templates/`
-- Put workflow docs in `workflows/`
-- Put templates in `templates/`
+### 🎨 Voice Samples
 
-### Naming Conventions
-- Files: `lowercase-with-hyphens.md`
-- Directories: `lowercase/`
-- Special docs: `UPPERCASE.md` (README, AGENTS, etc.)
-
-### What to Include
-
-**For Templates**:
-- Clear structure with sections
-- Inline instructions or comments
-- Example content
-- When to use this template
-
-**For Workflows**:
-- Natural language trigger
-- What it does (bullet list)
-- When to use it
-- Example usage
-- Expected output
-
-**For Documentation**:
-- Clear goal
-- Step-by-step instructions
-- Common issues section
-- Key takeaway
+**What to include:**
+1. Voice sample in `templates/voice-samples/`
+2. Different formats (email, spec intro, blog post, etc.)
+3. 150-300 words per sample
+4. Natural, authentic writing
 
 ---
 
 ## Content Standards
 
-### What We Accept
+### ✅ What We Accept
 
-✅ **Yes**:
 - Generic PM workflows applicable to many teams
 - Template structures (without proprietary content)
 - Process frameworks (RICE, OKRs, etc.)
-- Learning resources and tutorials
-- Voice sample formats (with example content)
+- Learning resources
+- Voice sample formats
 
-❌ **No**:
+### ❌ What We Don't Accept
+
 - Proprietary company information
 - Confidential product details
 - Personal identifying information
-- Specific customer data
+- Customer data
 - API keys or secrets
 
 ### Quality Standards
+
 - Tested with AI assistants
 - Clear and well-organized
-- Follows style guidance in AGENTS.md
+- Follows simplified structure
 - Includes examples
 - No typos or broken links
 
@@ -115,140 +142,100 @@ Open an issue to discuss:
 
 ## Submission Process
 
-### 1. Create an Issue First (Optional but Recommended)
+### 1. Create an Issue (Optional but Recommended)
+
 For significant changes, create an issue to discuss:
 - What you want to add
 - Why it's valuable
-- How it fits into existing structure
+- How it fits into the structure
 
 ### 2. Make Your Changes
+
 - Work in a dedicated branch
 - Follow the style guide
 - Keep changes focused
 - Write clear commit messages
 
 ### 3. Test Your Changes
-- Test workflows with AI assistant
+
+- Test with AI assistant (Cursor, Claude Code, etc.)
 - Verify all links work
 - Check formatting renders correctly
 - Ensure examples are accurate
 
 ### 4. Submit Pull Request
-**PR Title**: Clear, descriptive
+
+**PR Title Format:**
 - ✅ `feat: add RICE scoring framework template`
-- ✅ `docs: improve voice training tutorial`
+- ✅ `docs: improve backlog processing guide`
+- ✅ `feat: add competitor analysis skill`
 - ❌ `updates`
 
-**PR Description**:
+**PR Description Template:**
 ```markdown
 ## What
-Brief description of changes
+[Brief description of changes]
 
 ## Why
-Why this improvement is valuable
+[Why this improvement is valuable]
 
 ## Changes
-- Bullet list of specific changes
-- What was added/modified/removed
+- [Specific change 1]
+- [Specific change 2]
 
 ## Testing
-How you tested these changes
+[How you tested these changes]
 
 ## Checklist
-- [ ] Follows style guide
 - [ ] Tested with AI assistant
-- [ ] Documentation updated
+- [ ] Documentation updated if needed
 - [ ] Examples included
+- [ ] Follows style guide
 ```
+
+---
+
+## Style Guide
+
+### File Naming
+- Regular files: `lowercase-with-hyphens.md`
+- Directories: `lowercase-with-hyphens/`
+- Special docs: `UPPERCASE.md` (README, AGENTS)
+
+### Markdown Style
+- Clear, direct language
+- Active voice: "Create a spec" not "A spec should be created"
+- Scannable format: headers, bullets, tables
+- Specific examples over abstract descriptions
+
+### Documentation Tone
+- Direct and friendly
+- Concise (avoid fluff)
+- Helpful, not prescriptive
+- Action-oriented
 
 ---
 
 ## Review Process
 
 ### What We Look For
+
 1. **Value**: Does this help PMs work better with AI?
 2. **Quality**: Is it well-written and clear?
-3. **Consistency**: Follows style guide?
+3. **Consistency**: Follows the simplified structure?
 4. **Completeness**: Has examples and context?
 
 ### Timeline
+
 - Initial review: Within 1 week
 - Feedback provided if changes needed
 - Merged when approved
 
 ### If Changes Requested
+
 - Address feedback in same branch
 - Push updates
 - Comment when ready for re-review
-
----
-
-## Types of Contributions
-
-### 🆕 New Templates
-
-**What to include**:
-1. Template file in `templates/`
-2. Example usage in `templates/`
-3. Reference in relevant workflow doc
-4. Entry in main README if major
-
-**Example**:
-```
-templates/
-└── pricing-strategy-template.md
-
-workflows/
-└── generate-docs.md (updated to reference new template)
-```
-
-### 📋 New Workflows
-
-**What to include**:
-1. Workflow in appropriate category file in `workflows/`
-2. Example in `templates/` if complex
-3. Update `workflows/README.md` if new category
-
-**Format**:
-```markdown
-### Workflow Name
-
-```
-/trigger or "natural language"
-```
-
-**What it does**:
-- Action 1
-- Action 2
-
-**When to use**: Context
-
-**Example**:
-[Concrete example]
-```
-
-### 📚 Documentation Improvements
-
-**What to include**:
-1. Update relevant section in `README.md`
-2. Follow existing documentation style
-3. Include examples and clear instructions
-
-**Must have**:
-- Clear goal
-- Step-by-step instructions
-- Examples
-- Common issues
-- Key takeaway
-
-### 🎯 Framework Documentation
-
-**What to include**:
-1. Framework doc in `knowledge/frameworks/`
-2. When to use it
-- How to apply it
-3. Example application
-4. Your adaptations
 
 ---
 
@@ -256,17 +243,17 @@ workflows/
 
 ### Our Standards
 
-**Be respectful**:
+**Be respectful:**
 - Assume good intent
 - Provide constructive feedback
 - Welcome newcomers
 
-**Be collaborative**:
+**Be collaborative:**
 - Discuss significant changes
 - Credit others' work
 - Share learnings
 
-**Be professional**:
+**Be professional:**
 - No harassment or discrimination
 - Keep discussions on-topic
 - Respect privacy
@@ -305,8 +292,8 @@ By contributing, you agree that your contributions will be licensed under the sa
 ## Getting Help
 
 ### Resources
-- [README.md](README.md) - Project overview and complete guide
-- [AGENTS.md](AGENTS.md) - How AI uses this repo (includes style guidance)
+- [README.md](README.md) - Project overview and quick start
+- [AGENTS.md](AGENTS.md) - AI instructions and style guide
 
 ### Stuck?
 Open an issue with:
@@ -319,4 +306,3 @@ We're here to help!
 ---
 
 **Thank you for making PM Co-Pilot better for everyone!** 🚀
-
