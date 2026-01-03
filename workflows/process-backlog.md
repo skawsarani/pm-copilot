@@ -28,7 +28,7 @@ Assign each item to one category:
 
 ### 3. Check for Duplicates
 
-Before creating new files, check against existing items using settings from `config.yaml`:
+Before creating new files, check against existing items using settings from `core/config.yaml`:
 
 **Deduplication settings:**
 - `similarity_threshold` - How similar before flagging (0-1 scale, default 0.6)
@@ -49,7 +49,7 @@ For each task, create file in `tasks/` with frontmatter:
 ```yaml
 ---
 title: Task name
-category: auto-assigned from config.yaml keywords
+category: auto-assigned from core/config.yaml keywords
 priority: P0/P1/P2/P3
 status: n
 created_date: YYYY-MM-DD
@@ -74,14 +74,14 @@ due_date: YYYY-MM-DD (if mentioned in backlog)
 - P3 (Low): Nice to have, backlog
 
 **Auto-categorization:**
-- Use `category_keywords` from `config.yaml` to auto-assign task category
+- Use `category_keywords` from `core/config.yaml` to auto-assign task category
 - Match task description against keyword lists for each category
 - If multiple categories match, choose the most specific one
 - Default to "other" if no keywords match
 
 ### 5. Enforce Priority Caps
 
-Check priority caps from `config.yaml`:
+Check priority caps from `core/config.yaml`:
 - P0: Max 3 tasks
 - P1: Max 7 tasks
 - P2: Max 15 tasks
@@ -146,5 +146,5 @@ After processing all items:
 - If backlog item lacks context, ask user for clarification before creating
 - Use context from `knowledge/product-strategy/` to inform priority decisions
 - Reference `knowledge/frameworks/` for prioritization methodology
-- All configurable values (priority caps, deduplication thresholds, task aging) come from `config.yaml`
-- Users can customize these settings by editing `config.yaml`
+- All configurable values (priority caps, deduplication thresholds, task aging) come from `core/config.yaml`
+- Users can customize these settings by editing `core/config.yaml`

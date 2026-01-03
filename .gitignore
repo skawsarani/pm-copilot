@@ -10,12 +10,6 @@ tasks/**/*
 !tasks/**/.gitkeep
 !tasks/README.md
 
-# MCP specific
-mcp/**/*.log
-mcp/**/__pycache__/
-mcp/**/*.pyc
-mcp/**/.env
-
 # OS files
 .DS_Store
 Thumbs.db
@@ -58,5 +52,5 @@ code/**/*
 BACKLOG.md
 
 # Evals (test results and backups)
-evals/results/
+core/evals/results/
 *.backup

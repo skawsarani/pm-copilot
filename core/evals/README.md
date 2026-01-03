@@ -6,7 +6,7 @@ Automated evaluation system to validate backlog processing workflow.
 
 Ensures the backlog processing workflow continues to work correctly as the system evolves. Validates:
 - Categorization (tasks, opportunities, references)
-- Auto-categorization using config.yaml keywords
+- Auto-categorization using core/config.yaml keywords
 - Priority assignment
 - Priority caps enforcement (P0≤3, P1≤7, P2≤15)
 - File format and structure
@@ -79,7 +79,7 @@ Some tests require manual interaction:
 ### 2. Auto-Categorization
 
 **Tests:**
-- Tasks auto-assigned categories based on config.yaml keywords
+- Tasks auto-assigned categories based on core/config.yaml keywords
 - Technical, outreach, research, writing, admin categories working
 
 **Expected:**
@@ -169,7 +169,7 @@ All test outputs saved to `results/YYYY-MM-DD-HHMMSS/`:
 **Required:**
 - Before committing changes to AGENTS.md
 - Before updating workflows/process-backlog.md
-- Before modifying config.yaml structure
+- Before modifying core/config.yaml structure
 - Before major releases
 
 **Recommended:**

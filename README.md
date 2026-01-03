@@ -127,6 +127,25 @@ Skills are specialized tools AI uses automatically:
 
 ---
 
+## Task Management MCP (Optional)
+
+For faster task operations, install the task management MCP server:
+
+```bash
+cd core/task-manager
+python3 -m pip install -r requirements.txt
+```
+
+Then configure your AI assistant to use `core/task-manager/server.py` (see `core/README.md` for setup).
+
+**Benefits:**
+- 10x faster task operations (CRUD, deduplication, statistics)
+- Programmatic access to tasks
+- Auto-categorization and priority enforcement
+- Find stale/overdue tasks, prune completed ones
+
+---
+
 ## Common Commands
 
 **Daily:**
@@ -168,8 +187,15 @@ See `templates/voice-samples/` for examples.
 pm-copilot/
 ├── BACKLOG.md              # Daily inbox (gitignored)
 ├── AGENTS.md               # AI instructions
-├── config.yaml             # Priority caps, categories
 ├── setup.sh                # Setup script
+│
+├── core/                   # System components
+│   ├── config.yaml         # Priority caps, categories (customizable)
+│   ├── task-manager/       # Task management MCP
+│   │   ├── server.py       # MCP server
+│   │   └── requirements.txt # Python dependencies
+│   ├── evals/              # Automated tests
+│   └── README.md           # Core system docs
 │
 ├── tasks/                  # Your tasks (gitignored)
 ├── knowledge/              # Your context (gitignored)
@@ -186,7 +212,7 @@ pm-copilot/
 │
 ├── templates/              # Document templates
 ├── workflows/              # Workflow files
-├── mcp/                    # MCP servers (optional)
+├── mcp/                    # Custom MCP servers (optional)
 └── code/                   # Prototypes (gitignored)
 ```
 
@@ -197,7 +223,8 @@ pm-copilot/
 **Committed (shared structure):**
 - Directory structure
 - Documentation, templates
-- `config.yaml`, `AGENTS.md`
+- `core/` folder (config.yaml, task-manager, evals)
+- `AGENTS.md`
 
 **Gitignored (your data):**
 - `BACKLOG.md`
@@ -226,6 +253,25 @@ pm-copilot/
 - Generic responses? Add more to `knowledge/`
 - AI not using context? Use @ mentions explicitly
 - Too many tasks? Let AI enforce priority caps
+
+---
+
+## Running Evals
+
+Test that your system is working correctly after making changes:
+
+```bash
+cd core/evals
+./run_evals.sh
+```
+
+This validates:
+- Task categorization
+- Auto-categorization based on config.yaml keywords
+- Priority caps enforcement (P0≤3, P1≤7, P2≤15)
+- File format and structure
+
+See `core/evals/README.md` for details.
 
 ---
 

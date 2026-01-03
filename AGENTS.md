@@ -93,11 +93,11 @@ When caps exceeded during `/backlog`, ask user what to deprioritize.
 
 **Find tasks:**
 - "What should I work on today?" → Review P0/P1 tasks, check deadlines
-- "Find stale tasks" → Tasks with status `s` but no updates (uses `task_aging.flag_stale_after` from config.yaml)
+- "Find stale tasks" → Tasks with status `s` but no updates (uses `task_aging.flag_stale_after` from core/config.yaml)
 - "Show tasks older than [N] days"
 
 **Clean up:**
-- "Prune completed tasks" → Delete tasks with status `d` (uses `task_aging.prune_completed_after` from config.yaml)
+- "Prune completed tasks" → Delete tasks with status `d` (uses `task_aging.prune_completed_after` from core/config.yaml)
 
 ### Task File Structure
 
@@ -105,7 +105,7 @@ Each task in `tasks/` includes frontmatter:
 ```yaml
 ---
 title: Task name
-category: auto-assigned from config.yaml
+category: auto-assigned from core/config.yaml
 priority: P0/P1/P2/P3
 status: n/s/b/d
 created_date: YYYY-MM-DD

@@ -1,0 +1,7 @@
+# PM Co-Pilot Task Management MCP Server Dependencies
+
+# MCP SDK for Python
+mcp>=0.9.0
+
+# YAML parsing for frontmatter and config
+pyyaml>=6.0
