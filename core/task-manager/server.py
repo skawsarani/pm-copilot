@@ -19,7 +19,7 @@ from mcp.server.stdio import stdio_server
 from mcp.types import Tool, TextContent
 
 # Configuration
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent
 TASKS_DIR = PROJECT_ROOT / "tasks"
 CONFIG_FILE = PROJECT_ROOT / "core" / "config.yaml"
 
