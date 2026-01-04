@@ -43,13 +43,16 @@ __pycache__/
 !.env/.env.example
 
 # Prototype code (keep structure but ignore content)
-code/**/*
-!code/**/
-!code/**/.gitkeep
-!code/README.md
+prototypes/**/*
+!prototypes/**/
+!prototypes/**/.gitkeep
+!prototypes/README.md
 
 # Personal backlog (private daily inbox)
 BACKLOG.md
+
+# Personal goals (private quarterly objectives)
+GOALS.md
 
 # Evals (test results and backups)
 core/evals/results/

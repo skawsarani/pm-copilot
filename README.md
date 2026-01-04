@@ -171,11 +171,38 @@ Then configure your AI assistant to use `core/task-manager/server.py` (see `core
 
 ## Voice Training
 
-Train AI to match your writing style:
+Train AI to match your writing style in 3 steps:
 
-1. Add 5-10 writing samples to `knowledge/voice-samples/`
-2. Ask AI to analyze patterns
-3. AI will adapt to your voice automatically
+### 1. Collect Writing Samples (10 min)
+
+Add 5-10 authentic writing samples to `knowledge/voice-samples/`:
+- Emails to different audiences (peers, executives, customers)
+- Spec/PRD intros you've written
+- Slack messages or team updates
+- Blog posts or public writing
+
+**Tip**: Use `templates/voice-samples/` as reference for what to collect.
+
+### 2. Analyze Your Voice (5 min)
+
+Ask AI to analyze patterns:
+```
+Analyze the writing samples in knowledge/voice-samples/.
+What are my key patterns in:
+- Sentence structure and length
+- Opening/closing conventions
+- Vocabulary and phrasing
+- Tone across different audiences
+- Formatting preferences
+```
+
+### 3. Apply and Refine
+
+AI will automatically adapt to your voice in generated content. Provide feedback:
+- "This feels too formal, check my voice samples"
+- "Match the tone I use in customer emails"
+
+**Maintenance**: Add new samples monthly as your voice evolves.
 
 See `templates/voice-samples/` for examples.
 
@@ -210,10 +237,11 @@ pm-copilot/
 │   ├── references/
 │   └── notes/             # Archived backlog snapshots
 │
+├── commands/               # Slash command implementations
 ├── templates/              # Document templates
 ├── workflows/              # Workflow files
 ├── mcp/                    # Custom MCP servers (optional)
-└── code/                   # Prototypes (gitignored)
+└── prototypes/             # Code prototypes (gitignored)
 ```
 
 ---
@@ -228,7 +256,8 @@ pm-copilot/
 
 **Gitignored (your data):**
 - `BACKLOG.md`
-- Content in `knowledge/`, `tasks/`, `code/`
+- `GOALS.md`
+- Content in `knowledge/`, `tasks/`, `prototypes/`
 
 ---
 
