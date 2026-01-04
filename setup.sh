@@ -100,6 +100,7 @@ check_and_create_dir "knowledge/voice-samples" "Writing samples for matching com
 check_and_create_dir "knowledge/references" "Useful info, links, competitive analysis"
 check_and_create_dir "knowledge/proposals" "Decision docs, RFCs, proposals"
 check_and_create_dir "knowledge/notes" "Archived inbox snapshots, meeting notes, uncategorized items"
+check_and_create_dir "tasks" "Your task files (gitignored)"
 
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${BLUE}Step 2: Creating Essential Template Files${NC}"
@@ -257,14 +258,158 @@ Say `process my backlog` when you'\''re ready to categorize and organize items i
 fi
 
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${BLUE}Step 4: Setting Up Goals${NC}"
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo ""
+
+if [ -f "GOALS.md" ]; then
+    echo -e "${YELLOW}ℹ️  GOALS.md already exists${NC}"
+    echo -e "   Your existing GOALS.md is preserved."
+    echo ""
+else
+    # Create GOALS.md with template
+    cat > "GOALS.md" << 'EOF'
+# Goals
+
+Define your personal and business goals here. AI will use these to align task priorities and recommendations.
+
+---
+
+## How to Use This File
+
+1. Define 3-5 quarterly goals (too many = unfocused)
+2. Update quarterly or when priorities shift
+3. AI references this during:
+   - Weekly reviews (goal progress tracking)
+   - Daily planning (priority alignment)
+   - Backlog processing (strategic task categorization)
+
+**Tip**: Make goals specific and measurable. Vague goals get vague results.
+
+---
+
+## Current Quarter Goals
+
+### Goal 1: [Goal Name]
+
+**Description**: [What you want to achieve]
+
+**Why it matters**: [Impact / Strategic alignment]
+
+**Success criteria**:
+- [ ] [Measurable milestone 1]
+- [ ] [Measurable milestone 2]
+
+**Target date**: [YYYY-MM-DD]
+
+---
+
+### Goal 2: [Goal Name]
+
+**Description**: [What you want to achieve]
+
+**Why it matters**: [Impact / Strategic alignment]
+
+**Success criteria**:
+- [ ] [Measurable milestone 1]
+- [ ] [Measurable milestone 2]
+
+**Target date**: [YYYY-MM-DD]
+
+---
+
+### Goal 3: [Goal Name]
+
+**Description**: [What you want to achieve]
+
+**Why it matters**: [Impact / Strategic alignment]
+
+**Success criteria**:
+- [ ] [Measurable milestone 1]
+- [ ] [Measurable milestone 2]
+
+**Target date**: [YYYY-MM-DD]
+
+---
+
+## Archive
+
+Move completed goals here for reference.
+EOF
+
+    echo -e "${GREEN}✓ Created GOALS.md${NC}"
+    echo -e "   Define your quarterly goals here for AI-powered priority alignment."
+    echo ""
+
+    # Ask if user wants to define goals now
+    echo -e "${YELLOW}Would you like to define your goals now? (y/n)${NC}"
+    read -p "> " define_goals
+    echo ""
+
+    if [[ "$define_goals" =~ ^[Yy]$ ]]; then
+        echo -e "${BLUE}Let's define your top 3 goals for this quarter.${NC}"
+        echo ""
+
+        for i in 1 2 3; do
+            echo -e "${YELLOW}Goal $i:${NC}"
+            read -p "  What do you want to achieve? " goal_desc
+            echo ""
+        done
+
+        echo -e "${GREEN}✓ Goals captured!${NC}"
+        echo -e "   You can refine them anytime by editing GOALS.md"
+        echo -e "   AI will help align your tasks to these goals."
+        echo ""
+    else
+        echo -e "${YELLOW}No problem! You can add your goals anytime by editing GOALS.md${NC}"
+        echo ""
+    fi
+fi
+
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${BLUE}Step 5: AI Assistant Integration (Optional)${NC}"
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo ""
+
+echo -e "${YELLOW}Would you like to create symlinks for skills/commands in .claude directory?${NC}"
+echo -e "This helps Claude Code auto-discover available skills."
+echo ""
+read -p "Create symlinks? (y/n) > " create_symlinks
+echo ""
+
+if [[ "$create_symlinks" =~ ^[Yy]$ ]]; then
+    mkdir -p .claude
+
+    if [ ! -e ".claude/skills" ]; then
+        ln -s ../skills .claude/skills
+        echo -e "${GREEN}✓ Created symlink: .claude/skills → skills/${NC}"
+    else
+        echo -e "${YELLOW}ℹ️  Symlink .claude/skills already exists${NC}"
+    fi
+
+    if [ ! -e ".claude/commands" ]; then
+        ln -s ../commands .claude/commands
+        echo -e "${GREEN}✓ Created symlink: .claude/commands → commands/${NC}"
+    else
+        echo -e "${YELLOW}ℹ️  Symlink .claude/commands already exists${NC}"
+    fi
+    echo ""
+else
+    echo -e "${YELLOW}Skipped symlink creation. You can create them manually later if needed.${NC}"
+    echo ""
+fi
+
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${BLUE}Setup Complete! 🎉${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 
 echo -e "${GREEN}What was created:${NC}"
 echo "  ✓ Knowledge base directory structure"
+echo "  ✓ Tasks directory"
 echo "  ✓ Template files for essential context"
 echo "  ✓ BACKLOG.md (your daily inbox)"
+echo "  ✓ GOALS.md (your quarterly goals)"
 echo ""
 
 echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
@@ -277,34 +422,40 @@ echo "   • Edit knowledge/about-me/about-me.md - Add your background and worki
 echo "   • Edit knowledge/company-context/company-overview.md - Add company info"
 echo "   • Edit knowledge/product-strategy/current-strategy.md - Add your product vision"
 echo "   • Edit knowledge/processes/how-we-work.md - Document your team process"
+echo "   • Edit GOALS.md - Define your quarterly goals (3-5 goals max)"
 echo ""
 
 echo -e "${BLUE}2. Start using your BACKLOG.md:${NC}"
 echo "   • Add ideas, tasks, notes throughout the day"
 echo "   • Say 'process my backlog' or '/backlog' to organize items"
-echo "   • See templates/backlog-template.md for format ideas"
 echo ""
 
 echo -e "${BLUE}3. Tell your AI assistant:${NC}"
 echo "   Read @AGENTS.md to understand how to help me as a PM Co-Pilot."
 echo ""
 
-echo -e "${BLUE}4. Process your first backlog:${NC}"
-echo "   • Add a few items to BACKLOG.md"
-echo "   • Say: 'process my backlog' or '/backlog'"
-echo "   • AI will categorize items into opportunities, tasks, references, or archive"
+echo -e "${BLUE}4. Try daily and weekly workflows:${NC}"
+echo "   • Morning: 'What should I work on today?'"
+echo "   • Friday/Sunday: 'Run weekly review'"
+echo "   • See workflows/README.md for all workflows"
 echo ""
 
-echo -e "${BLUE}5. Explore the workflows:${NC}"
-echo "   • Browse workflows/README.md for available workflows"
-echo "   • Try: '/plan' to get prioritized recommendations"
-echo "   • Try: '/create-initiative [opportunity]' to create an initiative from an opportunity"
-echo "   • Try: '/spec [name]' to generate a spec from an initiative or opportunity"
+echo -e "${BLUE}5. Generate your first document:${NC}"
+echo "   • Add opportunity to BACKLOG.md"
+echo "   • Say: '/backlog' to process it"
+echo "   • Say: '/spec [opportunity-name]' to generate spec"
 echo ""
 
-echo -e "${BLUE}6. Learn more:${NC}"
-echo "   • Read README.md for complete guide and documentation"
-echo "   • Review templates/ for document examples"
+echo -e "${BLUE}6. Optional: Install Task Manager MCP (for faster task ops):${NC}"
+echo "   • cd core/task-manager"
+echo "   • python3 -m pip install -r requirements.txt"
+echo "   • See core/README.md for configuration"
+echo ""
+
+echo -e "${BLUE}7. Learn more:${NC}"
+echo "   • Read README.md for complete guide"
+echo "   • Browse templates/ for document examples"
+echo "   • Explore skills/ for available capabilities"
 echo ""
 
 echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
