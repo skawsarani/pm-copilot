@@ -108,12 +108,12 @@ If document type is ambiguous, ask the user which type they need using the table
 
 ### Step 3: Select Template
 
-Load the appropriate template from `assets/`:
-- `prd-template.md` - For PRDs
-- `brief-template.md` - For project briefs
-- `spec-template.md` - For product specs
-- `user-stories-template.md` - For user stories
-- `decision-doc-template.md` - For decision documentation
+Load the appropriate template from this skill's `assets/` directory:
+- `assets/prd-template.md` - For PRDs
+- `assets/brief-template.md` - For project briefs
+- `assets/spec-template.md` - For product specs
+- `assets/user-stories-template.md` - For user stories
+- `assets/decision-doc-template.md` - For decision documentation
 
 ### Step 4: Generate Complete First Draft
 
@@ -381,11 +381,13 @@ This skill replaces the `workflows/product-docs.md` workflow. It provides:
 
 ## Assets Reference
 
-All templates are in `assets/`:
-- `prd-template.md` - Comprehensive PRD (15+ sections)
-- `brief-template.md` - Project brief (1-2 pages)
-- `spec-template.md` - Product spec (10+ sections)
-- `user-stories-template.md` - User stories format
-- `decision-doc-template.md` - Decision documentation
+All templates are in this skill's `assets/` directory (NOT root `/templates/`):
+- `assets/prd-template.md` - Comprehensive PRD (15+ sections)
+- `assets/brief-template.md` - Project brief (1-2 pages)
+- `assets/spec-template.md` - Product spec (10+ sections)
+- `assets/user-stories-template.md` - User stories format
+- `assets/decision-doc-template.md` - Decision documentation
+
+**Note**: Root `/templates/` directory contains user-facing templates for voice samples, frameworks, and general PM templates.
 
 Templates are used as structure but never modified. Generated documents are saved to user's preferred location (typically `knowledge/briefs-and-specs/` or current directory).
