@@ -57,3 +57,6 @@ GOALS.md
 # Evals (test results and backups)
 core/evals/results/
 *.backup
+
+# Project todos
+TODO.md

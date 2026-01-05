@@ -18,7 +18,7 @@ PM Co-Pilot is a simple system that turns AI assistants (Cursor, Claude Code) in
 
 ---
 
-## Quick Start (10 minutes)
+## Quick Start
 
 ### 1. Clone and Setup
 
@@ -34,7 +34,7 @@ Tell your AI:
 Read @AGENTS.md to understand how to help me as a PM Co-Pilot.
 ```
 
-### 2. Add Your Context (15 minutes)
+### 2. Add Your Context
 
 Fill in these essential files created by setup:
 
@@ -111,7 +111,7 @@ Skills are specialized tools AI uses automatically:
 - Auto-pulls context from knowledge base
 
 **UX Copy (`ux-copy` skill):**
-- Translate to Canadian French (Québécois)
+- Translate to Canadian French
 - Create UI copy, error messages, microcopy
 - Follows OQLF guidelines
 
@@ -171,38 +171,120 @@ Then configure your AI assistant to use `core/task-manager/server.py` (see `core
 
 ## Voice Training
 
-Train AI to match your writing style in 3 steps:
+Give AI examples of your actual writing, then have it extract patterns and apply them.
+### Step 1: Collect Your Writing Samples
 
-### 1. Collect Writing Samples (10 min)
+Gather 5-10 examples of your real writing. Mix of formats works best:
 
-Add 5-10 authentic writing samples to `knowledge/voice-samples/`:
-- Emails to different audiences (peers, executives, customers)
-- Spec/PRD intros you've written
-- Slack messages or team updates
-- Blog posts or public writing
-
-**Tip**: Use `templates/voice-samples/` as reference for what to collect.
-
-### 2. Analyze Your Voice (5 min)
-
-Ask AI to analyze patterns:
 ```
-Analyze the writing samples in knowledge/voice-samples/.
-What are my key patterns in:
-- Sentence structure and length
-- Opening/closing conventions
-- Vocabulary and phrasing
-- Tone across different audiences
-- Formatting preferences
+knowledge/
+├── voice-samples/
+│   ├── email-to-colleague.md
+│   ├── email-to-exec.md
+│   ├── slack-messages.md
+│   ├── linkedin-post.md
+│   ├── blog-post-excerpt.md
+│   └── product-spec-intro.md
 ```
 
-### 3. Apply and Refine
+**What makes good samples:**
 
-AI will automatically adapt to your voice in generated content. Provide feedback:
-- "This feels too formal, check my voice samples"
-- "Match the tone I use in customer emails"
+- Emails you actually sent (not templates)
+- Slack messages that got good responses
+- Posts that felt authentically "you"
+- Writing you're proud of
+
+**What to avoid:**
+
+- Heavily edited/formal documents
+- Writing you copied from somewhere
+- Samples that don't represent your natural style
+
+### Step 2: Run Voice Analysis
+
+Ask Claude, Cursor (or your agent) to analyze your samples:
+
+```
+Read all files in Knowledge/voice-samples/ and analyze my writing style.
+Extract specific patterns for:
+1. Sentence structure and length
+2. How I open and close messages
+3. Words/phrases I use often
+4. What I never say
+5. Tone and formality level
+6. How I structure arguments
+
+Create a voice guide I can add to my agent instructions file (AGENTS.md)
+```
+
+### Step 3: Review the Voice Guide
+Your agent will produce something like:
+
+```md
+## Your Writing Voice
+
+### Sentence Style
+- Short sentences. Punchy. You rarely go over 15 words.
+- Questions used to transition: "So what does this mean?"
+- Em dashes avoided - you use commas or periods instead
+
+### Openers
+- Emails: Jump straight to the point, no "Hope you're well"
+- Posts: Lead with a surprising fact or bold claim
+- Specs: Start with the user problem, not the solution
+
+### Signature Phrases
+- "Here's the thing..."
+- "Let's be real"
+- "The short version:"
+- Ends with clear next step or question
+
+### What You Avoid
+- "I hope this email finds you well"
+- "Please don't hesitate to reach out"
+- Bullet point lists in emails (prefer paragraphs)
+- Emojis in professional context
+- "Key insights" or "learnings"
+
+### Tone Calibration
+- To peers: Casual, direct, occasional humor
+- To execs: Concise, data-first, clear ask
+- Public posts: Confident but not salesy
+```
+
+### Step 4: Add to Your Agent Instructions
+Add the voice guide to your agent instructions file (AGENTS.md) so it applies to all sessions:
+
+```md
+## Writing Style Guidelines
+
+[Paste your generated voice guide here]
+
+When drafting any writing for me:
+1. Apply these patterns
+2. Read a sample from Knowledge/voice-samples/ if unsure
+3. Ask me to review before finalizing
+```
+
+### Step 5: Test and Refine
+```
+Draft an email to my VP about pushing the launch date back one week.
+Use my voice - check Knowledge/voice-samples/ for reference.
+```
+
+Compare the output to how you'd actually write it. Give feedback:
+
+```
+Good start, but I wouldn't say "I wanted to reach out" - I'd just say
+"Quick update on launch timing." Also too many bullet points, I usually
+write in short paragraphs. Try again.
+```
 
 **Maintenance**: Add new samples monthly as your voice evolves.
+```
+Read my recent writing in [location] and update my voice guide.
+What patterns have changed? What's new?
+```
 
 See `templates/voice-samples/` for examples.
 

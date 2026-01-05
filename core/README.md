@@ -45,17 +45,16 @@ python3 -m pip install -r requirements.txt
 
 #### 2. Configure MCP Client
 
-Add to your MCP client configuration (e.g., Claude Desktop, Cursor):
+Add to your MCP client configuration (e.g., Claude Code, Cursor):
 
-**For Claude Desktop** (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+**For Claude Code** (`.claude/mcp_settings.json` in project root):
 
 ```json
 {
   "mcpServers": {
     "pm-tasks": {
       "command": "python3",
-      "args": ["/absolute/path/to/pm-copilot/core/task-manager/server.py"],
-      "cwd": "/absolute/path/to/pm-copilot"
+      "args": ["./core/task-manager/server.py"]
     }
   }
 }
@@ -76,7 +75,7 @@ Add to your MCP client configuration (e.g., Claude Desktop, Cursor):
 
 #### 3. Restart Your MCP Client
 
-Restart Claude Desktop, Cursor, or your MCP client to load the server.
+Restart Claude Code, Cursor, or your MCP client to load the server.
 
 ### Available Tools
 
@@ -220,7 +219,7 @@ See `core/evals/README.md` for details.
 - `skills/` - Custom AI skills
 - `templates/` - Document templates
 - `workflows/` - Workflow definitions
-- `mcp/` - Custom MCP servers
+- `mcp/` -  MCP servers
 
 ## Maintenance
 

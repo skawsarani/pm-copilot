@@ -39,14 +39,13 @@ See `skills/mcp-builder/SKILL.md` for details.
 
 Once you've created your MCP server:
 
-**Claude Desktop** - Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
+**Claude Code** - Create `.claude/mcp_settings.json` in project root:
 ```json
 {
   "mcpServers": {
     "your-server": {
       "command": "python3",
-      "args": ["/absolute/path/to/pm-copilot/mcp/your-server.py"],
-      "cwd": "/absolute/path/to/pm-copilot"
+      "args": ["./mcp/your-server.py"]
     }
   }
 }
@@ -92,5 +91,5 @@ API_KEY = os.getenv("API_KEY")
 
 - **MCP-Builder Skill**: `skills/mcp-builder/` (use this to generate servers)
 - **Task Manager Example**: `core/task-manager/` (working reference implementation)
-- **MCP Specification**: https://github.com/anthropics/mcp
-- **MCP Python SDK**: https://github.com/anthropics/mcp-python
+- **MCP Specification**: https://modelcontextprotocol.io/docs/getting-started/intro
+- **MCP SDKs**: https://modelcontextprotocol.io/docs/sdk

@@ -59,12 +59,15 @@ When user says `/backlog` or "process my backlog":
 **Read and follow `workflows/process-backlog.md`** for detailed logic.
 
 **Quick reference:**
-1. Read `BACKLOG.md` (root file)
-2. Categorize: Tasks (P0-P3) → `tasks/`, Opportunities → `knowledge/opportunities/`, References → `knowledge/references/`
-3. Check duplicates across existing items
-4. Enforce priority caps: P0≤3, P1≤7, P2≤15, P3=unlimited
-5. Create files with proper frontmatter/structure
-6. Clear `BACKLOG.md`
+1. Read `BACKLOG.md` and extract every actionable item.
+2. Look through `Knowledge/` for context (matching keywords, project names, or dates).
+3. Check duplicates across existing items. Use `check_duplicates` if available.
+4. If an item lacks context, priority, or a clear next step, STOP and ask the user for clarification before creating the task.
+5. Create or update task files under `Tasks/` with complete metadata.
+6. Categorize: Tasks (P0-P3) → `tasks/`, Opportunities → `knowledge/opportunities/`, References → `knowledge/references/`
+7. Enforce priority caps: P0≤3, P1≤7, P2≤15, P3=unlimited
+8. Create files with proper frontmatter/structure
+9. Present a concise summary of new tasks, then clear `BACKLOG.md`.
 
 ## Task Management
 
@@ -113,7 +116,7 @@ due_date: YYYY-MM-DD (if applicable)
 ---
 ```
 
-### Task Manager MCP (Optional)
+### Task Manager MCP
 
 If you've installed the task-manager MCP server (`core/task-manager/server.py`), use these tools for fast programmatic task operations:
 
@@ -128,12 +131,6 @@ If you've installed the task-manager MCP server (`core/task-manager/server.py`),
 8. **find_overdue_tasks** - Tasks past due_date
 9. **prune_completed_tasks** - Delete done tasks older than 90 days
 10. **check_duplicates** - Check for similar tasks before creating
-
-**When to use MCP tools:**
-- **Prefer MCP for:** Fast operations, bulk queries, validation checks, statistics
-- **Use conversational for:** User-facing explanations, complex reasoning, when MCP not installed
-
-**Setup:** See `core/README.md` for MCP installation instructions.
 
 ## File Locations
 
@@ -162,9 +159,12 @@ If you've installed the task-manager MCP server (`core/task-manager/server.py`),
 
 ## When Prioritizing
 
-1. **Check strategy alignment** - Does this support product vision?
-2. **Consider capacity** - Is the team overloaded?
-3. **Make tradeoffs explicit** - What are we NOT doing?
+1. During backlog work, make sure each task references the relevant goal inside the **Context** section (cite headings or bullets from `GOALS.md`). 
+	1. If no goal fits, ask whether to create a new goal entry or clarify why the work matters.
+	2. Remind the user when active tasks do not support any current goals.
+2. **Check strategy alignment** - Does this support product vision?
+3. **Consider capacity** - Is the team overloaded?
+4. **Make tradeoffs explicit** - What are we NOT doing?
 
 ## When Uncertain
 
