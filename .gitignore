@@ -35,6 +35,7 @@ logs/
 # Build artifacts (if using MCP servers)
 *.pyc
 __pycache__/
+.pytest_cache/
 
 # Environment variables folder
 .env/*

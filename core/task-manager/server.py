@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run python
 """
 PM Co-Pilot Task Management MCP Server
 
@@ -179,6 +179,155 @@ def get_task_by_file(filename: str) -> Optional[dict]:
     }
 
 
+def is_ambiguous(text: str) -> tuple[bool, str]:
+    """
+    Check if a backlog item is too vague/ambiguous to become a task.
+    Returns (is_ambiguous, reason)
+    """
+    text = text.strip()
+
+    # Too short
+    if len(text) < 10:
+        return True, "Item too short (less than 10 characters)"
+
+    # Check for action verbs
+    action_verbs = [
+        "add", "update", "fix", "create", "write", "review", "send", "email",
+        "call", "schedule", "research", "analyze", "implement", "deploy",
+        "design", "test", "document", "refactor", "contact", "follow up",
+        "debug", "investigate", "explore", "consider", "evaluate", "assess"
+    ]
+    has_action = any(verb in text.lower() for verb in action_verbs)
+
+    if not has_action:
+        return True, "No clear action verb found"
+
+    # Check for vague language
+    vague_words = ["something", "maybe", "should", "might", "possibly", "think about"]
+    has_vague = any(word in text.lower() for word in vague_words)
+
+    if has_vague:
+        return True, f"Contains vague language: {[w for w in vague_words if w in text.lower()]}"
+
+    return False, ""
+
+
+def generate_clarification_questions(item: str) -> list[str]:
+    """Generate questions to clarify an ambiguous backlog item"""
+    questions = []
+
+    item_lower = item.lower()
+
+    # Check what's missing
+    has_deadline_words = any(word in item_lower for word in ["by", "due", "deadline", "before"])
+    has_context_words = any(word in item_lower for word in ["because", "for", "to help", "context"])
+
+    if not has_deadline_words:
+        questions.append("When does this need to be done? (today, this week, this month, no deadline)")
+
+    if not has_context_words:
+        questions.append("Why does this matter? What's the context or goal?")
+
+    # Check for specific action
+    is_vague, reason = is_ambiguous(item)
+    if is_vague and "action verb" in reason:
+        questions.append("What specific action should be taken?")
+
+    if not questions:
+        questions.append("Can you provide more details about what needs to be done?")
+
+    return questions
+
+
+def generate_task_content(title: str, category: str, context: str = "") -> str:
+    """
+    Generate category-specific task content with appropriate sections.
+    Returns markdown body for the task.
+    """
+    # Base template
+    content = f"## Context\n{context if context else '[Why this task matters]'}\n\n"
+
+    # Category-specific sections
+    if category == "technical":
+        content += """## Technical Details
+- **Tech Stack:** [List relevant technologies]
+- **Dependencies:** [What this depends on]
+- **Risks:** [Technical risks or blockers]
+
+## Acceptance Criteria
+- [ ] [Criterion 1]
+- [ ] [Criterion 2]
+
+## Next Actions
+- [ ] [First step]
+- [ ] [Second step]
+"""
+
+    elif category == "outreach":
+        content += """## Contact Details
+- **Who:** [Name/organization]
+- **Channel:** [Email/call/meeting]
+- **Best time:** [When to reach out]
+
+## Talking Points
+- [Point 1]
+- [Point 2]
+
+## Follow-up
+- [ ] [Schedule follow-up]
+- [ ] [Document outcome]
+"""
+
+    elif category == "research":
+        content += """## Questions to Answer
+- [Question 1]
+- [Question 2]
+
+## Sources to Check
+- [Source 1]
+- [Source 2]
+
+## Synthesis
+[Document findings here]
+
+## Next Actions
+- [ ] [Research step 1]
+- [ ] [Synthesize findings]
+"""
+
+    elif category == "writing":
+        content += """## Audience
+[Who is this for?]
+
+## Key Points
+- [Point 1]
+- [Point 2]
+
+## Outline
+1. [Section 1]
+2. [Section 2]
+
+## Next Actions
+- [ ] Draft outline
+- [ ] Write first draft
+- [ ] Review and edit
+"""
+
+    else:  # admin or other
+        content += """## Details
+[Additional details about this task]
+
+## Next Actions
+- [ ] [First step]
+- [ ] [Second step]
+"""
+
+    content += "\n## Progress Log\n"
+    content += f"- {datetime.now().strftime('%Y-%m-%d')}: Task created\n"
+
+    return content
+
+
 # MCP Tool Handlers
 
 @app.list_tools()
@@ -327,7 +476,7 @@ async def list_tools() -> list[Tool]:
         ),
         Tool(
             name="check_duplicates",
-            description="Check for similar existing tasks before creating a new one. Uses similarity scoring.",
+            description="Check for similar existing tasks before creating a new one. Uses similarity scoring with actionable recommendations.",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -343,6 +492,32 @@ async def list_tools() -> list[Tool]:
                     },
                 },
                 "required": ["title"],
+            },
+        ),
+        Tool(
+            name="process_backlog",
+            description="Process all items from BACKLOG.md with automated categorization, deduplication, and ambiguity detection. Returns summary of what would be created and flags any items needing clarification.",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "auto_create": {
+                        "type": "boolean",
+                        "description": "If true, automatically create tasks/opportunities. If false (default), only return summary for review.",
+                    }
+                },
+            },
+        ),
+        Tool(
+            name="clear_backlog",
+            description="Archive current BACKLOG.md content to knowledge/notes/ and reset backlog to empty state.",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "archive": {
+                        "type": "boolean",
+                        "description": "If true (default), archive to knowledge/notes/. If false, just clear without archiving.",
+                    }
+                },
             },
         ),
     ]
@@ -679,21 +854,242 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
             return [
                 TextContent(
                     type="text",
-                    text=f"No duplicate tasks found (threshold: {threshold})",
+                    text=f"✓ No duplicate tasks found (threshold: {threshold}). Safe to create.",
                 )
             ]
 
         # Sort by similarity (highest first)
         similar_tasks.sort(key=lambda x: x[1], reverse=True)
 
-        result = f"Found {len(similar_tasks)} similar tasks (threshold: {threshold}):\n\n"
+        result = f"⚠️  Found {len(similar_tasks)} similar tasks (threshold: {threshold}):\n\n"
         for task, similarity in similar_tasks:
-            result += f"- **{task['title']}** ({task['file']})\n"
-            result += f"  Similarity: {similarity:.2f} | Priority: {task['priority']} | Status: {task['status']}\n\n"
+            result += f"**{task['title']}** ({task['file']})\n"
+            result += f"- Similarity: {similarity:.2f} ({int(similarity*100)}% match)\n"
+            result += f"- Priority: {task['priority']} | Status: {task['status']} | Category: {task['category']}\n"
 
-        result += "Consider updating an existing task instead of creating a duplicate."
+            # Explain why it matched
+            title_match = SequenceMatcher(None, arguments["title"].lower(), task["title"].lower()).ratio()
+            if title_match > 0.7:
+                result += f"- Match reason: Very similar titles ({int(title_match*100)}% title match)\n"
+
+            keyword_overlap = set(k.lower() for k in arguments.get("keywords", [])) & set(k.lower() for k in task.get("keywords", []))
+            if keyword_overlap:
+                result += f"- Shared keywords: {', '.join(keyword_overlap)}\n"
+
+            # Suggest action based on status
+            if task["status"] == "d":
+                result += f"- **Suggestion:** This task is done. You may want to reopen it instead of creating new.\n"
+            elif task["status"] == "b":
+                result += f"- **Suggestion:** This task is blocked. Consider unblocking and updating it.\n"
+            else:
+                result += f"- **Suggestion:** Update existing task with new details instead of creating duplicate.\n"
+
+            result += "\n"
 
         return [TextContent(type="text", text=result)]
+
+    elif name == "process_backlog":
+        backlog_file = PROJECT_ROOT / "BACKLOG.md"
+
+        if not backlog_file.exists():
+            return [TextContent(type="text", text="No BACKLOG.md found")]
+
+        with open(backlog_file, "r") as f:
+            backlog_content = f.read().strip()
+
+        if not backlog_content or backlog_content == "":
+            return [TextContent(type="text", text="BACKLOG.md is empty")]
+
+        # Parse backlog items (simple line-by-line for now)
+        lines = [line.strip() for line in backlog_content.split('\n') if line.strip()]
+        items = []
+
+        for line in lines:
+            # Skip markdown headers, empty lines
+            if line.startswith('#') or len(line) < 5:
+                continue
+            # Remove bullet points
+            item_text = line.lstrip('- ').lstrip('* ').lstrip('+ ')
+            items.append(item_text)
+
+        if not items:
+            return [TextContent(type="text", text="No actionable items found in BACKLOG.md")]
+
+        # Analyze each item
+        tasks_to_create = []
+        opportunities = []
+        ambiguous_items = []
+        duplicates = []
+
+        existing_tasks = get_all_tasks()
+
+        for item in items:
+            # Check ambiguity
+            is_amb, reason = is_ambiguous(item)
+            if is_amb:
+                questions = generate_clarification_questions(item)
+                ambiguous_items.append({
+                    "item": item,
+                    "reason": reason,
+                    "questions": questions
+                })
+                continue
+
+            # Auto-categorize
+            category = auto_categorize(item, "", config)
+
+            # Check if it's an opportunity (strategic) vs task (actionable)
+            opportunity_keywords = ["explore", "investigate", "consider", "opportunity", "idea", "strategy"]
+            is_opportunity = any(kw in item.lower() for kw in opportunity_keywords)
+
+            if is_opportunity:
+                opportunities.append({
+                    "title": item,
+                    "category": category
+                })
+                continue
+
+            # Check for duplicates
+            proposed = {
+                "title": item,
+                "keywords": [],
+                "category": category
+            }
+
+            similar = []
+            for task in existing_tasks:
+                similarity = calculate_similarity(proposed, task, config)
+                if similarity >= config["deduplication"]["similarity_threshold"]:
+                    similar.append((task, similarity))
+
+            if similar:
+                duplicates.append({
+                    "item": item,
+                    "similar": similar
+                })
+                continue
+
+            # This is a valid task
+            tasks_to_create.append({
+                "title": item,
+                "category": category,
+                "priority": "P2"  # Default to P2, user can adjust
+            })
+
+        # Build summary
+        result = f"# Backlog Processing Summary\n\n"
+        result += f"**Total items:** {len(items)}\n\n"
+
+        if tasks_to_create:
+            result += f"## ✓ Tasks to Create ({len(tasks_to_create)})\n\n"
+            for task in tasks_to_create:
+                result += f"- **{task['title']}**\n"
+                result += f"  Category: {task['category'] or 'uncategorized'} | Priority: {task['priority']}\n\n"
+
+        if opportunities:
+            result += f"## 💡 Opportunities Identified ({len(opportunities)})\n\n"
+            for opp in opportunities:
+                result += f"- {opp['title']}\n"
+                result += f"  Category: {opp['category'] or 'uncategorized'}\n\n"
+
+        if ambiguous_items:
+            result += f"## ⚠️  Ambiguous Items Needing Clarification ({len(ambiguous_items)})\n\n"
+            for amb in ambiguous_items:
+                result += f"**Item:** {amb['item']}\n"
+                result += f"**Issue:** {amb['reason']}\n"
+                result += f"**Questions:**\n"
+                for q in amb['questions']:
+                    result += f"  - {q}\n"
+                result += "\n"
+
+        if duplicates:
+            result += f"## 🔄 Possible Duplicates ({len(duplicates)})\n\n"
+            for dup in duplicates:
+                result += f"**Item:** {dup['item']}\n"
+                result += f"**Similar to:**\n"
+                for task, sim in dup['similar'][:2]:  # Show top 2
+                    result += f"  - {task['title']} ({task['file']}) - {int(sim*100)}% match\n"
+                result += "\n"
+
+        # Auto-create if requested
+        if arguments.get("auto_create", False) and tasks_to_create:
+            result += f"\n## Creating Tasks...\n\n"
+
+            for task_data in tasks_to_create:
+                # Generate filename
+                filename = re.sub(r"[^a-z0-9]+", "-", task_data["title"].lower())
+                filename = filename.strip("-") + ".md"
+                task_file = TASKS_DIR / filename
+
+                if task_file.exists():
+                    result += f"⚠️  Skipped {filename} (already exists)\n"
+                    continue
+
+                # Create frontmatter
+                now = datetime.now().isoformat()
+                frontmatter = {
+                    "title": task_data["title"],
+                    "priority": task_data["priority"],
+                    "status": "n",
+                    "category": task_data["category"],
+                    "keywords": [],
+                    "created_date": now,
+                    "updated_date": now,
+                }
+
+                # Generate smart content
+                body = generate_task_content(
+                    task_data["title"],
+                    task_data["category"],
+                    ""
+                )
+
+                write_task_file(task_file, frontmatter, body)
+                result += f"✓ Created {filename}\n"
+        else:
+            result += f"\n**Note:** Set auto_create=true to create tasks automatically.\n"
+
+        return [TextContent(type="text", text=result)]
+
+    elif name == "clear_backlog":
+        backlog_file = PROJECT_ROOT / "BACKLOG.md"
+        archive = arguments.get("archive", True)
+
+        if not backlog_file.exists():
+            return [TextContent(type="text", text="No BACKLOG.md found")]
+
+        with open(backlog_file, "r") as f:
+            content = f.read()
+
+        if archive and content.strip():
+            # Archive to knowledge/notes
+            notes_dir = PROJECT_ROOT / "knowledge" / "notes"
+            notes_dir.mkdir(parents=True, exist_ok=True)
+
+            archive_file = notes_dir / f"{datetime.now().strftime('%Y-%m-%d')}.md"
+
+            # If file exists, append
+            if archive_file.exists():
+                with open(archive_file, "a") as f:
+                    f.write(f"\n\n## Backlog archived at {datetime.now().strftime('%H:%M:%S')}\n\n")
+                    f.write(content)
+            else:
+                with open(archive_file, "w") as f:
+                    f.write(f"# Notes - {datetime.now().strftime('%Y-%m-%d')}\n\n")
+                    f.write(f"## Backlog archived at {datetime.now().strftime('%H:%M:%S')}\n\n")
+                    f.write(content)
+
+        # Clear backlog
+        with open(backlog_file, "w") as f:
+            f.write("")
+
+        if archive:
+            return [TextContent(
+                type="text",
+                text=f"✓ Backlog cleared and archived to knowledge/notes/{datetime.now().strftime('%Y-%m-%d')}.md"
+            )]
+        else:
+            return [TextContent(type="text", text="✓ Backlog cleared (not archived)")]
 
     return [TextContent(type="text", text=f"Unknown tool: {name}")]
 

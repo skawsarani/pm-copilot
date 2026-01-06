@@ -16,10 +16,11 @@ This folder contains core system components for PM Co-Pilot. These files provide
   - Run with: `cd core/evals && ./run_evals.sh`
 
 - **task-manager/** - Task management MCP server
-  - `server.py` - MCP server with 10 tools for task operations
+  - `server.py` - MCP server with 12 tools for task operations
   - `requirements.txt` - Python dependencies
+  - `README.md` - Detailed tool documentation and testing guide
   - Programmatic access to tasks via MCP protocol
-  - Auto-categorization and priority enforcement
+  - Auto-categorization, priority enforcement, backlog processing
 
 ## Task Management MCP Server
 
@@ -31,6 +32,8 @@ The task management MCP server provides fast, programmatic access to your tasks 
 - **Smart Deduplication**: Prevents duplicate tasks using similarity scoring
 - **Priority Enforcement**: Enforces caps (P0≤3, P1≤7, P2≤15)
 - **Auto-Categorization**: Uses keywords from config.yaml to assign categories
+- **Backlog Processing**: Automated BACKLOG.md processing with ambiguity detection
+- **Smart Templates**: Category-specific task templates (technical, outreach, research, writing, admin)
 - **Task Health**: Find stale tasks, overdue tasks, prune completed ones
 - **Statistics**: Get task counts by priority, status, category
 
@@ -79,18 +82,22 @@ Restart Claude Code, Cursor, or your MCP client to load the server.
 
 ### Available Tools
 
-The MCP server exposes 10 tools:
+The MCP server exposes 12 tools:
 
 1. **list_tasks** - Filter tasks by priority, status, category, age
 2. **get_task** - Read single task details with full metadata
-3. **create_task** - Create new task with YAML frontmatter
+3. **create_task** - Create new task with smart category templates
 4. **update_task_status** - Change status (n/s/b/d)
 5. **update_task_priority** - Change priority (P0-P3)
 6. **get_task_summary** - Statistics (counts by priority, status, category)
 7. **find_stale_tasks** - Tasks with status 's' but inactive 14+ days
 8. **find_overdue_tasks** - Tasks past their due_date
 9. **prune_completed_tasks** - Delete tasks with status 'd' older than 90 days
-10. **check_duplicates** - Check for similar tasks before creating
+10. **check_duplicates** - Check for similar tasks with actionable suggestions
+11. **process_backlog** - Automated BACKLOG.md processing with dedup and ambiguity detection
+12. **clear_backlog** - Archive BACKLOG.md to knowledge/notes/ and reset
+
+See `task-manager/README.md` for detailed documentation of each tool.
 
 ### Usage Examples
 

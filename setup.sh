@@ -371,33 +371,69 @@ echo -e "${BLUE}Step 5: AI Assistant Integration (Optional)${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 
-echo -e "${YELLOW}Would you like to create symlinks for skills/commands in .claude directory?${NC}"
-echo -e "This helps Claude Code auto-discover available skills."
+echo -e "${YELLOW}Create symlinks for skills/commands to help AI assistants auto-discover them?${NC}"
 echo ""
-read -p "Create symlinks? (y/n) > " create_symlinks
+echo "  1) Both .claude and .cursor directories"
+echo "  2) Only .claude directory (Claude Code)"
+echo "  3) Only .cursor directory (Cursor AI)"
+echo "  4) Skip (create manually later)"
+echo ""
+read -p "Choose option (1-4) > " symlink_choice
 echo ""
 
-if [[ "$create_symlinks" =~ ^[Yy]$ ]]; then
-    mkdir -p .claude
+# Function to create symlinks for a directory
+create_symlinks_for_dir() {
+    local dir="$1"
 
-    if [ ! -e ".claude/skills" ]; then
-        ln -s ../skills .claude/skills
-        echo -e "${GREEN}✓ Created symlink: .claude/skills → skills/${NC}"
-    else
-        echo -e "${YELLOW}ℹ️  Symlink .claude/skills already exists${NC}"
+    # Create directory if needed
+    if [ ! -d "$dir" ]; then
+        mkdir -p "$dir"
+        echo -e "${GREEN}✓ Created directory: ${dir}/${NC}"
     fi
 
-    if [ ! -e ".claude/commands" ]; then
-        ln -s ../commands .claude/commands
-        echo -e "${GREEN}✓ Created symlink: .claude/commands → commands/${NC}"
+    # Create skills symlink
+    if [ ! -e "$dir/skills" ]; then
+        ln -s ../skills "$dir/skills"
+        echo -e "${GREEN}✓ Created symlink: ${dir}/skills → skills/${NC}"
     else
-        echo -e "${YELLOW}ℹ️  Symlink .claude/commands already exists${NC}"
+        echo -e "${YELLOW}ℹ️  Symlink ${dir}/skills already exists (skipping)${NC}"
     fi
-    echo ""
-else
-    echo -e "${YELLOW}Skipped symlink creation. You can create them manually later if needed.${NC}"
-    echo ""
-fi
+
+    # Create commands symlink
+    if [ ! -e "$dir/commands" ]; then
+        ln -s ../commands "$dir/commands"
+        echo -e "${GREEN}✓ Created symlink: ${dir}/commands → commands/${NC}"
+    else
+        echo -e "${YELLOW}ℹ️  Symlink ${dir}/commands already exists (skipping)${NC}"
+    fi
+}
+
+case "$symlink_choice" in
+    1)
+        echo -e "${BLUE}Creating symlinks for both .claude and .cursor...${NC}"
+        echo ""
+        create_symlinks_for_dir ".claude"
+        echo ""
+        create_symlinks_for_dir ".cursor"
+        echo ""
+        ;;
+    2)
+        echo -e "${BLUE}Creating symlinks for .claude only...${NC}"
+        echo ""
+        create_symlinks_for_dir ".claude"
+        echo ""
+        ;;
+    3)
+        echo -e "${BLUE}Creating symlinks for .cursor only...${NC}"
+        echo ""
+        create_symlinks_for_dir ".cursor"
+        echo ""
+        ;;
+    *)
+        echo -e "${YELLOW}Skipped symlink creation. You can create them manually later if needed.${NC}"
+        echo ""
+        ;;
+esac
 
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${BLUE}Setup Complete! 🎉${NC}"

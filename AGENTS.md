@@ -121,16 +121,32 @@ due_date: YYYY-MM-DD (if applicable)
 If you've installed the task-manager MCP server (`core/task-manager/server.py`), use these tools for fast programmatic task operations:
 
 **Available MCP tools:**
+
+*Task Operations:*
 1. **list_tasks** - Filter tasks by priority, status, category, age
 2. **get_task** - Read single task details by filename
-3. **create_task** - Create new task (auto-categorizes, enforces caps)
+3. **create_task** - Create new task (auto-categorizes, enforces caps, uses smart templates)
 4. **update_task_status** - Change status (n/s/b/d)
 5. **update_task_priority** - Change priority (enforces caps)
+
+*Task Intelligence:*
 6. **get_task_summary** - Statistics (counts by priority/status/category)
 7. **find_stale_tasks** - Tasks started but inactive 14+ days
 8. **find_overdue_tasks** - Tasks past due_date
 9. **prune_completed_tasks** - Delete done tasks older than 90 days
-10. **check_duplicates** - Check for similar tasks before creating
+10. **check_duplicates** - Check for similar tasks with actionable suggestions
+
+*Backlog Processing (NEW):*
+11. **process_backlog** - Automated backlog processing with:
+    - Ambiguity detection (flags vague items)
+    - Duplicate detection (finds similar tasks)
+    - Auto-categorization (assigns categories)
+    - Smart task creation (category-specific templates)
+    - Returns preview before creating anything
+12. **clear_backlog** - Archive BACKLOG.md to knowledge/notes/ and clear
+
+**Backlog workflow:**
+When user says `/backlog`, use `process_backlog` (auto_create=false) to preview, discuss ambiguous/duplicate items with user, then call with auto_create=true to create tasks, then `clear_backlog` to archive and reset.
 
 ## File Locations
 

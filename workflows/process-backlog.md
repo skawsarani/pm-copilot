@@ -2,6 +2,30 @@
 
 When user says `/backlog` or "process my backlog", follow these steps:
 
+## Using MCP Tools (Recommended)
+
+If the task-manager MCP server is installed, use these tools for automated processing:
+
+1. **process_backlog** - Analyzes BACKLOG.md with:
+   - Automatic categorization
+   - Duplicate detection
+   - Ambiguity checking
+   - Returns summary for review before creating
+
+2. **clear_backlog** - Archives and clears BACKLOG.md after processing
+
+**Quick workflow:**
+```
+1. Call process_backlog (auto_create=false) to preview
+2. Review ambiguous items and duplicates with user
+3. Call process_backlog (auto_create=true) to create tasks
+4. Call clear_backlog to archive and clear
+```
+
+## Manual Processing (Fallback)
+
+If MCP tools unavailable, follow these manual steps:
+
 ## Steps
 
 ### 1. Read BACKLOG.md
