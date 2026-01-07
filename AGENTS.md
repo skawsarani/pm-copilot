@@ -39,7 +39,10 @@ Skills are specialized tools. Invoke based on user request:
 - `/decision [topic]` - Document decisions with options
 
 **UX Copy (ux-copy skill):**
-- Translate to Canadian French, create UI copy, error messages, microcopy
+- Create UI copy, error messages, microcopy, onboarding copy, notification copy
+
+**Translation & i18n (i18n-translator skill):**
+- Translate to French (Canadian or European), localize for markets, review translations, i18n strategy
 
 **User Research (user-research-analysis skill):**
 - Analyze interviews, synthesize research, create personas
