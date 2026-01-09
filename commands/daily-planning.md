@@ -1,30 +1,34 @@
-# Daily Planning Workflow
-
-When user says: "What should I work on today?", "Help me plan my day", or "Daily standup"
-
+---
+allowed-tools: list_tasks, find_overdue_tasks, get_task_summary, Glob, Read
+argument-hint: [optional: "2 hours" for time-constrained, "one thing" for focus mode]
+description: Plan your day with top priorities, blockers, and goal alignment
 ---
 
-## Purpose
+## Context
 
-Start your day with clarity on top priorities, time constraints, and goal alignment. This is your daily focus filter to avoid reactive mode.
+Tasks are in `tasks/` with YAML frontmatter (priority, status, due_date, category).
+Goals are in `GOALS.md`.
+Today's date: $TODAY
 
 **Best timing:** First thing in morning, before checking email/Slack
 
----
+## Your Task
 
-## Workflow Steps
+Help the user start their day with clarity on top priorities.
 
-### Step 1: Identify Today's Top Priorities
+If user provided arguments: $ARGUMENTS
+- "2 hours" or time constraint → Use Time-Constrained variation
+- "one thing" or "overwhelmed" → Use Focus Mode variation
+- "yesterday" or "context" → Use Context Recovery variation
 
-**Prompt the user:**
-> Let me show you today's top priorities.
+## Step 1: Identify Today's Top Priorities
 
 **Actions:**
 1. Read `tasks/` directory for:
    - P0 tasks (not done)
    - P1 tasks (not done)
    - Tasks with due dates today or overdue
-2. Read GOALS.md for goal context
+2. Read `GOALS.md` for goal context
 3. Prioritize by:
    - Urgency (due dates, blockers)
    - Goal alignment
@@ -36,28 +40,21 @@ Start your day with clarity on top priorities, time constraints, and goal alignm
 
 ### 1. [Task Name] (P0)
 **Goal:** [Goal name from GOALS.md]
-**Time estimate:** [X hours]
 **Why today:** [Urgency/impact context]
 **Next action:** [Specific first step]
 
 ### 2. [Task Name] (P1)
 **Goal:** [Goal name]
-**Time estimate:** [X hours]
 **Why today:** [Context]
 **Next action:** [First step]
 
 ### 3. [Task Name] (P1)
 **Goal:** [Goal name]
-**Time estimate:** [X hours]
 **Why today:** [Context]
 **Next action:** [First step]
-
-**Total time:** [Sum of estimates]
 ```
 
----
-
-### Step 2: Check for Blocked Items
+## Step 2: Check for Blocked Items
 
 **Actions:**
 1. Find tasks with status `b` (blocked)
@@ -65,20 +62,16 @@ Start your day with clarity on top priorities, time constraints, and goal alignm
 
 **Output format:**
 ```
-## 🚧 Blocked Items
+## Blocked Items
 
 **[Task name]** (P0) - Blocked on: [Dependency]
 - Can you unblock today? [Yes/No + suggestion]
 
-[If none:]
-No blocked items today.
+[If none: "No blocked items today."]
 ```
 
----
+## Step 3: Offer Support
 
-### Step 3: Offer Support
-
-**Output:**
 ```
 **Ready to start?**
 - Say "start [task name]" to mark task as in progress
@@ -91,44 +84,43 @@ No blocked items today.
 ## Variations
 
 ### Time-Constrained Day
-**User says:** "I only have 2 hours before meetings"
 
-**Response:**
+**Trigger:** User says "I only have 2 hours" or specifies time limit
+
 ```
-## 2-Hour Focus Plan
+## [X]-Hour Focus Plan
 
 **Realistically achievable:**
-1. **[Task]** - [1 hour] - [First actionable chunk]
-2. **[Task]** - [45 min] - [Completable subtask]
+1. **[Task]** - [Time estimate] - [First actionable chunk]
+2. **[Task]** - [Time estimate] - [Completable subtask]
 
 **Buffer:** 15 min for context switching
 
-**Defer to later:** [List of P1 tasks moved to tomorrow]
+**Defer to later:** [List of tasks moved to tomorrow]
 ```
 
-### Overwhelmed Mode
-**User says:** "What's the ONE thing I should focus on?"
+### Focus Mode (Overwhelmed)
 
-**Response:**
+**Trigger:** User says "What's the ONE thing?" or "I'm overwhelmed"
+
 ```
 ## Your ONE Thing Today
 
 **[Task Name]**
 **Why this:** [Highest impact / Most urgent / Unblocks most]
-**Time:** [X hours]
 **Success looks like:** [Clear completion criteria]
 
 Everything else can wait.
 ```
 
 ### Context Recovery
-**User says:** "Remind me what I was working on yesterday"
+
+**Trigger:** User says "What was I working on yesterday?" or "Remind me"
 
 **Actions:**
-1. Find tasks updated yesterday
-2. Check tasks with status `s` (started)
+1. Find tasks with status `s` (started)
+2. Check for recently updated tasks
 
-**Response:**
 ```
 ## Yesterday's Context
 
@@ -143,23 +135,7 @@ Everything else can wait.
 
 ## Best Practices
 
-**For PM daily planning:**
-- Run BEFORE checking communications (email/Slack)
-- Keep session under 2 minutes
+- Keep this session under 2 minutes
 - Focus on outcomes, not activity
-- Let AI decide when you're stuck choosing
-- Mark tasks as started when you begin
-
-**Frequency:**
-- Every morning at same time
-- Skip weekends unless needed
-- Use weekly-review.md on Fridays/Sundays
-
----
-
-## Related Files
-
-- `GOALS.md` - Goal context for prioritization
-- `tasks/` - All task files
-- `workflows/weekly-review.md` - Weekly strategic planning
-- `core/config.yaml` - Priority and category definitions
+- Mark tasks as started when you begin work
+- If user seems stuck choosing, make a recommendation
