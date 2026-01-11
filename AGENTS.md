@@ -26,7 +26,11 @@ Check these folders for context before making suggestions:
 
 ## Skills (Auto-Invoked)
 
-Claude automatically invokes these based on user request:
+**Before performing any action, check if there's an available skill that can help.** Skills provide specialized capabilities, templates, and workflows that make your work more efficient and consistent.
+
+**When using a skill, let the user know.** Example: "I'm using the product-docs skill to generate your PRD" or "I'll use the user-research-analysis skill to analyze these interviews."
+
+Available skills:
 
 - **product-docs** - `/prd`, `/spec`, `/brief`, `/user-stories`, `/decision`
 - **ux-copy** - UI copy, error messages, microcopy, notifications
@@ -36,7 +40,9 @@ Claude automatically invokes these based on user request:
 - **prototype-builder** - Working prototypes from PRDs/briefs
 - **internal-comms** - Status reports, updates, FAQs
 
-## Commands (User-Invoked)
+## Workflows (User-Invoked)
+
+Self-contained slash commands for common PM workflows. Located in `workflows/` folder (symlinked as `commands` for AI assistant compatibility).
 
 | Command | Purpose |
 |---------|---------|

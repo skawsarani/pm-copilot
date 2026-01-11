@@ -7,12 +7,14 @@
 ## Directory Structure
 
 **This Project:**
-- **Create commands in:** `commands/` (root directory)
+
+- **Create commands in:** `workflows/` (root directory)
 - This folder is symlinked to `.claude/commands` and `.cursor/commands`
 - Allows commands to work across both Claude Code and Cursor
-- Example: `commands/git/commit.md` creates `/commit` with description "(project:git)"
+- Example: `workflows/git/commit.md` creates `/commit` with description "(project:git)"
 
 **General Best Practices:**
+
 - **Project commands**: `.claude/commands/` (shared with team via git)
 - **Personal commands**: `~/.claude/commands/` (user-specific)
 - **Namespacing**: Use subdirectories to group related commands
@@ -34,13 +36,15 @@ model: claude-3-5-haiku-20241022
 ---
 ```
 
-| Field | Purpose | Default |
-|-------|---------|---------|
-| `allowed-tools` | Tools the command can use | Inherits from conversation |
-| `argument-hint` | Expected arguments for auto-complete | None |
-| `description` | Brief command description | First line from prompt |
-| `model` | Specific AI model to use | Inherits from conversation |
-| `disable-model-invocation` | Prevent auto-invocation | false |
+
+| Field                      | Purpose                              | Default                    |
+| -------------------------- | ------------------------------------ | -------------------------- |
+| `allowed-tools`            | Tools the command can use            | Inherits from conversation |
+| `argument-hint`            | Expected arguments for auto-complete | None                       |
+| `description`              | Brief command description            | First line from prompt     |
+| `model`                    | Specific AI model to use             | Inherits from conversation |
+| `disable-model-invocation` | Prevent auto-invocation              | false                      |
+
 
 ## Arguments
 
@@ -69,6 +73,7 @@ Review PR #$1 with priority $2.
 Usage: `/review-pr 456 high` → `$1` = "456", `$2` = "high"
 
 **Use positional arguments when:**
+
 - Arguments appear in different parts of the command
 - Providing defaults for missing arguments
 - Building structured commands with specific parameter roles
@@ -90,6 +95,7 @@ Based on the above, create a commit.
 ```
 
 **Requirements:**
+
 - Must include `allowed-tools` with the `Bash` tool
 - Specify exactly which bash commands are allowed
 
@@ -110,11 +116,13 @@ Trigger extended thinking by including keywords like "think deeply," "carefully 
 ## When to Use Slash Commands vs Skills
 
 ### Use Slash Commands for:
+
 - Quick, frequently used prompts
 - Simple instructions fitting in one file
 - Quick reminders or templates
 
 ### Use Skills for:
+
 - Complex workflows with multiple steps
 - Capabilities requiring scripts or utilities
 - Knowledge organized across multiple files
@@ -132,10 +140,12 @@ Trigger extended thinking by including keywords like "think deeply," "carefully 
 ## SlashCommand Tool Integration
 
 To enable Claude to auto-invoke commands:
+
 - Reference the command by name (with `/`) in prompts or `CLAUDE.md`
 - Example: "Run `/write-unit-test` when about to start writing tests"
 
 **Requirements:**
+
 - Must have `description` frontmatter field
 - Can disable with `disable-model-invocation: true`
 
@@ -148,21 +158,26 @@ To enable Claude to auto-invoke commands:
 ## Common Patterns
 
 ### Git Operations
+
 - Include `!git status` and `!git diff` for context
 - Restrict tools to specific git commands
 - Use argument hints for commit messages or PR numbers
 
 ### Code Review
+
 - Reference specific files with `@` syntax
 - Include context like recent commits or test results
 - Use positional arguments for PR numbers or file paths
 
 ### Documentation
+
 - Reference source files to document
 - Include style guide or template context
 - Use arguments for section names or focus areas
 
 ### Testing
+
 - Reference the code to test
 - Include test framework preferences
 - Use arguments for test types or coverage goals
+

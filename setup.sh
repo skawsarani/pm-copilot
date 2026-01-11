@@ -407,10 +407,10 @@ create_symlinks_for_dir() {
         echo -e "${YELLOW}ℹ️  Symlink ${dir}/skills already exists (skipping)${NC}"
     fi
 
-    # Create commands symlink
+    # Create commands symlink (points to workflows folder)
     if [ ! -e "$dir/commands" ]; then
-        ln -s ../commands "$dir/commands"
-        echo -e "${GREEN}✓ Created symlink: ${dir}/commands → commands/${NC}"
+        ln -s ../workflows "$dir/commands"
+        echo -e "${GREEN}✓ Created symlink: ${dir}/commands → workflows/${NC}"
     else
         echo -e "${YELLOW}ℹ️  Symlink ${dir}/commands already exists (skipping)${NC}"
     fi

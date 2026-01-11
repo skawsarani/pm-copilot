@@ -319,9 +319,8 @@ pm-copilot/
 │   ├── references/
 │   └── notes/             # Archived backlog snapshots
 │
-├── commands/               # Slash command implementations
+├── workflows/              # Slash command workflows (symlinked as 'commands' for AI compatibility)
 ├── templates/              # Document templates
-├── workflows/              # Workflow files
 ├── mcp/                    # Custom MCP servers (optional)
 └── prototypes/             # Code prototypes (gitignored)
 ```

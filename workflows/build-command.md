@@ -29,6 +29,6 @@ User input: $ARGUMENTS
 
 **Important:**
 - The slash-command-builder will handle the full workflow (asking questions, creating files, etc.)
-- Commands are stored in `commands/` directory as markdown files
+- Commands are stored in `workflows/` directory as markdown files
 - Each command includes frontmatter (allowed-tools, description) and prompt instructions
-- See existing commands in `commands/` for reference patterns
+- See existing commands in `workflows/` for reference patterns

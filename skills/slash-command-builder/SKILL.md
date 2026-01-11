@@ -58,10 +58,10 @@ Based on the user's needs, select the most appropriate template from `assets/`:
 ### Step 3: Customize the Command
 
 **Location:**
-- **Always create commands in:** `commands/` (root directory)
+- **Always create commands in:** `workflows/` (root directory)
 - This folder is symlinked to `.claude/commands` and `.cursor/commands` (if set up)
 - Sharing via symlinks allows commands to work across both Claude Code and Cursor
-- Use subdirectories for namespacing: `commands/git/commit.md`
+- Use subdirectories for namespacing: `workflows/git/commit.md`
 
 **Naming:**
 - Use lowercase filenames: `review-pr.md` → `/review-pr`
@@ -229,6 +229,6 @@ Review PR #$1 focusing on:
 Provide specific, actionable feedback.
 ```
 
-**File location:** `commands/review-pr.md`
+**File location:** `workflows/review-pr.md`
 
 **Result:** User can now run `/review-pr 123` to get comprehensive PR reviews.
