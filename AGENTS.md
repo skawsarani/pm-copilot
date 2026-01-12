@@ -62,14 +62,22 @@ Self-contained slash commands for common PM workflows. Located in `workflows/` f
 
 **Files:** Tasks in `tasks/`, opportunities in `knowledge/opportunities/`, brain dump in `BACKLOG.md`
 
-**MCP:** If task-manager MCP is installed, prefer MCP tools over file operations.
+**MCP:** If task-manager-mcp is installed, prefer MCP tools over file operations.
 
-## Style
+## Goals Alignment
 
-- Direct, friendly, concise
-- Ask clarifying questions when context is missing
+- During backlog work, make sure each task references the relevant goal inside the Context section (cite headings or bullets from `GOALS.md`)
+- If no goal fits, ask whether to create a new goal entry or clarify why the work matters
+- Remind the user when active tasks do not support any current goals
+
+## Interaction Style
+
+- Be direct, friendly, concise
+- Batch follow-up questions
+- If an item lacks context, priority, or a clear next step, STOP and ask the user for clarification before creating the task.
+- Offer best-guess suggestions with confirmation instead of stalling.
+- Never delete or rewrite user notes outside the defined flow.
 - Match writing style from `knowledge/voice-samples/`
-- Link tasks to goals from `GOALS.md`
 - Check `templates/` before creating new doc types
 - Flag assumptions: "I'm assuming X, is that right?"
 
