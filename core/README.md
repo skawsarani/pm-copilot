@@ -15,7 +15,7 @@ This folder contains core system components for PM Co-Pilot. These files provide
   - Tests categorization, priority caps, auto-categorization
   - Run with: `cd core/evals && ./run_evals.sh`
 
-- **task-manager/** - Task management MCP server
+- **task-manager-mcp/** - Task management MCP server
   - `server.py` - MCP server with 12 tools for task operations
   - `requirements.txt` - Python dependencies
   - `README.md` - Detailed tool documentation and testing guide
@@ -42,7 +42,7 @@ The task management MCP server provides fast, programmatic access to your tasks 
 #### 1. Install Dependencies
 
 ```bash
-cd core/task-manager
+cd core/task-manager-mcp
 python3 -m pip install -r requirements.txt
 ```
 
@@ -60,7 +60,7 @@ Add to your MCP client configuration (e.g., Claude Code, Cursor):
       "args": [
         "run",
         "--directory",
-        "./core/task-manager",
+        "./core/task-manager-mcp",
         "python",
         "server.py"
       ]
@@ -79,7 +79,7 @@ Add to your MCP client configuration (e.g., Claude Code, Cursor):
       "args": [
         "run",
         "--directory",
-        "./core/task-manager",
+        "./core/task-manager-mcp",
         "python",
         "server.py"
       ]
@@ -109,7 +109,7 @@ The MCP server exposes 12 tools:
 11. **process_backlog** - Automated BACKLOG.md processing with dedup and ambiguity detection
 12. **clear_backlog** - Archive BACKLOG.md to knowledge/notes/ and reset
 
-See `task-manager/README.md` for detailed documentation of each tool.
+See `task-manager-mcp/README.md` for detailed documentation of each tool.
 
 ### Usage Examples
 
@@ -230,7 +230,7 @@ See `core/evals/README.md` for details.
 **Core System Components** (this folder):
 - Configuration (`config.yaml`)
 - Evaluation suite (`evals/`)
-- Task management MCP (`task-manager/`)
+- Task management MCP (`task-manager-mcp/`)
 
 **User Workspace** (root level):
 - `knowledge/` - Your knowledge base
@@ -244,7 +244,7 @@ See `core/evals/README.md` for details.
 
 ### Update MCP Server
 
-If you make changes to `task-manager/server.py`, restart your MCP client to reload.
+If you make changes to `task-manager-mcp/server.py`, restart your MCP client to reload.
 
 ### Update Config
 

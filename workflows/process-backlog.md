@@ -19,7 +19,7 @@ Process all items from `BACKLOG.md` into organized tasks, opportunities, and ref
 
 ## Using MCP Tools (Preferred)
 
-If the task-manager MCP server is available, use these tools:
+If the task-manager-mcp server is available, use these tools:
 
 1. **process_backlog** (auto_create=false) - Preview with:
    - Automatic categorization

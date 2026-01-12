@@ -416,25 +416,51 @@ create_symlinks_for_dir() {
     fi
 }
 
+# Function to merge pm-tasks config into an MCP config file
+merge_mcp_config() {
+    local mcp_file="$1"
+    local pm_tasks_config='{"command": "uv", "args": ["run", "--directory", "./core/task-manager-mcp", "python", "server.py"]}'
+
+    python3 << EOF
+import json
+import os
+
+mcp_file = "$mcp_file"
+pm_tasks_config = $pm_tasks_config
+
+# Read existing config or start fresh
+if os.path.exists(mcp_file):
+    with open(mcp_file, 'r') as f:
+        try:
+            config = json.load(f)
+        except json.JSONDecodeError:
+            config = {}
+else:
+    config = {}
+
+# Ensure mcpServers exists
+if 'mcpServers' not in config:
+    config['mcpServers'] = {}
+
+# Add or update pm-tasks
+config['mcpServers']['pm-tasks'] = pm_tasks_config
+
+# Write back
+with open(mcp_file, 'w') as f:
+    json.dump(config, f, indent=2)
+    f.write('\n')
+EOF
+}
+
 # Function to setup MCP config for Claude Code (.mcp.json in root)
 setup_mcp_claude() {
     local mcp_file=".mcp.json"
 
     if [ -f "$mcp_file" ]; then
-        echo -e "${YELLOW}ℹ️  ${mcp_file} already exists${NC}"
-        echo -e "   To add the Task Manager MCP, merge this into your existing config:"
-        echo ""
-        echo -e "${BLUE}   {${NC}"
-        echo -e "${BLUE}     \"mcpServers\": {${NC}"
-        echo -e "${BLUE}       \"pm-tasks\": {${NC}"
-        echo -e "${BLUE}         \"command\": \"uv\",${NC}"
-        echo -e "${BLUE}         \"args\": [\"run\", \"--directory\", \"./core/task-manager\", \"python\", \"server.py\"]${NC}"
-        echo -e "${BLUE}       }${NC}"
-        echo -e "${BLUE}     }${NC}"
-        echo -e "${BLUE}   }${NC}"
-        echo ""
+        merge_mcp_config "$mcp_file"
+        echo -e "${GREEN}✓ Added pm-tasks to existing ${mcp_file}${NC}"
     else
-        cp "core/task-manager/mcp.json.sample" "$mcp_file"
+        cp "core/task-manager-mcp/mcp-config.json" "$mcp_file"
         echo -e "${GREEN}✓ Created ${mcp_file} with Task Manager MCP configuration${NC}"
     fi
 }
@@ -450,20 +476,10 @@ setup_mcp_cursor() {
     fi
 
     if [ -f "$mcp_file" ]; then
-        echo -e "${YELLOW}ℹ️  ${mcp_file} already exists${NC}"
-        echo -e "   To add the Task Manager MCP, merge this into your existing config:"
-        echo ""
-        echo -e "${BLUE}   {${NC}"
-        echo -e "${BLUE}     \"mcpServers\": {${NC}"
-        echo -e "${BLUE}       \"pm-tasks\": {${NC}"
-        echo -e "${BLUE}         \"command\": \"uv\",${NC}"
-        echo -e "${BLUE}         \"args\": [\"run\", \"--directory\", \"./core/task-manager\", \"python\", \"server.py\"]${NC}"
-        echo -e "${BLUE}       }${NC}"
-        echo -e "${BLUE}     }${NC}"
-        echo -e "${BLUE}   }${NC}"
-        echo ""
+        merge_mcp_config "$mcp_file"
+        echo -e "${GREEN}✓ Added pm-tasks to existing ${mcp_file}${NC}"
     else
-        cp "core/task-manager/mcp.json.sample" "$mcp_file"
+        cp "core/task-manager-mcp/mcp-config.json" "$mcp_file"
         echo -e "${GREEN}✓ Created ${mcp_file} with Task Manager MCP configuration${NC}"
     fi
 }
@@ -504,7 +520,7 @@ case "$ai_choice" in
     *)
         echo -e "${YELLOW}Skipped AI assistant configuration.${NC}"
         echo -e "   You can configure manually later using the sample at:"
-        echo -e "   core/task-manager/mcp.json.sample"
+        echo -e "   core/task-manager-mcp/mcp-config.json"
         echo ""
         ;;
 esac
@@ -560,7 +576,7 @@ echo "   • Say: '/spec [opportunity-name]' to generate spec"
 echo ""
 
 echo -e "${BLUE}6. Install Task Manager MCP dependencies (for faster task ops):${NC}"
-echo "   • cd core/task-manager && python3 -m pip install -r requirements.txt"
+echo "   • cd core/task-manager-mcp && python3 -m pip install -r requirements.txt"
 echo "   • Restart your AI assistant to load the MCP server"
 echo ""
 

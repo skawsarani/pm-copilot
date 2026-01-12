@@ -8,10 +8,10 @@ This directory is for custom MCP (Model Context Protocol) servers you create to 
 
 ### 1. Learn from the Task Manager MCP
 
-See `core/task-manager/` for a complete working example:
+See `core/task-manager-mcp/` for a complete working example:
 
 ```bash
-cd core/task-manager
+cd core/task-manager-mcp
 cat server.py  # Review implementation
 ```
 
@@ -90,6 +90,6 @@ API_KEY = os.getenv("API_KEY")
 ## Resources
 
 - **MCP-Builder Skill**: `skills/mcp-builder/` (use this to generate servers)
-- **Task Manager Example**: `core/task-manager/` (working reference implementation)
+- **Task Manager Example**: `core/task-manager-mcp/` (working reference implementation)
 - **MCP Specification**: https://modelcontextprotocol.io/docs/getting-started/intro
 - **MCP SDKs**: https://modelcontextprotocol.io/docs/sdk

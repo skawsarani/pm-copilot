@@ -821,7 +821,7 @@ wheels = [
 ]
 
 [[package]]
-name = "task-manager"
+name = "task-manager-mcp"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

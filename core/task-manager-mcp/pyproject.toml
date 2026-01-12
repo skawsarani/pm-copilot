@@ -1,5 +1,5 @@
 [project]
-name = "task-manager"
+name = "task-manager-mcp"
 version = "0.1.0"
 description = "PM Co-Pilot Task Management MCP Server - Provides programmatic access to task management through Model Context Protocol"
 readme = "README.md"

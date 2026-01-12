@@ -6,7 +6,7 @@ description: Get all tasks with their details
 
 ## Context
 
-You have access to the task-manager MCP server with tools to query tasks.
+You have access to the task-manager-mcp server with tools to query tasks.
 
 Tasks are stored in markdown files in the `tasks/` directory with YAML frontmatter.
 

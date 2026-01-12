@@ -5,7 +5,7 @@
       "args": [
         "run",
         "--directory",
-        "./core/task-manager",
+        "./core/task-manager-mcp",
         "python",
         "server.py"
       ]

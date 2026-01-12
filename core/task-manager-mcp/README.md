@@ -331,7 +331,7 @@ Tasks created via `create_task` or `process_backlog` use category-specific templ
 ### Running Tests
 
 ```bash
-cd core/task-manager
+cd core/task-manager-mcp
 python3 -m pytest test_server.py -v
 ```
 

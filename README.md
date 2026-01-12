@@ -2,7 +2,7 @@
 
 > Turn your AI assistant into a product management partner. Process ideas, generate specs, prioritize strategically.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ---
 
@@ -132,11 +132,11 @@ Skills are specialized tools AI uses automatically:
 For faster task operations, install the task management MCP server:
 
 ```bash
-cd core/task-manager
+cd core/task-manager-mcp
 python3 -m pip install -r requirements.txt
 ```
 
-Then configure your AI assistant to use `core/task-manager/server.py` (see `core/README.md` for setup).
+Then configure your AI assistant to use `core/task-manager-mcp/server.py` (see `core/README.md` for setup).
 
 **Benefits:**
 - 10x faster task operations (CRUD, deduplication, statistics)
@@ -300,7 +300,7 @@ pm-copilot/
 │
 ├── core/                   # System components
 │   ├── config.yaml         # Priority caps, categories (customizable)
-│   ├── task-manager/       # Task management MCP
+│   ├── task-manager-mcp/   # Task management MCP
 │   │   ├── server.py       # MCP server
 │   │   └── requirements.txt # Python dependencies
 │   ├── evals/              # Automated tests
@@ -332,7 +332,7 @@ pm-copilot/
 **Committed (shared structure):**
 - Directory structure
 - Documentation, templates
-- `core/` folder (config.yaml, task-manager, evals)
+- `core/` folder (config.yaml, task-manager-mcp, evals)
 - `AGENTS.md`
 
 **Gitignored (your data):**
@@ -387,4 +387,14 @@ See `core/evals/README.md` for details.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) to share templates or improvements.
+- Fork, create a branch, and submit a PR
+- Templates go in `templates/`, skills go in `skills/`
+- Test with your AI assistant before submitting
+- Follow existing style (see `AGENTS.md`)
+
+## License
+This work is licensed under CC BY-NC-SA 4.0.
+
+Copyright © 2026 Sam Kawsarani. You may view, use, modify, and share this repo with attribution for non-commercial purposes. Commercial sale is not permitted, but you may use it internally for work and business.
+
+Full license: [https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)

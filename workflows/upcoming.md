@@ -6,7 +6,7 @@ description: Get tasks due in the next 7 days
 
 ## Context
 
-You have access to the task-manager MCP server with tools to query tasks by due date.
+You have access to the task-manager-mcp server with tools to query tasks by due date.
 
 Tasks are stored in markdown files in the `tasks/` directory with YAML frontmatter containing `due_date`.
 
