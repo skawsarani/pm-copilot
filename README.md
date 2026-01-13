@@ -304,7 +304,8 @@ pm-copilot/
 │   ├── config.yaml         # Priority caps, categories (customizable)
 │   ├── task-manager-mcp/   # Task management MCP
 │   │   ├── server.py       # MCP server
-│   │   └── requirements.txt # Python dependencies
+│   │   ├── pyproject.toml  # Python project config
+│   │   └── uv.lock         # Dependency lockfile
 │   ├── evals/              # Automated tests
 │   └── README.md           # Core system docs
 │
@@ -387,12 +388,16 @@ See `core/evals/README.md` for details.
 
 ---
 
-## Contributing
+## For Contributors
 
-- Fork, create a branch, and submit a PR
-- Templates go in `templates/`, skills go in `skills/`
+Contributions should:
+- Not include personal information
+- Be generic and configurable
+- Include documentation
+- Follow the existing patterns
 - Test with your AI assistant before submitting
-- Follow existing style (see `AGENTS.md`)
+
+---
 
 ## License
 This work is licensed under CC BY-NC-SA 4.0.

@@ -17,7 +17,8 @@ This folder contains core system components for PM Co-Pilot. These files provide
 
 - **task-manager-mcp/** - Task management MCP server
   - `server.py` - MCP server with 12 tools for task operations
-  - `requirements.txt` - Python dependencies
+  - `pyproject.toml` - Python project config and dependencies
+  - `uv.lock` - Dependency lockfile
   - `README.md` - Detailed tool documentation and testing guide
   - Programmatic access to tasks via MCP protocol
   - Auto-categorization, priority enforcement, backlog processing
