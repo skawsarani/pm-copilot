@@ -35,7 +35,7 @@ knowledge/
 - **proposals/** - Decision docs, RFCs, architecture decisions
 - **references/** - Competitive analysis, market research, articles
 - **transcripts/** - User interviews, meetings (`YYYY-MM-DD-[type]-[participant].md`)
-- **voice-samples/** - Writing samples for AI voice matching (see `templates/voice-samples/`)
+- **voice-samples/** - Writing samples for AI voice matching
 
 ## Getting Started
 

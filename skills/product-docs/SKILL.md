@@ -93,7 +93,7 @@ If document type is ambiguous, ask the user which type they need using the table
    - Look for relevant user insights, pain points, quotes
 
 4. **Writing style**:
-   - `knowledge/voice-samples/` or `templates/voice-samples/` - Match writing tone and style
+   - `knowledge/voice-samples/` - Match writing tone and style
    - `knowledge/about-me/` - Personal preferences and communication style
 
 5. **Process and standards**:

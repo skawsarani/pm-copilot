@@ -288,7 +288,6 @@ Read my recent writing in [location] and update my voice guide.
 What patterns have changed? What's new?
 ```
 
-See `templates/voice-samples/` for examples.
 
 ---
 
