@@ -78,6 +78,61 @@ AI categorizes into:
 
 ---
 
+## Directory Structure
+
+```
+pm-copilot/
+├── BACKLOG.md              # Daily inbox (gitignored)
+├── AGENTS.md               # AI instructions
+├── VOICE-GUIDE.md          # Your writing style (optional, gitignored)
+├── setup.sh                # Setup script
+│
+├── core/                   # System components
+│   ├── config.yaml         # Priority caps, categories (customizable)
+│   ├── task-manager-mcp/   # Task management MCP
+│   │   ├── server.py       # MCP server
+│   │   ├── pyproject.toml  # Python project config
+│   │   └── uv.lock         # Dependency lockfile
+│   ├── evals/              # Automated tests
+│   └── README.md           # Core system docs
+│
+├── tasks/                  # Your tasks (gitignored)
+├── knowledge/              # Your context (gitignored)
+│   ├── about-me/
+│   ├── product-strategy/
+│   ├── company-context/
+│   ├── frameworks/
+│   ├── opportunities/
+│   ├── briefs-and-specs/
+│   ├── transcripts/
+│   ├── voice-samples/
+│   ├── references/
+│   └── notes/             # Archived backlog snapshots
+│
+├── workflows/              # Slash command workflows (symlinked as 'commands' for AI compatibility)
+├── templates/              # Document templates
+├── mcp/                    # Custom MCP servers (optional)
+└── prototypes/             # Code prototypes (gitignored)
+```
+
+---
+
+## What Gets Committed vs. Gitignored
+
+**Committed (shared structure):**
+- Directory structure
+- Documentation, templates
+- `core/` folder (config.yaml, task-manager-mcp, evals)
+- `AGENTS.md`
+
+**Gitignored (your data):**
+- `BACKLOG.md`
+- `GOALS.md`
+- `VOICE-GUIDE.md`
+- Content in `knowledge/`, `tasks/`, `prototypes/`
+
+---
+
 ## Core Workflow
 
 ```
@@ -294,61 +349,6 @@ What patterns have changed? What's new?
 
 ---
 
-## Directory Structure
-
-```
-pm-copilot/
-├── BACKLOG.md              # Daily inbox (gitignored)
-├── AGENTS.md               # AI instructions
-├── VOICE-GUIDE.md          # Your writing style (optional, gitignored)
-├── setup.sh                # Setup script
-│
-├── core/                   # System components
-│   ├── config.yaml         # Priority caps, categories (customizable)
-│   ├── task-manager-mcp/   # Task management MCP
-│   │   ├── server.py       # MCP server
-│   │   ├── pyproject.toml  # Python project config
-│   │   └── uv.lock         # Dependency lockfile
-│   ├── evals/              # Automated tests
-│   └── README.md           # Core system docs
-│
-├── tasks/                  # Your tasks (gitignored)
-├── knowledge/              # Your context (gitignored)
-│   ├── about-me/
-│   ├── product-strategy/
-│   ├── company-context/
-│   ├── frameworks/
-│   ├── opportunities/
-│   ├── briefs-and-specs/
-│   ├── transcripts/
-│   ├── voice-samples/
-│   ├── references/
-│   └── notes/             # Archived backlog snapshots
-│
-├── workflows/              # Slash command workflows (symlinked as 'commands' for AI compatibility)
-├── templates/              # Document templates
-├── mcp/                    # Custom MCP servers (optional)
-└── prototypes/             # Code prototypes (gitignored)
-```
-
----
-
-## What Gets Committed vs. Gitignored
-
-**Committed (shared structure):**
-- Directory structure
-- Documentation, templates
-- `core/` folder (config.yaml, task-manager-mcp, evals)
-- `AGENTS.md`
-
-**Gitignored (your data):**
-- `BACKLOG.md`
-- `GOALS.md`
-- `VOICE-GUIDE.md`
-- Content in `knowledge/`, `tasks/`, `prototypes/`
-
----
-
 ## Best Practices
 
 **Daily:**
@@ -417,4 +417,4 @@ This work is licensed under CC BY-NC-SA 4.0.
 
 Copyright © 2026 Sam Kawsarani. You may view, use, modify, and share this repo with attribution for non-commercial purposes. Commercial sale is not permitted, but you may use it internally for work and business.
 
-Full license: [https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+Full license: [https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
