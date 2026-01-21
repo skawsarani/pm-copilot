@@ -194,10 +194,6 @@ Skills are specialized tools AI uses automatically:
 - Analyze single competitor comprehensively
 - Features, pricing, strengths, gaps, testimonials
 
-**Notion Research (`notion-research-documentation` skill):**
-- Search and synthesize from Notion workspace
-- Create research documentation with citations
-
 **Prototyping (`prototype-builder` skill):**
 - Build working prototypes from specs
 - React, TypeScript, Shadcn/ui

@@ -38,7 +38,6 @@ Available skills:
 - **ux-copy** - UI copy, error messages, microcopy, notifications
 - **i18n-translator** - French translation (Canadian/European), localization
 - **user-research-analysis** - Interview analysis, personas, research synthesis (supports parallel processing for 3+ transcripts)
-- **notion-research-documentation** - Notion search, synthesis, research docs
 - **competitor-analysis** - Comprehensively analyze single competitor (features, pricing, customers, strengths, gaps, testimonials)
 - **prototype-builder** - Working prototypes from PRDs/briefs
 - **internal-comms** - Status reports, updates, FAQs

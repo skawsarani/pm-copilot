@@ -355,10 +355,6 @@ Use the structure from `assets/competitor-profile-template.md` to create the rep
 - Competitive landscape analysis uses these reports as input
 - SWOT analysis pulls from competitor strengths/weaknesses
 
-**With notion-research-documentation skill**:
-- If extensive Notion research exists, that skill can synthesize it first
-- This skill can then reference those synthesis documents
-
 ---
 
 ## Reference Documents
