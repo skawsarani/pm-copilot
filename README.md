@@ -110,7 +110,7 @@ pm-copilot/
 ├── skills/                 # AI capabilities and specialized workflows
 ├── workflows/              # Slash command workflows
 ├── templates/              # Document templates
-├── integrations/           # External service templates
+├── integrations/           # Read-only API clients for external services
 └── prototypes/             # Code prototypes (gitignored)
 ```
 
@@ -228,6 +228,23 @@ Then configure your AI assistant to use `mcp/task-manager/server.py` (see `mcp/t
 - Programmatic access to tasks
 - Auto-categorization and priority enforcement
 - Find stale/overdue tasks, prune completed ones
+
+---
+
+## Integrations (Optional)
+
+Read-only API clients for pulling context from external services:
+
+| Service | Capabilities |
+|---------|--------------|
+| **Slack** | Messages, channels, threads, users, search, channel summaries |
+| **Notion** | Pages, databases, blocks, search |
+| **Linear** | Issues, projects, initiatives, cycles, labels, customers |
+| **Google Calendar** | Events, calendars |
+| **Google Drive** | Files, folders, permissions, search |
+| **Avoma** | Meetings, notes, transcripts |
+
+See `integrations/README.md` for full API reference.
 
 ---
 
