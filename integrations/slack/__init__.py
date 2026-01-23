@@ -39,6 +39,7 @@ from .mapping import (
     set_user_display_name,
     upsert_user_cache,
     clear_mappings,
+    is_caching_enabled,
 )
 from .channel_summary import (
     get_channel_day_summary,
@@ -79,6 +80,7 @@ __all__ = [
     "set_user_display_name",
     "upsert_user_cache",
     "clear_mappings",
+    "is_caching_enabled",
     # Channel summary
     "get_channel_day_summary",
     "ChannelSummary",

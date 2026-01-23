@@ -26,6 +26,14 @@ from integrations.slack import (
     parse_slack_message_link,
     build_slack_message_url,
     is_slack_url,
+    # Mapping/caching functions
+    get_user_id,
+    set_user_mapping,
+    get_cached_user_display_name,
+    set_user_display_name,
+    upsert_user_cache,
+    clear_mappings,
+    is_caching_enabled,
 )
 from integrations.slack.messages import find_unanswered_messages
 from integrations.slack.client import get_client
@@ -379,6 +387,221 @@ def test_slack_links_unit():
     return passed == total
 
 
+def test_user_mapping_cache_basic():
+    """Unit tests for user mapping cache read/write (no API required)."""
+    print("\n13. Testing user mapping cache basic operations (unit tests)...")
+
+    passed = 0
+    total = 0
+
+    # Clear cache before testing
+    clear_mappings()
+
+    # Test set_user_mapping / get_user_id
+    total += 1
+    set_user_mapping("jsmith", "U12345ABC")
+    if get_user_id("jsmith") == "U12345ABC":
+        passed += 1
+    else:
+        print("    ✗ set_user_mapping/get_user_id failed")
+
+    # Test set_user_display_name / get_cached_user_display_name
+    total += 1
+    set_user_display_name("U12345ABC", "John Smith")
+    if get_cached_user_display_name("U12345ABC") == "John Smith":
+        passed += 1
+    else:
+        print("    ✗ set_user_display_name/get_cached_user_display_name failed")
+
+    # Test upsert_user_cache batch updates
+    total += 1
+    upsert_user_cache([
+        {"id": "U111", "handle": "alice", "display_name": "Alice Anderson"},
+        {"id": "U222", "handle": "bob", "display_name": "Bob Builder"},
+    ])
+    if (
+        get_user_id("alice") == "U111"
+        and get_user_id("bob") == "U222"
+        and get_cached_user_display_name("U111") == "Alice Anderson"
+        and get_cached_user_display_name("U222") == "Bob Builder"
+    ):
+        passed += 1
+    else:
+        print("    ✗ upsert_user_cache batch failed")
+
+    # Test clear_mappings
+    total += 1
+    clear_mappings()
+    if get_user_id("jsmith") is None and get_cached_user_display_name("U12345ABC") is None:
+        passed += 1
+    else:
+        print("    ✗ clear_mappings failed")
+
+    print(f"    ✓ Passed {passed}/{total} unit tests")
+    return passed == total
+
+
+def test_user_cache_normalization():
+    """Test handle normalization in cache (@ prefix, case insensitivity)."""
+    print("\n14. Testing user cache handle normalization (unit tests)...")
+
+    passed = 0
+    total = 0
+
+    clear_mappings()
+
+    # Test @ prefix removal
+    total += 1
+    set_user_mapping("@testuser", "U99999")
+    if get_user_id("testuser") == "U99999":
+        passed += 1
+    else:
+        print("    ✗ @ prefix removal failed")
+
+    # Test case insensitivity
+    total += 1
+    set_user_mapping("MixedCase", "U88888")
+    if get_user_id("mixedcase") == "U88888" and get_user_id("MIXEDCASE") == "U88888":
+        passed += 1
+    else:
+        print("    ✗ case insensitivity failed")
+
+    # Test combined: @Prefix + Mixed Case
+    total += 1
+    if get_user_id("@TestUser") == "U99999":
+        passed += 1
+    else:
+        print("    ✗ combined @prefix + case normalization failed")
+
+    clear_mappings()
+
+    print(f"    ✓ Passed {passed}/{total} unit tests")
+    return passed == total
+
+
+def test_user_cache_passthrough():
+    """Test that user IDs pass through without cache lookup."""
+    print("\n15. Testing user ID passthrough (unit tests)...")
+
+    passed = 0
+    total = 0
+
+    clear_mappings()
+
+    # User ID should pass through as-is
+    total += 1
+    if get_user_id("U12345ABC") == "U12345ABC":
+        passed += 1
+    else:
+        print("    ✗ User ID passthrough failed")
+
+    # Even with empty cache, ID returns itself
+    total += 1
+    if get_user_id("UABCDEFGH") == "UABCDEFGH":
+        passed += 1
+    else:
+        print("    ✗ User ID passthrough (empty cache) failed")
+
+    # Handle that's NOT in cache returns None
+    total += 1
+    if get_user_id("nonexistent") is None:
+        passed += 1
+    else:
+        print("    ✗ Non-cached handle should return None")
+
+    print(f"    ✓ Passed {passed}/{total} unit tests")
+    return passed == total
+
+
+def test_get_user_caches_result(user_id: str | None):
+    """Integration test: verify get_user() caches the result."""
+    print(f"\n16. Testing get_user() caching (user_id={user_id})...")
+    print("    Required scopes: users:read")
+
+    if not user_id:
+        print("    ○ Skipped - no user ID available")
+        return None
+
+    if not is_caching_enabled():
+        print("    ○ Skipped - caching is disabled in config")
+        return None
+
+    try:
+        # Clear cache first
+        clear_mappings()
+
+        # Fetch user (should populate cache)
+        user = get_user(user_id)
+        handle = user.get("name")
+        display_name = get_user_display_name(user)
+
+        # Verify cache was populated
+        cached_id = get_user_id(handle) if handle else None
+        cached_name = get_cached_user_display_name(user_id)
+
+        passed = 0
+        total = 2
+
+        if cached_id == user_id:
+            passed += 1
+            print(f"    ✓ Handle '{handle}' -> ID '{cached_id}' cached correctly")
+        else:
+            print(f"    ✗ Handle->ID cache mismatch: {cached_id} != {user_id}")
+
+        if cached_name == display_name:
+            passed += 1
+            print(f"    ✓ ID '{user_id}' -> display_name '{cached_name}' cached correctly")
+        else:
+            print(f"    ✗ ID->display_name cache mismatch: {cached_name} != {display_name}")
+
+        return passed == total
+
+    except Exception as e:
+        print(f"    ✗ Failed: {e}")
+        return False
+
+
+def test_find_user_by_handle_uses_cache(user: dict | None):
+    """Integration test: verify find_user_by_handle() uses cache."""
+    print("\n17. Testing find_user_by_handle() cache usage...")
+    print("    Required scopes: users:read")
+
+    if not user:
+        print("    ○ Skipped - no user available")
+        return None
+
+    if not is_caching_enabled():
+        print("    ○ Skipped - caching is disabled in config")
+        return None
+
+    handle = user.get("name")
+    user_id = user.get("id")
+
+    if not handle or not user_id:
+        print("    ○ Skipped - user has no handle or ID")
+        return None
+
+    try:
+        # Clear cache and pre-populate with known mapping
+        clear_mappings()
+        set_user_mapping(handle, user_id)
+
+        # Now find_user_by_handle should use cached ID to fetch user
+        # (instead of iterating through all users)
+        found = find_user_by_handle(handle)
+
+        if found and found.get("id") == user_id:
+            print(f"    ✓ Found user @{handle} using cached mapping")
+            return True
+        else:
+            print(f"    ✗ User not found or ID mismatch")
+            return False
+
+    except Exception as e:
+        print(f"    ✗ Failed: {e}")
+        return False
+
+
 def main():
     """Run all tests."""
     print("=" * 60)
@@ -461,6 +684,15 @@ def main():
 
     # Test 12: Slack links unit tests (no API required)
     results["slack_links_unit"] = test_slack_links_unit()
+
+    # Test 13-15: User mapping cache unit tests (no API required)
+    results["user_mapping_cache_basic"] = test_user_mapping_cache_basic()
+    results["user_cache_normalization"] = test_user_cache_normalization()
+    results["user_cache_passthrough"] = test_user_cache_passthrough()
+
+    # Test 16-17: User caching integration tests
+    results["get_user_caches_result"] = test_get_user_caches_result(user_id)
+    results["find_user_by_handle_uses_cache"] = test_find_user_by_handle_uses_cache(user)
 
     # Summary
     print("\n" + "=" * 60)

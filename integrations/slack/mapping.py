@@ -2,6 +2,12 @@
 
 The cache is built incrementally as API calls are made - it checks cache first,
 only calls API for uncached items, then stores new results. No upfront bulk fetch.
+
+Caching is enabled by default. To disable, add to config.yaml:
+
+    integrations:
+      slack:
+        cache_user_mappings: false
 """
 
 import json
@@ -9,8 +15,36 @@ from pathlib import Path
 from datetime import datetime
 from typing import Any
 
+import yaml
+
 # Cache file location (same directory as this module)
 MAPPINGS_FILE = Path(__file__).parent / "mappings.json"
+
+# Config file location (project root)
+CONFIG_FILE = Path(__file__).parent.parent.parent / "config.yaml"
+
+
+def is_caching_enabled() -> bool:
+    """
+    Check if user mapping caching is enabled in config.
+
+    Reads integrations.slack.cache_user_mappings from config.yaml.
+    Returns True by default if config is missing or malformed.
+
+    Returns:
+        True if caching is enabled (default), False if explicitly disabled.
+    """
+    if not CONFIG_FILE.exists():
+        return True
+
+    try:
+        with open(CONFIG_FILE) as f:
+            config = yaml.safe_load(f) or {}
+        return config.get("integrations", {}).get("slack", {}).get(
+            "cache_user_mappings", True
+        )
+    except (yaml.YAMLError, OSError):
+        return True
 
 
 def _normalize_channel_name(name: str) -> str:
