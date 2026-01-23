@@ -212,21 +212,21 @@ def test_get_channel_day_summary(channel_id: str):
     print(f"\n8. Testing get_channel_day_summary(channel={channel_id})...")
     print("   Required scopes: channels:history, groups:history, users:read")
     try:
-        from datetime import date
         summary = get_channel_day_summary(
-            channel_id=channel_id,
-            target_date=date.today(),
+            channel=channel_id,
+            # target_date defaults to today if not provided
         )
 
         print(f"   ✓ Success!")
         print(f"      Channel: #{summary.channel_name}")
         print(f"      Date: {summary.date}")
-        print(f"      Total messages: {summary.total_messages}")
-        print(f"      Active users: {len(summary.active_users)}")
+        print(f"      Total messages: {summary.message_count}")
+        print(f"      Active users: {summary.participant_count}")
         print(f"      Thread count: {summary.thread_count}")
 
         if summary.top_participants:
-            print(f"      Top participants: {', '.join(summary.top_participants[:3])}")
+            top_names = [p["who"] for p in summary.top_participants[:3]]
+            print(f"      Top participants: {', '.join(top_names)}")
 
         return True
     except Exception as e:
