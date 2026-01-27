@@ -34,14 +34,6 @@ def get_notion_token() -> str:
     return token
 
 
-def get_avoma_api_key() -> str:
-    """Get Avoma API key from environment."""
-    key = os.getenv("AVOMA_API_KEY")
-    if not key:
-        raise ValueError("AVOMA_API_KEY not set in environment")
-    return key
-
-
 def get_google_oauth_client_file() -> Path:
     """
     Get the path to the Google OAuth client secrets file.

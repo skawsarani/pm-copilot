@@ -242,7 +242,6 @@ Read-only API clients for pulling context from external services:
 | **Linear** | Issues, projects, initiatives, cycles, labels, customers |
 | **Google Calendar** | Events, calendars |
 | **Google Drive** | Files, folders, permissions, search |
-| **Avoma** | Meetings, notes, transcripts |
 
 See `integrations/README.md` for full API reference.
 

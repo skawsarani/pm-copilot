@@ -18,7 +18,6 @@ from integrations.common.url_parser import (
     parse_slack_url,
     parse_notion_url,
     parse_linear_url,
-    parse_avoma_url,
     parse_google_url,
     build_url,
     extract_keywords_from_text,
@@ -126,51 +125,9 @@ def test_linear_url_parsing():
     return passed == len(tests)
 
 
-def test_avoma_url_parsing():
-    """Test Avoma URL parsing."""
-    print("\n4. Testing Avoma URL parsing...")
-
-    tests = [
-        {
-            "url": "https://app.avoma.com/meeting/abc-123-def-456",
-            "expected_type": "avoma-meeting",
-            "expected_meeting_id": "abc-123-def-456",
-        },
-        {
-            "url": "https://app.avoma.com/meeting/12345678-90ab-cdef-1234-567890abcdef",
-            "expected_type": "avoma-meeting",
-            "expected_meeting_id": "12345678-90ab-cdef-1234-567890abcdef",
-        },
-    ]
-
-    passed = 0
-    for test in tests:
-        result = parse_input(test["url"])
-        if result.type == test["expected_type"]:
-            if result.avoma_meeting_id == test["expected_meeting_id"]:
-                passed += 1
-                print(f"   ✓ Parsed: {test['url']}")
-            else:
-                print(f"   ✗ Meeting ID mismatch: expected {test['expected_meeting_id']}, got {result.avoma_meeting_id}")
-        else:
-            print(f"   ✗ Type mismatch: expected {test['expected_type']}, got {result.type}")
-
-    # Test rebuild URL
-    result = parse_input("https://app.avoma.com/meeting/test-uuid-123")
-    rebuilt = build_url(result)
-    if rebuilt == "https://app.avoma.com/meeting/test-uuid-123":
-        passed += 1
-        print(f"   ✓ Rebuild URL works")
-    else:
-        print(f"   ✗ Rebuild URL failed: {rebuilt}")
-
-    print(f"   Passed {passed}/{len(tests) + 1} tests")
-    return passed == len(tests) + 1
-
-
 def test_google_url_parsing():
     """Test Google Docs/Sheets/Slides URL parsing."""
-    print("\n5. Testing Google URL parsing...")
+    print("\n4. Testing Google URL parsing...")
 
     tests = [
         {
@@ -228,7 +185,7 @@ def test_google_url_parsing():
 
 def test_raw_text_fallback():
     """Test raw text fallback and keyword extraction."""
-    print("\n6. Testing raw text fallback...")
+    print("\n5. Testing raw text fallback...")
 
     # Test raw text with keywords
     result = parse_input("Need to implement user authentication for the login page")
@@ -246,7 +203,7 @@ def test_raw_text_fallback():
 
 def test_is_url():
     """Test URL detection."""
-    print("\n7. Testing is_url()...")
+    print("\n6. Testing is_url()...")
 
     tests = [
         ("https://example.com", True),
@@ -270,12 +227,11 @@ def test_is_url():
 
 def test_invalid_urls():
     """Test that invalid URLs fall back to raw text."""
-    print("\n8. Testing invalid URL handling...")
+    print("\n7. Testing invalid URL handling...")
 
     invalid_urls = [
         "https://random-site.com/page",
         "https://github.com/user/repo",
-        "https://app.avoma.com/",  # No meeting path
         "https://docs.google.com/forms/d/123/edit",  # Forms not supported
         "https://linear.app/workspace",  # No resource type
     ]
@@ -309,7 +265,6 @@ def main():
     results["slack_url"] = test_slack_url_parsing()
     results["notion_url"] = test_notion_url_parsing()
     results["linear_url"] = test_linear_url_parsing()
-    results["avoma_url"] = test_avoma_url_parsing()
     results["google_url"] = test_google_url_parsing()
     results["raw_text"] = test_raw_text_fallback()
     results["is_url"] = test_is_url()

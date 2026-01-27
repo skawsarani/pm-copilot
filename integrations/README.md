@@ -12,16 +12,6 @@ uv sync --all-extras
 
 ## Available Integrations
 
-### Avoma
-
-Meeting intelligence platform.
-
-| Module | Functions |
-|--------|-----------|
-| Meetings | `get_meeting`, `list_meetings`, `search_meetings` |
-| Notes | `get_notes`, `get_meeting_insights` |
-| Transcripts | `get_transcript`, `get_transcription` |
-
 ### Google Calendar
 
 | Module | Functions |
@@ -99,10 +89,10 @@ Shared helpers for all integrations.
 
 | Module | Functions |
 |--------|-----------|
-| Config | `get_linear_api_key`, `get_slack_token`, `get_notion_token`, `get_avoma_api_key`, `get_hubspot_access_token` |
+| Config | `get_linear_api_key`, `get_slack_token`, `get_notion_token`, `get_hubspot_access_token` |
 | Utils | `paginate`, `format_output`, `APIError` |
 | Google Auth | `build_calendar_service`, `build_drive_service` |
-| URL Parser | `parse_input`, `parse_slack_url`, `parse_notion_url`, `parse_linear_url`, `parse_avoma_url`, `parse_google_url`, `build_url`, `is_url` |
+| URL Parser | `parse_input`, `parse_slack_url`, `parse_notion_url`, `parse_linear_url`, `parse_google_url`, `build_url`, `is_url` |
 
 ## Configuration
 

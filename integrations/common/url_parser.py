@@ -15,7 +15,6 @@ InputType = Literal[
     "linear-issue",
     "linear-project",
     "linear-initiative",
-    "avoma-meeting",
     "google-doc",
     "google-sheet",
     "google-slide",
@@ -58,9 +57,6 @@ class ParsedInput:
     linear_initiative_id: str | None = None
     linear_workspace: str | None = None
 
-    # Avoma fields
-    avoma_meeting_id: str | None = None
-
     # Google fields
     google_file_id: str | None = None
     google_file_type: Literal["document", "spreadsheet", "presentation"] | None = None
@@ -94,10 +90,6 @@ def parse_input(input_str: str) -> ParsedInput:
         return result
 
     result = parse_linear_url(input_str)
-    if result:
-        return result
-
-    result = parse_avoma_url(input_str)
     if result:
         return result
 
@@ -307,41 +299,6 @@ def parse_linear_url(url: str) -> ParsedInput | None:
         return None
 
 
-def parse_avoma_url(url: str) -> ParsedInput | None:
-    """
-    Parse an Avoma meeting URL.
-
-    Handles URLs like:
-    - https://app.avoma.com/meeting/{uuid}
-
-    Args:
-        url: URL to parse.
-
-    Returns:
-        ParsedInput with Avoma components, or None if not an Avoma URL.
-    """
-    try:
-        parsed = urlparse(url)
-
-        if parsed.hostname != "app.avoma.com":
-            return None
-
-        path_parts = [p for p in parsed.path.strip("/").split("/") if p]
-        if len(path_parts) < 2 or path_parts[0] != "meeting":
-            return None
-
-        meeting_id = path_parts[1]
-
-        return ParsedInput(
-            type="avoma-meeting",
-            original_input=url,
-            avoma_meeting_id=meeting_id,
-        )
-
-    except Exception:
-        return None
-
-
 def parse_google_url(url: str) -> ParsedInput | None:
     """
     Parse a Google Docs, Sheets, or Slides URL.
@@ -436,11 +393,6 @@ def build_url(parsed: ParsedInput) -> str | None:
         if not all([parsed.linear_workspace, parsed.linear_initiative_id]):
             return None
         return f"https://linear.app/{parsed.linear_workspace}/initiative/{parsed.linear_initiative_id}"
-
-    elif parsed.type == "avoma-meeting":
-        if not parsed.avoma_meeting_id:
-            return None
-        return f"https://app.avoma.com/meeting/{parsed.avoma_meeting_id}"
 
     elif parsed.type in ("google-doc", "google-sheet", "google-slide"):
         if not parsed.google_file_id or not parsed.google_file_type:

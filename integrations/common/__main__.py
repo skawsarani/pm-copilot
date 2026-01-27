@@ -38,7 +38,6 @@ Supported URL types:
   - Linear issues: linear.app/{workspace}/issue/{identifier}
   - Linear projects: linear.app/{workspace}/project/{slug}
   - Linear initiatives: linear.app/{workspace}/initiative/{slug}
-  - Avoma meetings: app.avoma.com/meeting/{uuid}
   - Google Docs: docs.google.com/document/d/{id}/edit
   - Google Sheets: docs.google.com/spreadsheets/d/{id}/edit
   - Google Slides: docs.google.com/presentation/d/{id}/edit
