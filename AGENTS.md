@@ -31,37 +31,37 @@ Check these folders for context before making suggestions:
 
 **When using a skill, let the user know.** Example: "I'm using the product-docs skill to generate your PRD" or "I'll use the user-research-analysis skill to analyze these interviews."
 
-Available skills:
+### PM Documentation & Content
 
-- **product-docs** - `/write-prd`, `/write-spec`, `/write-brief`, `/write-user-stories`, `/write-decision`
-- **product-metrics-analysis** - Analyze product metrics, identify patterns, and provide data-driven insights
-- **ux-copy** - UI copy, error messages, microcopy, notifications
-- **i18n-translator** - French translation (Canadian/European), localization
-- **user-research-analysis** - Interview analysis, personas, research synthesis (supports parallel processing for 3+ transcripts)
-- **competitor-analysis** - Comprehensively analyze single competitor (features, pricing, customers, strengths, gaps, testimonials)
-- **prototype-builder** - Working prototypes from PRDs/briefs
-- **internal-comms** - Status reports, updates, FAQs
+| Skill | Purpose |
+|-------|---------|
+| **product-docs** | Automated generation of PM documents (PRDs, specs, briefs, user stories, decision docs) |
+| **doc-coauthoring** | Collaborative workflow for co-authoring documentation, proposals, technical specs |
+| **ux-copy** | UI copy, error messages, microcopy, notifications, onboarding flows |
+| **internal-comms** | Status reports, leadership updates, newsletters, FAQs, incident reports |
 
-## Workflows (User-Invoked)
+### Research & Analysis
 
-Self-contained slash commands for common PM workflows. Located in `workflows/` folder (symlinked as `commands` for AI assistant compatibility).
+| Skill | Purpose |
+|-------|---------|
+| **product-metrics-analysis** | Analyze product metrics, identify patterns, provide data-driven insights |
+| **user-research-analysis** | Interview analysis, personas, research synthesis (parallel processing for 3+ transcripts) |
+| **competitor-analysis** | Comprehensive single competitor analysis (features, pricing, customers, strengths, gaps) |
 
-| Command | Purpose |
-|---------|---------|
-| `/write-prd` | Generate a Product Requirements Document |
-| `/write-spec` | Generate a Product Specification |
-| `/write-brief` | Generate a Project Brief |
-| `/write-user-stories` | Generate User Stories with acceptance criteria |
-| `/write-decision` | Document a Product Decision |
-| `/process-backlog` | Process BACKLOG.md into tasks, initiatives, references |
-| `/process-transcripts` | Extract action items from recent meeting transcripts |
-| `/competitor-research` | Research multiple competitors in parallel, generate comparison matrix |
-| `/daily-planning` | Plan your day with priorities, blockers, goal alignment |
-| `/weekly-review` | Review the week, check goals, plan next week |
-| `/today` | Quick view of due/overdue tasks |
-| `/upcoming` | Tasks due in next 7 days |
-| `/tasks` | View all tasks with filters |
-| `/commit` | Git commit with conventional format and emoji |
+### Building & Prototyping
+
+| Skill | Purpose |
+|-------|---------|
+| **prototype-builder** | Build working React/TypeScript prototypes from PRDs/briefs |
+| **skill-creator** | Create new skills to extend capabilities |
+| **slash-command-builder** | Create custom slash commands |
+| **mcp-builder** | Create MCP servers for tool integrations |
+
+### Localization
+
+| Skill | Purpose |
+|-------|---------|
+| **i18n-translator** | English-French translation (Canadian/European), localization
 
 ## Task System
 
@@ -71,7 +71,48 @@ Self-contained slash commands for common PM workflows. Located in `workflows/` f
 
 **Files:** Tasks in `tasks/`, initiatives in `knowledge/initiatives/`, brain dump in `BACKLOG.md`
 
-**MCP:** If task-manager-mcp is installed, prefer MCP tools over file operations.
+## MCP Tools
+
+MCP (Model Context Protocol) provides direct tool access. Prefer MCP tools over file operations when available.
+
+### PM Tasks (`mcp__pm-tasks__*`)
+
+| Tool | Purpose |
+|------|---------|
+| `list_tasks` | List and filter tasks by priority, status, category, age |
+| `get_task` | Get full details of a specific task |
+| `create_task` | Create new task with auto-categorization |
+| `update_task_status` | Update task status (n/s/b/d) |
+| `update_task_priority` | Update task priority (P0-P3) |
+| `get_task_summary` | Task statistics by priority, status, category |
+| `find_stale_tasks` | Find started tasks not updated recently |
+| `find_overdue_tasks` | Find tasks past due date |
+| `prune_completed_tasks` | Delete old completed tasks |
+| `check_duplicates` | Check for similar existing tasks before creating |
+| `process_backlog` | Process BACKLOG.md with categorization and deduplication |
+| `clear_backlog` | Archive and reset BACKLOG.md |
+
+## Integrations
+
+Python modules in `integrations/` for external services. Run via `uv run -m integrations.<name>`.
+
+### Linear
+Issues, projects, initiatives, comments, labels, cycles, customers
+
+### Slack
+Search messages, channels, threads, links, channel summaries
+
+### Notion
+Search, pages, databases, blocks
+
+### Google Calendar
+Events, calendars
+
+### Google Drive
+Search, files, folders, permissions
+
+### HubSpot
+Contacts, companies, deals, tickets, products, orders, invoices, quotes, subscriptions
 
 ## Goals Alignment
 

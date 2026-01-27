@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "pm-tasks": {
+      "command": "uv",
+      "args": ["run", "python", "mcp/task-manager/server.py"]
+    },
+    "linear-server": {
+      "type": "http",
+      "url": "https://mcp.linear.app/mcp"
+    },
+    "notion": {
+      "type": "http",
+      "url": "https://mcp.notion.com/mcp"
+    },
+    "bigquery": {
+      "command": "./PATH/TO/toolbox",
+      "args": ["--prebuilt","bigquery","--stdio"],
+      "env": {
+        "BIGQUERY_PROJECT": "PROJECT_ID"
+      }
+    }
+  }
+}
