@@ -1,4 +1,5 @@
 # SAMS PRODUCT OS
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/samkawsarani)
 
 > Turn your AI assistant into a product management partner. Process ideas, generate specs, prioritize strategically.
 
