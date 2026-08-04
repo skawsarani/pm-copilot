@@ -59,6 +59,10 @@ Calculate the reporting period:
 2. For each goal, match completed and in-progress work from Step 1 to assess progress
 3. Flag goals with no activity this week
 
+**Absence of task activity is NOT evidence a goal is at risk.** Much of Sam's goal progress is driven by other people and lives in meetings, Slack, and Linear — never in TASKS.md. For any goal with no logged task activity, mark it **Status unknown — need your read** and ask, rather than assigning At Risk or Behind. Only call a goal at risk when you have positive evidence of a stall (a missed date, a blocker, a dependency with no owner). Before asking, check `meetings/` for the week and, if the goal maps to a Linear project, its recent status updates.
+
+After Sam gives the real status, write it back to `GOALS.md`: update the success criteria checkboxes and add or refresh a `**Status (YYYY-MM-DD):**` line on that goal. Don't leave the correction only in the review output.
+
 **Output format:**
 ```
 ## Quarterly Goal Progress
